@@ -101,6 +101,9 @@ chown root:root "$FSDIR/sbin/xqflash"
 # as a last-ditch effort, change the *.miwifi.com hostnames to localhost
 #sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
 
+# apply patch from xqrepack repository
+(cd "$FSDIR" && patch -p1) < 0001-Add-TX-power-in-dBm-options-in-web-interface.patch
+
 >&2 echo "repacking squashfs..."
 rm -f "$IMG.new"
 mksquashfs "$FSDIR" "$IMG.new" -comp xz -b 256K -no-xattrs
