@@ -9,6 +9,17 @@ local mac = string.upper(luci.sys.net.ip4mac(remote_addr))
 local macdefault = string.upper(xqlanwanutil.getDefaultWanMacAddress())
 local XQSysUtil = require "xiaoqiang.util.XQSysUtil"
 local hardware = string.lower( XQSysUtil.getHardware() )
+
+local XQFunction = require("xiaoqiang.common.XQFunction")
+local netmod = 0
+local netmod = XQFunction.getnetmode()
+--2 有线中继
+--1 无线中继
+--4 mesh主设备  whc_cap
+--3 mesh从设备  whc_re
+--0 router
+
+
 %>
 <%include("web/inc/head")%>
 <title><%:小米路由器%></title>
@@ -233,8 +244,6 @@ local hardware = string.lower( XQSysUtil.getHardware() )
          <%if hardware ~= "d01" then%>
             <%include("web/inc/netmod")%>
         <%end%>
-        <a id="netmode" name="netmode"></a>
-
         <!-- ipv6 -->
         <div class="mod-set mod-wifi" id="ipv6_set">
             <div class="hd">
@@ -1636,6 +1645,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
             });
         });
     } );
+
 
     $(function(){
         //$.pub( 'getWanType' );

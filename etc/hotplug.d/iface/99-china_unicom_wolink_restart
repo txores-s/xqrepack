@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ "$INTERFACE" == "wan" -a "$ACTION" == "ifup" ]; then
+    logger -p error -t "wolink" "wolink will start because of $INTERFACE $ACTION"
+    /etc/init.d/wolink start
+fi
+if [ "$INTERFACE" == "wan" -a "$ACTION" == "ifdown" ]; then
+    logger -p error -t "wolink" "wolink will stop because of $INTERFACE $ACTION"
+    /etc/init.d/wolink stop
+fi

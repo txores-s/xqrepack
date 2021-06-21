@@ -1,0 +1,10 @@
+#!/bin/sh
+ap_mode=$(uci -q get xiaoqiang.common.NETMODE)
+if [ "$ap_mode" = "whc_re" ]; then
+        return 0
+fi
+
+[ ifup = "$ACTION" ] && [ "$INTERFACE" = "lan" ] && {
+    echo "1" > /sys/devices/virtual/net/br-lan/bridge/multicast_snooping
+}
+

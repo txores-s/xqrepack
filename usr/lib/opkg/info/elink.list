@@ -1,0 +1,3 @@
+/usr/bin/elink
+/etc/init.d/elink
+/usr/sbin/elink_ap_realdev.lua

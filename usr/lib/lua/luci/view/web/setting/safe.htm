@@ -35,7 +35,7 @@ local netmod = XQFunction.getnetmode()
         <div class="mod-set mod-macfilter" id="modMacfilter" style="display:none;">
             <div class="hd">
                 <h3><%:无线访问控制%></h3>
-                <div class="switch">
+                <div class="switch" style="display: none">
                     <a data-enable="1" class="btn-switch btn-switch-off" id="macfilterswitch" href="#"></a>
                 </div>
             </div>
@@ -272,7 +272,7 @@ local netmod = XQFunction.getnetmode()
         };
         var isEnable = function (res) {
             $.pub('wifiFilter:switch', {
-                enable: res.enable
+                enable: true
             });
         };
         var setWifiMacfilter = function(){

@@ -17,6 +17,16 @@ local allWifiInfo = wifiUtil.getAllWifiInfo()
 local uci = require("luci.model.uci").cursor()
 local features = require("xiaoqiang.XQFeatures").FEATURES
 local hardware = string.lower( XQSysUtil.getHardware() )
+
+
+local XQFunction = require("xiaoqiang.common.XQFunction")
+local netmod = 0
+local netmod = XQFunction.getnetmode()
+--2 有线中继
+--1 无线中继
+--4 mesh主设备  whc_cap
+--3 mesh从设备  whc_re
+--0 router
 %>
 <div class="mod-set mod-netmode">
     <div class="hd">
@@ -37,7 +47,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 		<%end%>
     </div>
 </div>
-<%if features["netmode"]["elink"] == "1" and hardware ~= "r4ac" and hardware ~= "r2100" and hardware ~= "r3600" then%>
+<%if netmod ~= 3 and netmod ~=4 then%>
  <div class="mod-set mod-wifi" >
             <div class="hd">
                 <h3><%:启用与智能网关的无线配置同步%></h3>

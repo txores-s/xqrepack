@@ -49,14 +49,6 @@ upgrade_prepare_dir() {
 }
 
 upgrade_done_set_flags() {
-	# tell server upgrade is finished
-	[ -f /etc/config/messaging -a -f /sbin/uci ] && {
-		/sbin/uci set /etc/config/messaging.deviceInfo.UPGRADE_STATUS_UPLOAD=0
-		/sbin/uci commit
-		klogger "messaging.deviceInfo.UPGRADE_STATUS_UPLOAD=`uci get /etc/config/messaging.deviceInfo.UPGRADE_STATUS_UPLOAD`"
-		klogger "/etc/config/messaging : `cat /etc/config/messaging`"
-	}
-
 	# update nvram setting when upgrading
 	if [ "$2" = "1" ]; then
 		nvram set restore_defaults=1

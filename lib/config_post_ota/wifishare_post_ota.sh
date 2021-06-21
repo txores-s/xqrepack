@@ -35,12 +35,6 @@ country_code=$(nvram get CountryCode)
 #guest default format Xiaomi_xxxx_VIP
 #guest_ssid_matched=$(echo $guest_ssid | grep "^Xiaomi_[[:xdigit:]]\{4\}_VIP$")
 [ "$guest_ssid" != "" -a "$guest_ssid_change" != "2" ] && {
-    if [ "$country_code" == "CN" ]
-    then
-        uci set wireless.guest_2G.ssid="  小米共享WiFi_${guest_suffix}";
-    else
-        uci set wireless.guest_2G.ssid="  MiShareWiFi_${guest_suffix}";
-    fi
     uci set wireless.guest_2G.ssid_changed=2
     uci commit wireless
 }

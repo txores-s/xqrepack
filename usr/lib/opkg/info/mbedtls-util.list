@@ -1,0 +1,5 @@
+/usr/bin/rsa_encrypt
+/usr/bin/cert_req
+/usr/bin/rsa_genkey
+/usr/bin/gen_key
+/usr/bin/rsa_decrypt
