@@ -43,16 +43,15 @@ start() {
 		return 0
 	}
 
-	$CMD wan wan6_on
 	start_ipv6 $mode
-
+	
     return 0
 }
 
 stop() {
-    $CMD wan wan6_off
-    switch_ipv6 off
+    $CMD wan off
     $CMD wan reload_network
+    switch_ipv6 off
     return 0
 }
 
@@ -64,7 +63,7 @@ restart() {
 switch_ipv6() {
 	local dis=0
 	[ -z "$1" -o "$1" != "on" ] && dis=1
-	#echo $dis > /proc/sys/net/ipv6/conf/all/disable_ipv6
+	echo $dis > /proc/sys/net/ipv6/conf/all/disable_ipv6
 }
 
 ip6_fw() {
@@ -74,9 +73,9 @@ ip6_fw() {
     local mode=$(uci -q get ipv6.settings.mode)
 
     if [ "$1" = "close" ]; then
-	    uci -q set firewall.@defaults[0].disable_ipv6=1
+	uci -q set firewall.@defaults[0].disable_ipv6=1
     elif [ "$flag" != "0" -a "$mode" != "off" ]; then
-	    uci -q set firewall.@defaults[0].disable_ipv6=0
+	uci -q set firewall.@defaults[0].disable_ipv6=0
     fi
     uci -q commit firewall
 }
@@ -99,9 +98,6 @@ update_dns6() {
 start_ipv6() {
 	[ "$1" != "static" -a "$1" != "native" -a "$1" != "nat" ] && return
 	local proto_v4=$(uci -q get network.wan.proto)
-	local mode_old=$2
-
-	switch_ipv6 on
 
     #add IPv6 config, restart odhcpd
     dhcpv6=$(uci -q get dhcp.lan.dhcpv6)
@@ -110,7 +106,6 @@ start_ipv6() {
         set dhcp.lan.dhcpv6='server'
         set dhcp.lan.ra='server'
         set dhcp.lan.ra_default='1'
-        set dhcp.lan.ra_preference='high'
         commit dhcp
 EOF
         /etc/init.d/odhcpd restart
@@ -135,7 +130,8 @@ EOF
 	
     uci -q set firewall.@defaults[0].disable_ipv6=0
     uci -q commit firewall
-	$CMD wan reload_network $mode_old
+	switch_ipv6 on
+    $CMD wan reload_network
 
     return 0
 }
@@ -227,32 +223,27 @@ restart_lan() {
 }
 
 native() {
-	local mode_old=$(uci -q get ipv6.settings.mode)
     local mode_chg=$(set_mode native $@)
-    start_ipv6 native $mode_old
-
+    start_ipv6 native
 	[ "$mode_chg" == "0" ] && restart_lan
 }
 
 static() {
-	local mode_old=$(uci -q get ipv6.settings.mode)
     local mode_chg=$(set_mode static $@)
-    start_ipv6 static $mode_old
+    start_ipv6 static
 	[ "$mode_chg" == "0" ] && restart_lan
 }
 
 nat() {
-	local mode_old=$(uci -q get ipv6.settings.mode)
     local mode_chg=$(set_mode nat $@)
-    start_ipv6 nat $mode_old
+    start_ipv6 nat
 	[ "$mode_chg" == "0" ] && restart_lan
 }
 
 off() {
-	local mode_old=$(uci -q get ipv6.settings.mode)
     local mode_chg=$(set_mode off)
     $CMD wan off
+    $CMD wan reload_network
 	switch_ipv6 off
-    $CMD wan reload_network $mode_old
 	[ "$mode_chg" == "0" ] && restart_lan
 }

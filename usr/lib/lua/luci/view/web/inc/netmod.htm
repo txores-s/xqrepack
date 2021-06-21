@@ -35,11 +35,10 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 		<%for k,v in pairs(allWifiInfo) do%>
 		    <input type="hidden" id="currentssid<%=k%>" value="<%=encode4HtmlValue(v["ssid"])%>" data-status="<%=v["status"]%>" />
 		<%end%>
-		<p style="margin-top:20px;"><%:中继模式下，如果上级路由器是小米路由器，请设置和上级路由器相同的国家地区%></p>
     </div>
 </div>
-<%if features["netmode"]["elink"] == "1" and hardware ~= "r4ac" and hardware ~= "r3600" then%>
- <div class="mod-set mod-wifi" style="display:none">
+<%if features["netmode"]["elink"] == "1" and hardware ~= "r4ac" and hardware ~= "r2100" and hardware ~= "r3600" then%>
+ <div class="mod-set mod-wifi" >
             <div class="hd">
                 <h3><%:启用与智能网关的无线配置同步%></h3>
                 <div class="switch">

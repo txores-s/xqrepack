@@ -166,9 +166,6 @@ EOF
 # Take care: used for QCA series, R3600.
 bridgeap_open_r3600() {
     echo "#######################bridgeap_open_r3600###############"
-	
-	/usr/sbin/mi_iptv.sh off
-	
 uci -q batch <<-EOF >/dev/null
     delete network.wan
 	delete network.wan_6
@@ -257,7 +254,6 @@ EOF
     nvram set mode=Router
     nvram commit
 
-	/usr/sbin/mi_iptv.sh on
 }
 
 bridgeap_close_r3600_default() {

@@ -6,20 +6,28 @@ START=11
 . /lib/functions.sh
 
 set_timezone_from_countrycode() {
-	cc=`nvram get CountryCode`
+	cc=`bdata get CountryCode`
 
-    if [ -z "$cc" ]; then
-        tz="UTC"
-    else
-        tz=`uci -q get country_mapping.$cc.timezone`
-        [ -z "$tz" ] && tz="UTC"
-    fi
-
+	case "$cc" in
+		"EU" )	tz="CST-1"
+			;;
+		"US" )	tz="CST+8"  #PST time
+			;;
+		"KR" )	tz="CST-9"
+			;;
+		"UK" )	tz="CST-0"
+			;;
+		"IN" )	tz="CST-5:30"
+			;;
+		*)	tz="CST-8"   #China standard time
+			;;
+	esac
 	echo $tz > /tmp/TZ
+
 	# update uci config. config_set doesn't work >_<
 	# config_set $1 timezone $tz
 	uci set system.@system[0].timezone="$tz"
-	uci commit system
+
 }
 
 
@@ -28,14 +36,12 @@ timezone_config() {
 	local idx
 	local timezone
 
-    initted=`uci -q get xiaoqiang.common.INITTED`
 	# "timezoneindex" exists indicates it was manually changed from web admin interface.
 	# Apply the uci timezone config if timezoneindex exist.
 	# Otherwise use timezone from country code.
 	config_get idx "$cfg" timezoneindex
 
-    #set timezone by CountryCode if not set by mannual and not inited
-	if [ -z "$idx" -o "$initted" != "YES" ]; then
+	if [ -z "$idx" ]; then
 		set_timezone_from_countrycode $cfg
 	else
 		config_get timezone "$cfg" timezone 'UTC'
@@ -48,6 +54,6 @@ timezone_config() {
 
 start() {
 	config_load system
-    config_foreach timezone_config system
+        config_foreach timezone_config system
 }
 

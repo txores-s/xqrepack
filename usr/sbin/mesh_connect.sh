@@ -1,23 +1,6 @@
 #!/bin/sh
 # Copyright (C) 2020 Xiaomi
 
-log(){
-	logger -t "meshd connect: " -p9 "$1"
-}
-check_re_initted(){
-	initted=`uci -q get xiaoqiang.common.INITTED`
-	[ "$initted" == "YES" ] && { log "RE already initted. exit 0." ; exit 0; }
-}
-run_with_lock(){
-	{
-		log "$$, ====== TRY locking......"
-		flock -x -w 60 1000
-		[ $? -eq "1" ] && { log "$$, ===== GET lock failed. exit 1" ; exit 1 ; }
-		log "$$, ====== GET lock to RUN."
-		$@
-		log "$$, ====== END lock to RUN."
-	} 1000<>/var/log/mesh_connect_lock.lock
-}
 usage() {
 	echo "$0 re_start xx:xx:xx:xx:xx:xx"
 	echo "$0 help"
@@ -210,16 +193,8 @@ do_re_init_json() {
 	local txbf_5g=$(json_get_value "$jsonbuf" "txbf_5g")
 	local ch_2g=$(json_get_value "$jsonbuf" "ch_2g")
 	local ch_5g=$(json_get_value "$jsonbuf" "ch_5g")
-	local web_passwd=$(json_get_value "$jsonbuf" "web_passwd")
-	local policy=$(json_get_value "$jsonbuf" "policy")
-	local maclist=$(json_get_value "$jsonbuf" "maclist")
-	local maclist_format="`echo -n $maclist | sed "s/;/ /g"`"
-	local support160=$(json_get_value "$jsonbuf" "support160")
 
-	local lang=$(json_get_value "$jsonbuf" "main_lang")
-	[ -z "$lang" ] && lang=en
-	uci set luci.main.lang="$lang"
-	uci commit luci
+	local support160=$(json_get_value "$jsonbuf" "support160")
 
 	uci set wireless.wifi0.channel="$ch_5g"
 	uci set wireless.wifi1.channel="$ch_2g"
@@ -244,24 +219,11 @@ do_re_init_json() {
 		fi
 	fi
 
-	uci set wireless.@wifi-iface[1].hidden="$hidden_2g"
-	uci set wireless.@wifi-iface[0].hidden="$hidden_5g"
-	
-	uci set wireless.@wifi-iface[1].disabled="0"
-	uci set wireless.@wifi-iface[0].disabled="0"
+	uci set wireless.@wifi-iface[0].hidden="$hidden_2g"
+	uci set wireless.@wifi-iface[1].hidden="$hidden_5g"
 
-	if [ -n "$web_passwd" ]; then
-		uci set account.common.admin="$web_passwd"
-		uci commit account
-	fi
-	if [ -n "$policy" ]; then
-		uci set wireless.@wifi-iface[1].macfilter="$policy"
-		uci set wireless.@wifi-iface[0].macfilter="$policy"
-	fi
-	for mac in $maclist_format; do
-		uci add_list wireless.@wifi-iface[1].maclist="$mac"
-		uci add_list wireless.@wifi-iface[0].maclist="$mac"
-	done
+	uci set wireless.@wifi-iface[0].disabled="$disabled_2g"
+	uci set wireless.@wifi-iface[1].disabled="$disabled_5g"
 
 	uci commit wireless
 }
@@ -405,7 +367,7 @@ do_cap_init_bsd() {
 		whc_pswd=$(printf "%s" $whc_pswd | base64 | xargs)
 
 		case "$channel" in
-			52|56|60|64|100|104|108|112|116|120|124|128|132|136|140)
+			52|56|60|64)
 				if [ "$bw" -eq 0 ]; then
 					uci set wireless.wifi0.channel='36'
 				else
@@ -506,7 +468,7 @@ do_cap_init() {
 		pswd_5g=$(printf "%s" $pswd_5g | base64 | xargs)
 
 		case "$channel" in
-			52|56|60|64|100|104|108|112|116|120|124|128|132|136|140)
+			52|56|60|64)
 				if [ "$bw" -eq 0 ]; then
 					uci set wireless.wifi0.channel='36'
 				else
@@ -555,7 +517,7 @@ re_start_wps() {
 	killall -9 wpa_supplicant
 
 	case "$channel" in
-		52|56|60|64|100|104|108|112|116|120|124|128|132|136|140) channel=36
+		52|56|60|64) channel=36
 			;;
 		*) ;;
 	esac
@@ -615,7 +577,7 @@ cap_create_vap() {
 	cp -f /usr/share/mesh/hostapd-template.conf /var/run/hostapd-${ifname}.conf
 
 	case "$channel" in
-		52|56|60|64|100|104|108|112|116|120|124|128|132|136|140)
+		52|56|60|64)
 			channel=36
 			if [ "$wifi_mode" = "11AHE160" -o "$wifi_mode" = "11ACVHT160" ]; then
 				[ "$wifi_mode" = "11AHE160" ] && wifi_mode="11AHE80" || wifi_mode="11ACVHT80"
@@ -703,7 +665,7 @@ cap_start_wps() {
 	radartool -n -i $device ignorecac 0
 
 	case "$channel" in
-		52|56|60|64|100|104|108|112|116|120|124|128|132|136|140)
+		52|56|60|64)
 			cfg80211tool $ifname_5G channel $channel
 			if [ "$wifi_mode" = "11AHE160" -o "$wifi_mode" = "11ACVHT160" ]; then
 				cfg80211tool $ifname_5G mode $wifi_mode
@@ -729,13 +691,13 @@ case "$1" in
 	init_cap_mode
 	;;
 	cap_init)
-	run_with_lock do_cap_init "$2" "$3" "$4" "$5" "$6" "$7" "$8"
+	do_cap_init "$2" "$3" "$4" "$5" "$6" "$7" "$8"
 	;;
 	cap_init_bsd)
 	do_cap_init_bsd "$2" "$3" "$4" "$5" "$6" "$7" "$8"
 	;;
 	re_init)
-	run_with_lock do_re_init "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "$10"
+	do_re_init "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "$10"
 	;;
 	re_init_bsd)
 	do_re_init_bsd "$2" "$3" "$4" "$5" "$6" "$7"

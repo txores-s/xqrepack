@@ -51,11 +51,8 @@ ios_domain=$(uci get wifishare.global.ios_domain 2>/dev/null)
 update_cfg_time=$(uci get wifishare.global.update_cfg_time 2>/dev/null)
 config_md5=$(uci get wifishare.global.config_md5 2>/dev/null)
 last_etag=$(uci get wifishare.global.last_etag 2>/dev/null)
-api_miwifi_url=$(uci -q get miwifi.server.API 2>/dev/null)
-[ -z "$api_miwifi_url" ] && api_miwifi_url="api.miwifi.com"
-
 [ -z "${domain_white_list}" ] && {
-    uci set wifishare.global.domain_white_list="s.miwifi.com ${api_miwifi_url}"
+    uci set wifishare.global.domain_white_list="s.miwifi.com api.miwifi.com"
     uci commit wifishare
 }
 [ -z "${ios_domain}" ] && {

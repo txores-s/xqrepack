@@ -8,7 +8,7 @@ __get_wifi_iface()
     local iface network backhaul
     config_get network $1 network
     config_get iface "$1" ifname
-    config_get backhaul "$1" backhaul 0
+    config_get backhaul "$1" backhaul
 
     if [ -n "$iface" -a "$2" = "$network" -a "$backhaul" -eq 1 ]; then
         append $3 $iface 
@@ -21,7 +21,7 @@ __get_wifi_iface_enable()
     config_get network $1 network
     config_get iface "$1" ifname
     config_get en "$1" disabled '0'
-    config_get backhaul "$1" backhaul 0
+    config_get backhaul "$1" backhaul
 
     if [ -n "$iface" -a "$2" = "$network" -a "$en" -eq 0 -a "$backhaul" -eq 1 ]; then
         append $3 $iface
@@ -34,7 +34,7 @@ __get_wifi_iface_ap()
     config_get network $1 network
     config_get iface "$1" ifname
     config_get mode "$1" mode
-    config_get backhaul "$1" backhaul 0
+    config_get backhaul "$1" backhaul
 
     if [ -n "$iface" -a "$2" = "$network" -a "$mode" = "ap" -a "$backhaul" -eq 1 ]; then
         append $3 $iface

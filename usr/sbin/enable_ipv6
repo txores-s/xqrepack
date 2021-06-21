@@ -284,12 +284,12 @@ EOF
 
 "wan6_off")
     #set wan6 interface off
-    if [ "$proto_type" = "pppoe" ]; then
-        ubus call network.interface.wan_6 remove
+    if [ "$proto_type" != "pppoe" ]; then
+        logerr "ERROR: Support pppoe, but now mode is $proto_type. exit."
         exit 0
     fi
 
-    ip6iface=$(uci -q get network.${iface}_6.ifname)
+    ip6iface=$(uci -q get network.${iface}6.ifname)
     if [ -n "$ip6iface" ]; then
         uci -q batch <<EOF
 		set network.${iface}_6.auto=0
@@ -301,24 +301,15 @@ EOF
 "reload_network")
 	ip6_enabled=$(uci -q get ipv6.settings.enabled)
     mode=$(uci -q get ipv6.settings.mode)
-	mode_old=$3
-	[ -z "$mode_old" ] && mode_old=$mode
-
     logger stat_points_none ip6_enabled=$ip6_status,$mode
 
     ubus call network reload
-    #up-down ipv6 interface: trigger hotplug
-    [ "$ip6_enabled" == "1" -a "$mode" != "off" -a "$mode" != "static" ] && {
-        ifup ${iface}_6 >/dev/null 2>&1
-	}
 
-	[ "$mode_old" != "$mode" ] && {
-		if [ "$ip6_enabled" = "1" -a "$mode" = "nat" ]; then 
+	if [ "$ip6_enabled" == "1" -a "$mode" == "nat" ]; then
 		[ -d "/sys/module/shortcut_fe_cm" ] && /etc/init.d/qca-nss-ecm restart
-		elif [ "$mode_old" = "nat" ]; then
-			[ ! -d "/sys/module/shortcut_fe_cm" -a ! -d "/sys/kernel/debug/ecm/ecm_nss_ipv6" ] && /etc/init.d/qca-nss-ecm restart
+	else
+		[ ! -d "/sys/module/shortcut_fe_cm" ] && /etc/init.d/qca-nss-ecm restart
 	fi
-	}
 
     /etc/init.d/dnsmasq restart
     ;;

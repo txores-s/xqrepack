@@ -27,6 +27,13 @@ local clickUrl = "http://"..apiServerDomain.."/res_stat/click.gif"
 local ccode = xqCountryCode.getBDataCountryCode()
 
 local XQFunction = require("xiaoqiang.common.XQFunction")
+local netmod = 0
+local netmod = XQFunction.getnetmode()
+--2 有线中继
+--1 无线中继
+--4 mesh主设备  whc_cap
+--3 mesh从设备  whc_re
+--0 router
 
 local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
 
@@ -45,7 +52,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
 <div id="dropmenu" class="dropmenu" style="z-index:3; display:none;">
     <ul>
         <li><a href="#" id="toRename"><%:修改路由器名称%></a></li>
-        <%if netmod == 0 or netmod == 4 then%>
+        <%if netmod == 0 then%>
         <li><a href="<%=luci.dispatcher.build_url("web","setting","upgrade")%>"><%:系统升级%></a></li>
         <%else%>
         <li><a href="<%=luci.dispatcher.build_url("web","apsetting","upgrade")%>"><%:系统升级%></a></li>
@@ -92,7 +99,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                 </span>
                 <em class="t"></em>
             </div>
-            <div class="form-item" style="display:none">
+            <div class="form-item">
                 <label class="k"><%:位置%></label>
                 <span class="v">
                     <input type="text" name="locale" id="locale" class="ipt-text" autocomplete="off" datatype="bytetext" maxlength="24" reqMsg="<%:路由器位置%>" value="{$locale}">
@@ -349,7 +356,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                 if (parent.hasClass(clsError)) {
                     t.hide();
                 }
-                // label.css({'left': 'auto'});
+                label.css({'left': 'auto'});
                 label.hide();
                 parent[0].className = classname;
             };
@@ -376,7 +383,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                     if (offsetX > 0) {
                         label.css({'left': offsetX + 10});
                     } else {
-                        // label.css({'left': 12});
+                        label.css({'left': 12});
                     }
                     parent[0].className = classname;
                 }
@@ -627,7 +634,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                     content: ''
                 },
                 conf = mix(_config, {
-                    width: 490,
+                    width: 390,
                     padding: '25px 30px',
                     title: config.title,
                     content: '<p style="padding-bottom:30px;">{$content}</p><div class="loading-bar"></div>'.tmpl({content: config.content}),
@@ -676,7 +683,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
             ok = ok || function () {
             };
             return $.dialog({
-                width: 490,
+                width: 390,
                 padding: '25px 30px',
                 title: '<%:提示信息%>',
                 content: content,
@@ -692,7 +699,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
             var _cancel = cancel || function () {
             };
             return $.dialog({
-                width: 490,
+                width: 390,
                 padding: '25px 30px',
                 title: '<%:确认信息%>',
                 content: content,
@@ -829,7 +836,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                             name: StringH.encode4HtmlValue(rsp.name)
                         });
                         dlgRouterName = $.dialog({
-                            width: 490,
+                            width: 390,
                             title: '<%:修改路由器名称%>',
                             content: html,
                             lock: true
@@ -851,7 +858,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                 content = $('#tpldownintl').html()
             }
             $.dialog({
-                width: 490,
+                width: 390,
                 title: '<%:下载客户端%>',
                 content: content,
                 lock: true
@@ -873,7 +880,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
         function rebootHandler(e) {
             e.preventDefault();
             dlgReboot = $.dialog({
-                width: 490,
+                width: 390,
                 title: '<%:重启路由器%>',
                 content: $('#tplreboot').html(),
                 lock: true
@@ -883,7 +890,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
         function shutdownHandler(e) {
             e.preventDefault();
             dlgShutdown = $.dialog({
-                width: 490,
+                width: 390,
                 title: '<%:路由器关机%>',
                 content: $('#tplshutdown').html(),
                 lock: true
@@ -1010,21 +1017,6 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                 e.preventDefault();
 
                 if (isClick) return;
-
-                //判断是否为尼日利亚
-                $.getJSON('<%=luci.dispatcher.build_url("api","xqsystem","get_location")%>', function(rsp){
-                    if (rsp.code === 0) {//  code非0代表失败
-                        // {"code":0 ,location="地区简称"}
-                        //zone value
-                        if(rsp.location == 'NG' || rsp.location == 'ID') {
-                            meshModeDialog = $.dialog({
-                                title: '<%:提示%>',
-                                content: $('#nrlyTips').html(),
-                                padding: '30px 40px',
-                                lock: true,
-                                width: 400
-                            })
-                        } else {
                 // var apiDevicesGet = '<%=luci.dispatcher.build_url("api", "misystem","devicelist")%>';
                 var apiDevicesGet = '<%=luci.dispatcher.build_url("api","misystem","topo_graph")%>';
                 isClick = true;
@@ -1118,7 +1110,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                                                 for (var i = 0; i < rsp.graph.leafs.length; i++) {
 
                                                    var item = rsp.graph.leafs[i];
-                                                    if (item.mode == 8 && item.assoc == 1 ) {
+                                                    if (item.mode == 8) {
                                                         count++;
                                                     }
 
@@ -1132,7 +1124,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                                                 content: $('#tmplMeshMode').html(),
                                                 padding: '30px 40px',
                                                 lock: true,
-                                                width: 500,
+                                                width: 400,
                                             });
 
                                             // 设置最多只能添加三个路由器
@@ -1160,11 +1152,10 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                         }
 
                     })
-                        }
-                    }
-            });
+
 
             });
+
             $('body').delegate('#mesh_re_try', 'click', function (e) {
                 e.preventDefault();
                 $('#mesh-add-loading').siblings('.switch-step').hide();
@@ -1207,7 +1198,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                     $('#mesh-local').siblings('.switch-step').hide();
                     $('#mesh-local').show();
                 } else {
-                    $.alert('<%:请选择要添加的设备%>');
+                    $.alert('请选择要添加的设备');
                 }
 
             });
@@ -1254,7 +1245,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                 $.get(api, {mac: iteValue}, function (rsp) {
                     rsp = $.parseJSON(rsp);
                     // 0:添加成功； 1：正在连接mesh节点  2：正在同步Mesh网络配置  3：正在扩展Mesh网络  4：失败
-                    // rsp = {"status":3,"code":0}
+                    // rsp = {"status":4,"code":0}
                     if (rsp.code == 0) {
                         if (rsp.status == 0) {
 
@@ -1268,9 +1259,9 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
 
                         } else {
                             if (rsp.status === 3) {
-                                $('#mesh-add-loading').find('p').html('<%:扩展Mesh网络(约1分钟)...%>')
+                                $('#mesh-add-loading').find('p').html('正在扩展Mesh节点(1-2分钟)...')
                             } else if (rsp.status === 2) {
-                                $('#mesh-add-loading').find('p').html('<%:同步Mesh网络配置...%>')
+                                $('#mesh-add-loading').find('p').html('正在同步Mesh节点配置...')
                             }
                             timeout =  setTimeout(function () {
                                 getMeshStatus(iteValue);
@@ -1293,7 +1284,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                 $('#mesh-search-loading').siblings('.switch-step').hide();
                 $('#mesh-search-loading').show();
                 // $('#mesh_list_length0').hide();
-                $('.d-hd').html('<%:搜索并添加Mesh节点%>');
+                $('.d-hd').html('搜索并添加Mesh节点');
                 //获取可添加的Mesh子节点 /api/xqnetwork/scan_mesh_node
                 var api = '<%=luci.dispatcher.build_url("api", "xqnetwork", "scan_mesh_node")%>';
                 // debugger;
@@ -1331,7 +1322,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                                 div.attr('data-mac', StringH.encode4Html(item.mac));
                                 var rssi = item.rssi < -60 ? '<div class="rssi small"></div>' : '<div class="rssi"></div>';
                                 var name = '<div class="name">' + StringH.encode4Html(item.ssid) + '</div>';
-                                var mac = '<div class="mac">' + StringH.encode4Html(item.mac) + (item.rssi < -60 ? '<span><%:信号弱，请靠近主Mesh路由器%></span>' : '') + '</div>';
+                                var mac = '<div class="mac">' + StringH.encode4Html(item.mac) + (item.rssi < -60 ? '<span>请靠近主路由</span>' : '') + '</div>';
                                 div.on('click', function () {
                                     $('.list_box').find('.mesh_item').removeClass('selected')
                                     $(this).addClass('selected');
@@ -1346,7 +1337,7 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
                             //  debugger;
                             $('#mesh_list_length0').siblings('.switch-step').hide();
                             $('#mesh_list_length0').show();
-                            $('.d-hd').html('<%:未找到可用的Mesh节点路由%>');
+                            $('.d-hd').html('没有搜索到可用的mesh节点');
 
                         }
 

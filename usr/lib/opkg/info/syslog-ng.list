@@ -2,7 +2,6 @@
 /usr/lib/syslog-ng/libafuser.so
 /usr/lib/syslog-ng/libkvformat.so
 /usr/lib/syslog-ng/libbasicfuncs.so
-/usr/sbin/syslog-ng.helper
 /usr/lib/syslog-ng/libgraphite.so
 /usr/lib/syslog-ng/libdate.so
 /usr/lib/syslog-ng/libafprog.so

@@ -9,7 +9,8 @@ local request_uri = luci.http.getenv("REMOTE_URI")
 local remote_addr = luci.http.getenv("REMOTE_ADDR")
 local mac = luci.sys.net.ip4mac(remote_addr)
 local lanType = wifiUtil.getDeviceWifiIndex(mac)
-local hardware = string.lower( sys.getHardware() )
+local XQSysUtil = require "xiaoqiang.util.XQSysUtil"
+local hardware = string.lower( XQSysUtil.getHardware() )
 %>
 <%include("web/inc/head")%>
 <title><%:小米路由器%></title>
@@ -78,7 +79,8 @@ local hardware = string.lower( sys.getHardware() )
                 <div class="mod-qos-set hasspeed">
                     <div class="isoff" id="qosoff" style="display:none;"><%:当前QoS服务暂未开启%></div>
                     <div class="ison" id="qosset" style="display:none;">
-                        <!-- <div class="models settings" style="padding-top:40px;display:none;">
+                        <%if hardware ~= "d01" then%>
+                        <div class="models settings" style="padding-top:40px;">
                             <h4 class="tit"><%:根据应用优先级分配网速%></h4>
                             <div id="qosmode" class="tab clearfix">
                                 <ul>
@@ -101,7 +103,9 @@ local hardware = string.lower( sys.getHardware() )
                                 <p><%:优先保证看视频的网速，高清也流畅%></p>
                             </div>
                             <hr></hr>
-                        </div> -->
+                        </div>
+                        <%end%>
+
                         <div class="settings">
                             <h4><%:家庭WiFi限速%> <i class="ico ico-refresh" id="refresh"></i></h4>
                             <div class="table-devices" id="tableauto" style="display:none">
@@ -155,7 +159,9 @@ local hardware = string.lower( sys.getHardware() )
                             </div>
                             <hr></hr>
                         </div>
-                        <div id="guest-limit">
+
+                        <%if hardware ~= "d01" then%>
+                        <div id="guest-limit" >
                             <script type="tmpl/html" id="guest-limit-script">
                             <div class="mod-qos-speedtest settings">
                                 <h4 class="tit"><%:访客WiFi限速%>:</h4>
@@ -186,11 +192,14 @@ local hardware = string.lower( sys.getHardware() )
                             </div>
                             </script>
                         </div>
+                        <%end%>
+
+                        <%if hardware ~= "d01" then%>
                         <div id="local-limit">
                         <script type="tmpl/html" id="local-limit-script">
-                        <%if (hardware ~= "r4" and hardware ~= "r1cl" and hardware ~= "r4c" and hardware ~= "r4cm" and hardware ~= "r3a" and hardware ~= "r3l" and hardware ~= "r4ac" and hardware ~= "r2350") then%>
+                        <%if (hardware ~= "r4" and hardware ~= "r1cl" and hardware ~= "r4c" and hardware ~= "r4cm" and hardware ~= "r3a" and hardware ~= "r3l" and hardware ~= "r4ac") then%>
                             
-                            <div class="mod-qos-speedtest settings" style="display:none;">
+                            <div class="mod-qos-speedtest settings">
                                 <h4 class="tit"><%:路由器自身上传下载限速%>:</h4>
                                 <div class="mod-speed-result" style="padding-top:0px;">
                                     <ul class="clearfix">
@@ -221,6 +230,8 @@ local hardware = string.lower( sys.getHardware() )
                              <%end%>
                              </script>
                         </div>
+                        <%end%>
+
                     </div>
                 </div>
             </div>
@@ -296,8 +307,8 @@ local hardware = string.lower( sys.getHardware() )
                 <th width="270"><%:设备名称%></th>
                 <th width="200"><%:设备信息%></th>
                 <th width="110"><%:当前网速%></th>
-                <th><%:上传速度%></th>
-                <th><%:下载速度%></th>
+                <th class="center"><%:上传速度%></th>
+                <th class="center"><%:下载速度%></th>
             </tr>
         </thead>
         <tbody>
@@ -306,10 +317,10 @@ local hardware = string.lower( sys.getHardware() )
                 <td>{$devlist[i].devname}</td>
                 <td class="con">{$devlist[i].ip} <br> {$devlist[i].mac}</td>
                 <td class="con"><i class="ico ico-upspeed"></i> {$devlist[i].upspeed}/S <br><i class="ico ico-downspeed"></i> {$devlist[i].downspeed}/S</td>
-                <td class="form-item">
+                <td class="center form-item">
                     <input class="ipt-text" reqMsg="<%:上传速度%>" datatype="n-10.2" minValue="0" name="upmax" value="{$devlist[i].upmax}"> KB/S <em></em>
                 </td>
-                <td class="form-item">
+                <td class="center form-item">
                     <input class="ipt-text" reqMsg="<%:下载速度%>" datatype="n-10.2" minValue="0"  name="downmax" value="{$devlist[i].downmax}"> KB/S <em></em>
                 </td>
             </tr>
@@ -366,8 +377,8 @@ local hardware = string.lower( sys.getHardware() )
                 <th width="270"><%:设备名称%></th>
                 <th width="200"><%:设备信息%></th>
                 <th width="110"><%:当前网速%></th>
-                <th><%:上传速度%></th>
-                <th><%:下载速度%></th>
+                <th class="center"><%:上传速度%></th>
+                <th class="center"><%:下载速度%></th>
             </tr>
         </thead>
         <tbody>
@@ -376,10 +387,10 @@ local hardware = string.lower( sys.getHardware() )
                 <td>{$devlist[i].devname}</td>
                 <td class="con">{$devlist[i].ip} <br> {$devlist[i].mac}</td>
                 <td class="con"><i class="ico ico-upspeed"></i> {$devlist[i].upspeed}/S <br><i class="ico ico-downspeed"></i> {$devlist[i].downspeed}/S</td>
-                <td class="form-item">
+                <td class="center form-item">
                     <input class="ipt-text" reqMsg="<%:上传速度%>" datatype="n-10.2" minValue="0" name="upmax" value="{$devlist[i].upmax}"> KB/S <em></em>
                 </td>
-                <td class="form-item">
+                <td class="center form-item">
                     <input class="ipt-text" reqMsg="<%:下载速度%>" datatype="n-10.2" minValue="0"  name="downmax" value="{$devlist[i].downmax}"> KB/S <em></em>
                 </td>
             </tr>
@@ -394,6 +405,26 @@ local hardware = string.lower( sys.getHardware() )
 </script>
 <script>
 var modelQos = (function(){
+
+    var cookie = {
+        set:function(key,val,time){//设置cookie方法
+            var date=new Date(); 
+            var expiresDays=time;  //将date设置为n天以后的时间
+            date.setTime(date.getTime()+expiresDays*24*3600*1000); 
+            document.cookie=key + "=" + val +";expires="+date.toGMTString();  
+        },
+        get:function(key){//获取cookie方法
+            var arr=document.cookie.split('; '); 
+            for(var i=0;i<arr[i].length;i++){
+              var arr2=arr[i].split('='); 
+              if(arr2[0]==key){
+                return arr2[1]; 
+              }
+              return '';
+            }
+        }
+    }
+
     function setDefaultMode(){
         $.pub('loading:start');
         $.getJSON( '<%=luci.dispatcher.build_url("api", "misystem", "qos_mode")%>', { mode: 3 }, function( rsp ){
@@ -441,10 +472,26 @@ var modelQos = (function(){
                 } else {
                     $( '.mod-qos-alert' ).hide();
                 }
+                
                 if ( downband  == 0 ) {
                     $('.mod-bandwidth .nospeed').show();
                     $('.mod-bandwidth .hasspeed').hide();
                     $('.result-tip').show();
+                    var st = cookie.get("qosbtn");
+                    if( st == 1){
+                        dlgSpeed = $.dialog({
+                            title: '<%:手工设置外网带宽%>',
+                            content: $('#tplbandsetform').html().tmpl({
+                                upband: '',
+                                downband: ''
+                            }),
+                            lock: true
+                        });
+                        setTimeout(function(){
+                            $.formInit();
+                        }, 100);
+                    }
+                                  
                     return;
                 }
                 $('.mod-bandwidth .nospeed').hide();
@@ -474,6 +521,16 @@ var modelQos = (function(){
             }
         });
     }
+
+
+    function guestWifiSwitch(){
+        $.getJSON('<%=luci.dispatcher.build_url("api", "misns", "wifi_share_info")%>', { }, function(rsp){
+            if(!rsp.info&&rsp.info.guest){
+                $('#guest-limit').hide();
+            }
+        })
+    }
+
     function qosLimit(rspBand){
         $.getJSON('<%=luci.dispatcher.build_url("api", "misystem", "qos_info")%>', { }, function(rsp){
             var htmlGuest = $('#guest-limit-script').html();
@@ -482,6 +539,12 @@ var modelQos = (function(){
             var outbandDown = rspBand.band.download * 1024 / 8;
             $('#guest-limit').html(htmlGuest.tmpl({'up':(rsp.guest.percent_up*outbandUp).toFixed(2),'down':(rsp.guest.percent*outbandDown).toFixed(2)}));
             $('#local-limit').html(htmlLocal.tmpl({'up':(rsp.local.percent_up*outbandUp).toFixed(2),'down':(rsp.local.percent*outbandDown).toFixed(2)}));
+
+
+            // guest wifi switch
+            guestWifiSwitch();
+            $('#local-limit').hide();
+
             if(rsp.guest.percent_up == 0){
                 $('#guest-limit li:first .num').text('无限制').addClass('txt');
                 $('#guest-limit li:first .con').hide();
@@ -661,17 +724,18 @@ var modelQos = (function(){
         return devdata;
     }
 
-    // switch QoS status
+    // switch QoS status 
     function qosSwitch(){
         var btnqos = $('#btnqos');
         btnqos.on('click', function(e){
             e.preventDefault();
             var st = $(this).hasClass('btn-switch-on') ? 0 : 1,
                 btn = this;
+                cookie.set("qosbtn", st, 24);
                 $.pub( 'qos:test',{st:st,cb:function(){
                     $.getJSON('<%=luci.dispatcher.build_url("api", "misystem", "qos_switch")%>', {'on': st}, function(rsp){
                                 if (rsp.code == 0) {
-                                    location.reload(1);
+                                    location.reload(1);                            
                                 }
                             });
                 }});

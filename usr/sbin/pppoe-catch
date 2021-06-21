@@ -31,8 +31,6 @@ pppoecatch_unlock()
 ################### dnsd ###################
 
 cleanup() {
-    iptv=$(uci -q get mi_iptv.settings.internet_tag)
-    [ "$iptv" == "1" ] && ubus call network reload && sleep 4;
     rm -f $SERVER_NAME_FILE
     rm -f $PAP_FILE
     killall -9 pppoe-server &>/dev/null

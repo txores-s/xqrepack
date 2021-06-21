@@ -112,8 +112,6 @@ restore_nvram () {
 		[  "$wl1_val" != "" -a -n "$wl1_val" ] && nvram set wl1_radio=$wl1_val
 		[  "$wl0_val" != "" -a -n "$wl0_val" ] && nvram set wl0_radio=$wl0_val
 	fi
-	countrycode=`nvram get CountryCode`
-	[ "$countrycode" = "EU" ] && nvram set CountryCode=SG
 
 	nvram commit
 }

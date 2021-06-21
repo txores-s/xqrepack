@@ -5,6 +5,7 @@ config defaults
 	option output		ACCEPT
 	option forward		REJECT
 	option drop_invalid	1
+# Uncomment this line to disable ipv6 rules
 	option disable_ipv6	1
 
 config zone
@@ -130,6 +131,10 @@ config include 'ipv6_masq'
        option path '/lib/firewall.sysapi.loader ipv6_masq'
        option reload '1'
 
+config include 'set_tcpmss'
+	option path '/lib/firewall.sysapi.loader set_tcpmss'
+	option reload '1'
+
 config rule 'guest_8999'
 	option name 'Hello wifi 8999'
 	option src 'guest'
@@ -165,7 +170,6 @@ config rule 'ready_dhcp'
         option dest_port '67-68'
         option proto 'udp'
         option target 'ACCEPT'
-        option family		'ipv4'
 
 config rule 'ready_dhcp_out'
         option name 'DHCP for ready'
@@ -174,7 +178,6 @@ config rule 'ready_dhcp_out'
         option dest_port '67-68'
         option proto 'udp'
         option target 'ACCEPT'
-        option family		'ipv4'
 
 config rule 'ready_minet_in'
        option name 'minet ready'
@@ -182,7 +185,6 @@ config rule 'ready_minet_in'
        option dest_port '786'
        option proto 'tcp'
        option target 'ACCEPT'
-       option family		'ipv4'
 
 config rule 'ready_minet_out'
        option name 'minet ready'
@@ -190,4 +192,3 @@ config rule 'ready_minet_out'
        option src_port '786'
        option proto 'tcp'
        option target 'ACCEPT'
-       option family		'ipv4'
