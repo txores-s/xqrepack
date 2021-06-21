@@ -115,7 +115,7 @@ wanip_check()
                 #cat $wanip_status
                 break;
             else
-                echo 0 > $wanip_status
+                echo 1 > $wanip_status
                 sleep $interval
                 let max_retry--
                 wanip_check_log "wan is up, server response error, retry $max_retry"

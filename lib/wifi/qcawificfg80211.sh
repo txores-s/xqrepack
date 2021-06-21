@@ -2732,9 +2732,6 @@ enable_qcawificfg80211() {
 		[ -n "$ctsprt_dtmbcn" ] && "$device_if" "$ifname" ctsprt_dtmbcn "${ctsprt_dtmbcn}"
 
 		config_get assocwar160  "$vif" assocwar160
-        if [ "$bw" = "0" -a "$bdmode" = "5G" ]; then
-            assocwar160=1
-        fi
 		[ -n "$assocwar160" ] && "$device_if" "$ifname" assocwar160 "$assocwar160"
 
 		config_get rawdwepind "$vif" rawdwepind
@@ -3000,13 +2997,6 @@ enable_qcawificfg80211() {
 		ifconfig $ifname down
 	fi
 
-	if [ $ifname = "wl14" ]; then
-		iwpriv wl14 ap_bridge 0
-	fi
-
-	if [ $ifname = "wl15" ]; then
-		iwpriv wl15 ap_bridge 0
-	fi
 	lock -u /var/run/wifilock
 }
 
@@ -3805,6 +3795,7 @@ EOF
     if [ $devidx = 0 ]; then
         cat <<EOF
     option bw 80
+    option support160 '1'
 EOF
     fi
 	cat <<EOF
@@ -3827,35 +3818,7 @@ EOF
 	fi
 	devidx=$(($devidx + 1))
 	done
-	cat <<EOF
 
-config wifi-iface 'guest_2G'
-	option ifname 'wl14'
-	option ssid 'xiaomi_guest_2G'
-	option encryption 'none'
-	option device 'wifi1'
-	option key '12345678'
-	option network 'guest'
-	option mode 'ap'
-	option disabled '1'
-	option wpsdevicename 'XIAOMI_ROUTER_GUEST'
-	option ap_isolate '1'
-
-EOF
-	cat <<EOF
-
-config wifi-iface 'guest_5G'
-	option ifname 'wl15'
-	option ssid 'xiaomi_guest_5G'
-	option encryption 'none'
-	option device 'wifi0'
-	option key '12345678'
-	option network 'guest'
-	option mode 'ap'
-	option disabled '1'
-	option wpsdevicename 'XIAOMI_ROUTER_GUEST'
-
-EOF
 	if [ $reload == 1 ] ; then
 		if [ $avoid_load == 1 ]; then
 			wifi_updown "disable" "$2" > /dev/null

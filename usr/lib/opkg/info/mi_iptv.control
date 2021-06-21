@@ -1,8 +1,0 @@
-Package: mi_iptv
-Version: 1.0-1.0
-Depends: libc
-Source: package/miwifi/mi_iptv
-Section: data
-Architecture: all
-Installed-Size: 1462
-Description:  mi_iptv
