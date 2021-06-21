@@ -55,8 +55,6 @@ start() {
 	    fi
 	fi
 
-	hyctl setmc br-lan state disable
-
 }
 
 stop() {

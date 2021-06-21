@@ -98,6 +98,9 @@ __get_wifi()
     support160="`uci -q get misc.wireless.support_160m`"
     [ -z "$support160" ] && support160=0
 
+    iot_switch="`uci -q get wireless.miot_2G.userswitch`"
+    [ -z "$iot_switch" ] && iot_switch=""
+
     [ "$USE_ENCODE" -gt 0 ] || {
     # support special string escape
         ssid_2g="$(str_escape "$ssid_2g")"
@@ -178,9 +181,6 @@ __get_system()
     led_blue="`uci -q get xiaoqiang.common.BLUE_LED`"
     [ -z "$led_blue" ] && led_blue=1
 
-    main_lang="`uci -q get luci.main.lang`"
-    [ -z "$main_lang" ] && main_lang=en
-
 }
 
 __get_miscan()
@@ -192,7 +192,7 @@ __get_miscan()
 __info_compose()
 {
     # collect whc_sync msg & push to REs
-#tbus call 192.168.31.115 whc_sync "{\"ssid_2g\":\"!@D01-son\",\"ssid_5g\":\"!@D01-son\",\"pswd_2g\":\"123456789\",\"pswd_5g\":\"123456789\",\"mgmt_2g\":\"mixed-psk\",\"mgmt_5g\":\"mixed-psk\",\"txpwr_2g\":\"max\",\"txpwr_5g\":\"max\",\"hidden_2g\":\"0\",\"hidden_5g\":\"0\,\"ch_2g\":\"1\",\"ch_5g\":\"161\",\"bw_2g\":\"0\",\"bw_5g\":\"0\",\"bsd_2g\":\"1\",\"bsd_5g\":\"1\",\"txbf_2g\":\"0\",\"txbf_5g\":\"0\",\sae_2g\":\"1\",\"sae_5g\":\"1\",\"sae_passwd_2g\":\"123456789\",\"sae_passwd_5g\":\"123456789\",\"ieee80211w_2g\":\"1\",\"ieee80211w_5g\":\"1\",\"gst_disab\":\"1\",\"gst_ssid\":\"\",\"gst_pswd\":\"\",\"gst_mgmt\":\"\",\"timezone\":\"CST-8\",\"ota_auto\":\"0\",\"ota_time\":\"4\",\"led_blue\":\"1\",\"main_lang\":\"en\"}"
+#tbus call 192.168.31.115 whc_sync "{\"ssid_2g\":\"!@D01-son\",\"ssid_5g\":\"!@D01-son\",\"pswd_2g\":\"123456789\",\"pswd_5g\":\"123456789\",\"mgmt_2g\":\"mixed-psk\",\"mgmt_5g\":\"mixed-psk\",\"txpwr_2g\":\"max\",\"txpwr_5g\":\"max\",\"hidden_2g\":\"0\",\"hidden_5g\":\"0\,\"ch_2g\":\"1\",\"ch_5g\":\"161\",\"bw_2g\":\"0\",\"bw_5g\":\"0\",\"bsd_2g\":\"1\",\"bsd_5g\":\"1\",\"txbf_2g\":\"0\",\"txbf_5g\":\"0\",\sae_2g\":\"1\",\"sae_5g\":\"1\",\"sae_passwd_2g\":\"123456789\",\"sae_passwd_5g\":\"123456789\",\"ieee80211w_2g\":\"1\",\"ieee80211w_5g\":\"1\",\"gst_disab\":\"1\",\"gst_ssid\":\"\",\"gst_pswd\":\"\",\"gst_mgmt\":\"\",\"timezone\":\"CST-8\",\"ota_auto\":\"0\",\"ota_time\":\"4\",\"led_blue\":\"1\"}"
 
     __get_wifi
 [ "$SUPPORT_GUEST_ON_RE" -gt 0 ] && {
@@ -211,7 +211,8 @@ if [ "$SUPPORT_GUEST_ON_RE" -gt 0 ]; then
 \"sae_2g\":\"$sae_2g\",\"sae_5g\":\"$sae_5g\",\"sae_passwd_2g\":\"$sae_pwd_2g\",\"sae_passwd_5g\":\"$sae_pwd_5g\",\
 \"ieee80211w_2g\":\"$ieee80211w_2g\",\"ieee80211w_5g\":\"$ieee80211w_5g\",\
 \"gst_disab\":\"$gst_disab\",\"gst_ssid\":\"$gst_ssid\",\"gst_pswd\":\"$gst_pswd\",\"gst_mgmt\":\"$gst_mgmt\",\
-\"timezone\":\"$timezone\",\"ota_auto\":\"$ota_auto\",\"ota_time\":\"$ota_time\",\"led_blue\":\"$led_blue\",\"miscan_enable\":\"$miscan_enable\",\"support160\":\"$support160\",\"main_lang\":\"$main_lang\"\
+\"timezone\":\"$timezone\",\"ota_auto\":\"$ota_auto\",\"ota_time\":\"$ota_time\",\"led_blue\":\"$led_blue\",\"miscan_enable\":\"$miscan_enable\",\"support160\":\"$support160\",\
+\"iot_switch\":\"$iot_switch\"\
 }"
 
     msg="$msg_decode"
@@ -225,7 +226,8 @@ if [ "$SUPPORT_GUEST_ON_RE" -gt 0 ]; then
 \"sae_2g\":\"$sae_2g\",\"sae_5g\":\"$sae_5g\",\"sae_passwd_2g\":\"$(base64_enc "$sae_pwd_2g")\",\"sae_passwd_5g\":\"$(base64_enc "$sae_pwd_5g")\",\
 \"ieee80211w_2g\":\"$ieee80211w_2g\",\"ieee80211w_5g\":\"$ieee80211w_5g\",\
 \"gst_disab\":\"$gst_disab\",\"gst_ssid\":\"$gst_ssid\",\"gst_pswd\":\"$gst_pswd\",\"gst_mgmt\":\"$gst_mgmt\",\
-\"timezone\":\"$timezone\",\"ota_auto\":\"$ota_auto\",\"ota_time\":\"$ota_time\",\"led_blue\":\"$led_blue\",\"miscan_enable\":\"$miscan_enable\",\"support160\":\"$support160\",\"main_lang\":\"$main_lang\"\
+\"timezone\":\"$timezone\",\"ota_auto\":\"$ota_auto\",\"ota_time\":\"$ota_time\",\"led_blue\":\"$led_blue\",\"miscan_enable\":\"$miscan_enable\",\"support160\":\"$support160\",\
+\"iot_switch\":\"$iot_switch\"\
 }"
     fi
 else
@@ -237,7 +239,8 @@ else
 \"bw_2g\":\"$bw_2g\",\"bw_5g\":\"$bw_5g\",\"bsd_2g\":\"$bsd_2g\",\"bsd_5g\":\"$bsd_5g\",\"txbf_2g\":\"$txbf_2g\",\"txbf_5g\":\"$txbf_5g\",\
 \"sae_2g\":\"$sae_2g\",\"sae_5g\":\"$sae_5g\",\"sae_passwd_2g\":\"$sae_pwd_2g\",\"sae_passwd_5g\":\"$sae_pwd_5g\",\
 \"ieee80211w_2g\":\"$ieee80211w_2g\",\"ieee80211w_5g\":\"$ieee80211w_5g\",\
-\"timezone\":\"$timezone\",\"ota_auto\":\"$ota_auto\",\"ota_time\":\"$ota_time\",\"led_blue\":\"$led_blue\",\"miscan_enable\":\"$miscan_enable\",\"support160\":\"$support160\",\"main_lang\":\"$main_lang\"\
+\"timezone\":\"$timezone\",\"ota_auto\":\"$ota_auto\",\"ota_time\":\"$ota_time\",\"led_blue\":\"$led_blue\",\"miscan_enable\":\"$miscan_enable\",\"support160\":\"$support160\",\
+\"iot_switch\":\"$iot_switch\"\
 }"
 
     msg="$msg_decode"
@@ -250,7 +253,8 @@ else
 \"bw_2g\":\"$bw_2g\",\"bw_5g\":\"$bw_5g\",\"bsd_2g\":\"$bsd_2g\",\"bsd_5g\":\"$bsd_5g\",\"txbf_2g\":\"$txbf_2g\",\"txbf_5g\":\"$txbf_5g\",\
 \"sae_2g\":\"$sae_2g\",\"sae_5g\":\"$sae_5g\",\"sae_passwd_2g\":\"$(base64_enc "$sae_pwd_2g")\",\"sae_passwd_5g\":\"$(base64_enc "$sae_pwd_5g")\",\
 \"ieee80211w_2g\":\"$ieee80211w_2g\",\"ieee80211w_5g\":\"$ieee80211w_5g\",\
-\"timezone\":\"$timezone\",\"ota_auto\":\"$ota_auto\",\"ota_time\":\"$ota_time\",\"led_blue\":\"$led_blue\",\"miscan_enable\":\"$miscan_enable\",\"support160\":\"$support160\",\"main_lang\":\"$main_lang\"\
+\"timezone\":\"$timezone\",\"ota_auto\":\"$ota_auto\",\"ota_time\":\"$ota_time\",\"led_blue\":\"$led_blue\",\"miscan_enable\":\"$miscan_enable\",\"support160\":\"$support160\",\
+\"iot_switch\":\"$iot_switch\"\
 }"
     fi
 
@@ -262,30 +266,13 @@ __init_info_compose()
     __get_wifi
     __get_system
 
-    web_passwd="`uci -q get account.common.admin`"
-    policy="`uci -q get wireless.@wifi-iface[0].macfilter`"
-    maclist="`uci -q get wireless.@wifi-iface[0].maclist`"
-    maclist_format="`echo -n $maclist | sed "s/ /;/g"`"
-    mac_count="`echo $maclist_format | awk -F ';' '{a+=NF}END{print a}'`"
-
-    if [ $mac_count -gt 28 ]; then
     init_msg="{\
 \"hidden_2g\":\"$hidden_2g\",\"hidden_5g\":\"$hidden_5g\",\
 \"disabled_2g\":\"$disabled_2g\",\"disabled_5g\":\"$disabled_5g\",\"ax_2g\":\"$ax_2g\",\"ax_5g\":\"$ax_5g\",\
 \"txpwr_2g\":\"$txpwr_2g\",\"txpwr_5g\":\"$txpwr_5g\",\"ch_2g\":\"$ch_2g\",\"ch_5g\":\"$ch_5g\",\
 \"bw_2g\":\"$bw_2g\",\"bw_5g\":\"$bw_5g\",\"txbf_2g\":\"$txbf_2g\",\"txbf_5g\":\"$txbf_5g\",\
-\"support160\":\"$support160\",\"web_passwd\":\"$web_passwd\",\"main_lang\":\"$main_lang\"\
+\"support160\":\"$support160\"\
 }"
-    else
-    init_msg="{\
-\"hidden_2g\":\"$hidden_2g\",\"hidden_5g\":\"$hidden_5g\",\
-\"disabled_2g\":\"$disabled_2g\",\"disabled_5g\":\"$disabled_5g\",\"ax_2g\":\"$ax_2g\",\"ax_5g\":\"$ax_5g\",\
-\"txpwr_2g\":\"$txpwr_2g\",\"txpwr_5g\":\"$txpwr_5g\",\"ch_2g\":\"$ch_2g\",\"ch_5g\":\"$ch_5g\",\
-\"bw_2g\":\"$bw_2g\",\"bw_5g\":\"$bw_5g\",\"txbf_2g\":\"$txbf_2g\",\"txbf_5g\":\"$txbf_5g\",\
-\"support160\":\"$support160\",\"web_passwd\":\"$web_passwd\",\"main_lang\":\"$main_lang\",\
-\"policy\":\"$policy\",\"maclist\":\"$maclist_format\"\
-}"
-    fi
 }
 __syncbuf_compare()
 {

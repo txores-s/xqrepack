@@ -1,8 +1,0 @@
-Package: miwifi-scan
-Version: 1.0-a
-Depends: libc, libjson-c, libiw, libmbedtls, libuci, libpthread
-Source: package/miwifi/miwifi-scan
-Section: net
-Architecture: all
-Installed-Size: 43598
-Description:  A script to do wifi scan.

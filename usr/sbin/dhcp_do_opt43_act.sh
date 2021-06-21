@@ -11,10 +11,12 @@ del_ip(){
         ip addr del $ip_str dev $ifname
 }
 
-# oversea not support
-cc=`bdata get CountryCode`
-cc=${cc:-CN}
-[ "$cc" != "CN" ] && return
+# Add to remove opt43 for D01, and return un-support.
+HARDWARE=`/sbin/uci get /usr/share/xiaoqiang/xiaoqiang_version.version.HARDWARE`
+if [ "$HARDWARE" == "D01" ]; then
+    return 100
+fi
+# Add end
 
 act_base64=$1
 

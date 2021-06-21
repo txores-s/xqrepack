@@ -10,4 +10,3 @@
 /etc/init.d/xq_info_sync_mqtt
 /sbin/xqwhc_maclist_reload.sh
 /sbin/xqwhc_info_sync.sh
-/sbin/re_restore.sh

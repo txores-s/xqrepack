@@ -5,5 +5,5 @@ Source: feeds/luci/luci
 Section: luci
 Maintainer: LuCI Development Team <luci@lists.subsignal.org>
 Architecture: aarch64_cortex-a53
-Installed-Size: 351000
+Installed-Size: 351912
 Description:  Web UI Core module

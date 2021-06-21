@@ -7,27 +7,6 @@ once="$2"
 
 NTPSTATUSFLAG="/tmp/ntp.status"
 SCRIP_PATH='/etc/hotplug.d/ntp'
-NET_CONNECTED=0
-
-check_wan()
-{
-	local cc=$(nvram get CountryCode)	
-    local host_list=
-	cc=${cc:-CN}
-	
-    if [ "$1" == "CN" ]; then
-		host_list=$(uci -q get system.netdt.cn_domain)
-    else
-		host_list=$(uci -q get system.netdt.world_domain)
-    fi
-    for host in $host_list; do
-		ping -c 1 -w 3 -q "$host" &> /dev/null && {
-			NET_CONNECTED=1
-			return 0;
-		}	
-    done
-    return 1;
-}
 
 dlog() {
     logger -s -p 6 -t "ntp" "$@"
@@ -90,12 +69,6 @@ if [ "$NTPSTATUS" = "ok" ];then
     local last_sync=$(cut -d, -f2 $NTPSTATUSFLAG 2>/dev/null)
     echo "INFO: last ntp sync sucessed at $last_sync"
     [ -n "$once" ] && exit 0
-fi
-
-check_wan
-if [ "$NET_CONNECTED" = "0" ]; then
-    echo "INFO: internet is not connected. exit."
-    exit 0
 fi
 
 ntpservers="$(uci get system.ntp.server)"

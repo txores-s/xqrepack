@@ -1,5 +1,5 @@
 config core main
-	option lang en
+	option lang zh_cn
 	option 'mediaurlbase' '/xiaoqiang'
     option 'resourcebase' '/xiaoqiang'
 	

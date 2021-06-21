@@ -76,7 +76,7 @@ if ! lock -n $LOCKFILE; then
     trap '' EXIT
     exit 0
 fi
-cc=$(nvram get CountryCode)
+cc=$(/usr/sbin/bdata get CountryCode)
 cc=${cc:-CN}
 check_ppp_dest_peer
 

@@ -586,7 +586,7 @@ local wifi50IsSupport = features["wifi"]["wifi50"]
                     <div class="ap-text-tip hide">
                         <%:重要提示：如果上级路由器不是小米路由器，它分配给中继路由器的管理后台地址可能会改变，因此会造成无法访问后台，建议安装小米路由手机客户端，绑定当前路由器，即可通过手机使用管理功能。%>
                     </div>
-                    <a href="<%if (ccode=='CN') then%>http://eu.api.miwifi.com/data/redirect/hello_internet<%else%>http://www.mi.com/en/<%end%>" class="btn btn-primary btn-block"><span><%:开始上网%></span></a>
+                    <a href="<%if (ccode=='CN') then%>http://api.miwifi.com/data/redirect/hello_internet<%else%>http://www.mi.com/en/<%end%>" class="btn btn-primary btn-block"><span><%:开始上网%></span></a>
                     <a href="<%=luci.dispatcher.build_url("web", "home")%>" class="gotohome"><span><%:管理后台%></span></a>
                 </div>
                 <!--/end-->
@@ -1018,13 +1018,16 @@ var isMobile = {
         var tpl = $('#tmplVaslist').html();
         for( var key in res.web ){
             if( res.web.hasOwnProperty(key) ){
-                var li = StringH.tmpl(tpl, {
-                    icon: res.web[key]['icon'],
-                    title: res.web[key]['title'],
-                    desc: res.web[key]['desc'],
-                    postkey: key
-                });
-                liArr.push( li );
+                 // delete 比价助手
+                if(rsp.web[key]['title'] != "比价助手"){
+                    var li = StringH.tmpl(tpl, {
+                        icon: res.web[key]['icon'],
+                        title: res.web[key]['title'],
+                        desc: res.web[key]['desc'],
+                        postkey: key
+                    });
+                    liArr.push( li );
+                }
             }
         }
         container.html( liArr.join('') );
@@ -1089,7 +1092,7 @@ var isMobile = {
                 if( ccode == 'CN' ){
                     if( getWanLinkStatus() !== 0 ){
                         //wan linked
-                       if ((isMobile.Android() || isMobile.iOS()) && hardware != 'r3a' && hardware != 'r3l'  && hardware != 'r4' && hardware != 'r4c' && hardware != 'r4cm' && hardware != 'r4ac') {
+                       if ((isMobile.Android() || isMobile.iOS()) && hardware != 'r3a' && hardware != 'r3l'  && hardware != 'r4' && hardware != 'r4c' && hardware != 'r4cm' && hardware != 'r4ac' && hardware != 'r4g') {
 
                                         $.pub('init:toStep', {step: 'bind'});
                                         setTimeout(function(){

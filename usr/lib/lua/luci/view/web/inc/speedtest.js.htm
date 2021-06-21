@@ -418,7 +418,7 @@
                     strbw = '--';
                     bandwidthval = "--";
                     bandwidth2val = "--";
-                     statusInternet = "<%:外网状态%>";
+                     statusInternet = "<%:点击测速%>";
                     $('#retestSpeed').text("<%:开始测速%>");
                     $('#manualSetting').text("<%:手工设置%>");
                 } else {
@@ -450,7 +450,7 @@
             e.preventDefault();
             dlgSpeed = $.dialog({
                 title: '<%:网络速度%>',
-                width: 900,
+                width: 800,
                 content: $( '#tmplSpeedTesting' ).html(),
                 lock: true,
                 padding: 0,
@@ -474,7 +474,7 @@
             e.preventDefault();
             dlgSpeed = $.dialog({
                 title: '<%:外网带宽检测%>',
-                width: 900,
+                width: 740,
                 content: $( '#tmplSpeedTesting' ).html(),
                 lock: true,
                 padding: 0,
@@ -522,7 +522,7 @@
             e.preventDefault();
             dlgSpeed = $.dialog({
                 title: '<%:网络速度%>',
-                width: 900,
+                width: 740,
                 content: '<div class="mod-speed-testing"><%:处理中...%></div>',
                 lock: true,
                 padding: 0,

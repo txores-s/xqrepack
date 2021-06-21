@@ -142,7 +142,6 @@ EOF
     else
 		/etc/init.d/hyd stop
         ubus call network reload
-        /usr/sbin/reset_wpa_supp &
         logger -p warn -t udhcpc "====== call /etc/init.d/network reload after dhcp, make lan to static."
     fi
 }

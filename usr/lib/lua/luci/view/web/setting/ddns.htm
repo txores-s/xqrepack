@@ -83,7 +83,7 @@ local macdefault = string.upper(xqlanwanutil.getDefaultMacAddress())
 <script type="tmpl/html" id="tmplService">
 <tr data-service-id="{$id}" {if($enabled == 1)}data-enabled = "1"{/if}>
     <td>{$servicename}<br/>{$domain}</td>
-    <td class="con">{$lastupdate}&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" class="forceupdate"><%:手动更新%></a><br/>WAN&nbsp;IP:&nbsp;&nbsp;{$wanip}</td>
+    <td class="con">{$lastupdate}&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" class="forceupdate"><%:手动更新%></a><br/>WAN口&nbsp;IP:&nbsp;&nbsp;{$wanip}</td>
     <td class="con">{if($enabled == 1)}<%:已启用%>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="close" href="#"><%:停用%></a>{else}<%:未启用%>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="open" href="#"><%:启用%></a>{/if}<br/>{if($status == 1)}<span class="status-ok"><%:连接正常%></span>{elseif($status == 2)}<span><%:连接中...%></span>{else}<span class="status-err"><%:连接错误%></span><span class="err-ico" data-error="{$error}"></span>{/if}</td>
     <td><a href="#" class="btn btn-dft edit btn-s"><span><%:编辑%></span></a><a href="#" class="btn btn-dft del btn-s"><span><%:删除%></span></a></td>
 </tr>
@@ -191,7 +191,7 @@ local macdefault = string.upper(xqlanwanutil.getDefaultMacAddress())
             <em class="t" id="tiphour"><%:小时%></em>
         </div>
         <div class="form-contral">
-            <button type="submit" class="btn btn-primary btn-l btn-block" id="editDdnsSubmit"><span><%:确定%></span></button>
+            <button type="submit" class="btn btn-primary btn-block" id="editDdnsSubmit"><span><%:确定%></span></button>
         </div>
     </form>
 </div>

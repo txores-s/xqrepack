@@ -2,4 +2,3 @@
 /etc/init.d/odhcpd
 /etc/uci-defaults/odhcpd.defaults
 /usr/sbin/odhcpd-update
-/usr/sbin/wan6_link_check.sh
