@@ -382,10 +382,10 @@ local macdefault = string.upper(xqlanwanutil.getDefaultMacAddress())
                                 servicename: list[i].servicename
                             });
                             trarr.push(tr);
-                            if(list[i].status == 2 || list[i].status == 0){
+                            if(list[i].status == 2 && list[i].enabled == 1){
                                 setTimeout(function(){
                                     $.pub('ddns:get');
-                                }, 1000);
+                                }, 2000);
                             }
                         }
                         $('#serviceTbody').html(trarr.join(''));

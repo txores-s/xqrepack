@@ -170,7 +170,6 @@
 /etc/hotplug.d/iface/40-ntpd
 /lib/preinit/30_failsafe_wait
 /lib/upgrade/stage2
-/etc/opkg/keys/d7791d1a67d2a8df
 /etc/uci-defaults/13_fix_group_user
 /sbin/firstboot
 /usr/sbin/showmacs
@@ -186,11 +185,14 @@
 /etc/custom_hosts
 /usr/sbin/mem_compaction.sh
 /etc/config/network
+/usr/sbin/upcrash
 /lib/functions/leds.sh
 /lib/config_post_ota/wireless_cfg_update.lua
 /lib/xq-misc/phy_switch.sh
+/etc/opkg/keys/ab963bc60ec5195a
 /etc/smartvpn/proxy.txt
 /usr/sbin/openvpn_deamon.sh
+/usr/sbin/vip_device_push_act.lua
 /etc/config/parentalctl
 /etc/init.d/timezone
 /usr/sbin/ntpsetclock
