@@ -126,10 +126,6 @@ __init_son()
 
     uci commit repacd
 
-    uci set network.lan.multicast_querier='1'
-    uci set network.lan.igmp_snooping='1'
-
-	uci commit network
 }
 
 __start_son()

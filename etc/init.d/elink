@@ -1,0 +1,105 @@
+#!/bin/sh /etc/rc.common
+
+START=99
+USE_PROCD=1
+PROG="/usr/bin/elink"
+get_telecom_sn(){
+	telecom_sn=`nvram get telecom_sn 2>/dev/null`
+	[ -n "$telecom_sn" ] && return 0
+
+	mac=`getmac | awk -F "," '{print $1}'`
+	sn=`nvram get SN`
+
+	json_results=`/usr/bin/matool --method api_call --params "/device/get_sn_for_dianxin" "{'mac':\"$mac\",'sn':\"$sn\"}"`
+	results=`jshn -r $json_results 2>/dev/null`
+	code=`echo $results | grep -o "'code' 0;" 2>/dev/null`
+	[ -n "$code" ] && {
+        	telecom_sn=`echo $results |grep -o "sn_for_dianxin.*" | awk -F "'" '{print $3}'`
+        	echo "SN: [$telecom_sn]"
+        	[ -n "$telecom_sn" ] && {
+                	nvram set telecom_sn=$telecom_sn
+                	nvram commit
+                	echo "SN save to nvram success."
+			return 0
+        	}
+	}
+}
+enable_elink(){
+	return
+        local cron_elink_status
+        cron_elink_status=`cat /etc/crontabs/root | grep test_add_ip.sh > /dev/null 2>&1 ; echo $?`
+        if [[ "$cron_elink_status" == "0" ]]; then
+        	echo "cron_elink_status has been elink status return"
+        else
+        	echo "set cron elink mode"
+        	echo "* * * * * /usr/sbin/test_add_ip.sh 192.168.99.1 >/dev/null" >> /etc/crontabs/root
+		/etc/init.d/cron restart
+        fi
+        return
+}
+
+disable_elink(){
+	return
+        local cron_elink_status
+        cron_elink_status=`cat /etc/crontabs/root | grep test_add_ip.sh > /dev/null 2>&1 ; echo $?`
+        if [[ "$cron_elink_status" == "0" ]]; then
+        	echo "disable elink mode"
+        	cat /etc/crontabs/root | grep -v test_add_ip.sh > /tmp/crontabs_root_tmp
+        	mv /tmp/crontabs_root_tmp /etc/crontabs/root
+		/etc/init.d/cron restart
+        else
+        	echo "cron_elink_status has not been elink status return"
+        fi
+        return
+}
+test_and_set_elink_mode(){
+        local elink_mode
+        elink_mode="1"
+        elink_mode=`nvram get elink_en`
+        if [[ "$elink_mode" == "1" ]]; then
+        	echo "enable elink"
+        	enable_elink
+        else
+        	echo "disable elink"
+        	disable_elink
+       	fi
+	/etc/init.d/cron restart
+       	return
+}
+
+start_service() {
+    netmode=$(uci -q get xiaoqiang.common.NETMODE)
+    if [ "$netmode" == "whc_cap" -o "$netmode" == "whc_re" ]; then
+        echo "The NETMODE is whc_cap or whc_re, elink must not start!!!"
+        return 0
+    fi
+
+    local elink_enable
+    elink_enable=`nvram get elink_en`
+    if [ "$elink_enable" == "1" ]; then
+    	elink_enable="1"
+    else
+	elink_enable="0"
+    fi
+
+    if [[ "$elink_enable" == "1" ]]; then
+	#get_telecom_sn
+    	enable_elink
+	[ -f "$PROG" ] && {
+        procd_open_instance
+        procd_set_param command "$PROG"
+        procd_set_param respawn
+        procd_close_instance
+    }
+	
+    else
+	disable_elink
+	return 0
+    fi
+}
+
+stop() {
+    disable_elink
+    service_stop $PROG
+}
+

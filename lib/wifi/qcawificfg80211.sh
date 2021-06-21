@@ -2976,7 +2976,8 @@ enable_qcawificfg80211() {
 			enable_rps $ifname
 		fi
 
-
+		# miwifi enable multicast to unicast
+		[ "$mode" = "ap" ] && echo "1" > /sys/devices/virtual/net/$ifname/brport/multicast_to_unicast
 	done
 
 	config_get wifi_debug_sh $device wifi_debug_sh

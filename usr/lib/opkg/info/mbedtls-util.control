@@ -1,0 +1,12 @@
+Package: mbedtls-util
+Version: 2.16.3-1
+Depends: libc, libmbedtls
+Source: package/libs/mbedtls
+License: GPL-2.0+
+Section: utils
+Architecture: aarch64_cortex-a53
+Installed-Size: 12855
+Description:  The aim of the mbedtls project is to provide a quality, open-source
+ cryptographic library written in C and targeted at embedded systems.
+ This package contains mbedtls helper programs for private key and
+ CSR generation (gen_key, cert_req)

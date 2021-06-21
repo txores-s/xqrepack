@@ -58,6 +58,7 @@
 /usr/sbin/logupload.lua
 /etc/config/macfilter
 /etc/config/skb_recycler
+/etc/opkg/keys/5e5002977e8bb8a3
 /lib/preinit/32_check_for_boottype
 /usr/sbin/cr_ip_conflict.lua
 /etc/config/system
@@ -98,7 +99,6 @@
 /etc/iwevent.d/01-feedpush.sh
 /etc/hotplug.d/iface/10-phy_check.sh
 /etc/os-release
-/etc/opkg/keys/efb26340e23d4431
 /sbin/ethstatus
 /usr/sbin/sysapi.firewall
 /usr/sbin/jason.sh
@@ -231,6 +231,7 @@
 /usr/sbin/dhcpc_do_opt43_act.sh
 /etc/init.d/boot
 /usr/sbin/phyhelper
+/usr/sbin/reset_wpa_supp
 /etc/config/misc.R2200
 /lib/functions/boot.sh
 /usr/sbin/config_pre_ota.sh

@@ -40,6 +40,15 @@ else
     policy=0
 fi
 
+#add for repeater mode
+tbus list | grep -v netapi | grep -v master | while read a
+do
+        #call tbus function to notice device change maclist
+        timeout -t 2 tbus call $a access  "{\"policy\":${policy},\"list\":\"${maclist_format}\"}"
+done
+
+
+#add for mesh
 json_init
 
 if [ "$HARDWARE" == "D01" -o "$HARDWARE" == "R3600" -o "$HARDWARE" == "RM1800" ]; then
