@@ -173,6 +173,13 @@ user::rw-
 group::rw-
 other::r--
 
+# file: etc/roam.conf
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: etc/protocols
 # owner: root
 # group: root
@@ -517,6 +524,13 @@ group::r--
 other::r--
 
 # file: etc/modules.d/32-qca-nss-drv
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
+# file: etc/modules.d/78-enid
 # owner: root
 # group: root
 user::rw-
@@ -1300,6 +1314,13 @@ user::rwx
 group::rwx
 other::r-x
 
+# file: etc/hotplug.d/button/01-mi-reset-key
+# owner: root
+# group: root
+user::rwx
+group::rwx
+other::r-x
+
 # file: etc/hotplug.d/button/53-wps-repacd
 # owner: root
 # group: root
@@ -1608,6 +1629,13 @@ user::rw-
 group::r--
 other::r--
 
+# file: etc/opkg/keys/a1174740835a460
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: etc/opkg/keys/dd6de0d06bbd3d85
 # owner: root
 # group: root
@@ -1651,13 +1679,6 @@ group::r--
 other::r--
 
 # file: etc/opkg/keys/72a57f2191b211e0
-# owner: root
-# group: root
-user::rw-
-group::r--
-other::r--
-
-# file: etc/opkg/keys/3fcbc1f4336c2b6e
 # owner: root
 # group: root
 user::rw-
@@ -2322,6 +2343,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: etc/init.d/miwifi-roam
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: etc/init.d/skb_recycler
 # owner: root
 # group: root
@@ -2560,6 +2588,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: etc/init.d/topomon
+# owner: root
+# group: root
+user::rwx
+group::rwx
+other::r-x
+
 # file: etc/init.d/qca-iot
 # owner: root
 # group: root
@@ -2623,6 +2658,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: etc/init.d/cab_meshd
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: etc/init.d/qca-ssdk
 # owner: root
 # group: root
@@ -2677,13 +2719,6 @@ other::r-x
 # group: root
 user::rwx
 group::r-x
-other::r-x
-
-# file: etc/init.d/xqwhc
-# owner: root
-# group: root
-user::rwx
-group::rwx
 other::r-x
 
 # file: etc/init.d/datacenter
@@ -3426,6 +3461,27 @@ other::r--
 # group: root
 user::rwx
 group::rwx
+other::r-x
+
+# file: etc/taskdaemon.d
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: etc/taskdaemon.d/linkstatus
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: etc/taskdaemon.d/linkstatus/03-mesh_cable_dog.sh
+# owner: root
+# group: root
+user::rwx
+group::r-x
 other::r-x
 
 # file: etc/syslog-ng.d
@@ -4177,6 +4233,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/52/8f72d3df77e6d25d5e1033f6f72e24792d57f2
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/52/570f848475c29c59f5e2e8fb825ef41b183db3
 # owner: root
 # group: root
@@ -4255,6 +4318,13 @@ group::r-x
 other::r-x
 
 # file: .git/objects/27/5e689ef3e49e06e2c881aca260ca9ff2327f91
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/27/5ce1f56300ae1dff6436dcf810204597e868c1
 # owner: root
 # group: root
 user::r--
@@ -4835,6 +4905,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/1c/02a8d1eb54a1ff1156250cd3a00eb8e819ef27
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/1c/d7cd79836d9b8d40d7ce29843694a6aa0cd1e7
 # owner: root
 # group: root
@@ -5171,6 +5248,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/7d/659ba39d0dc83ec3a02cd6bcba5a2007326ea6
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/7d/6a9e81e9a8e176c6d73eecc32de56f6f3c2028
 # owner: root
 # group: root
@@ -5423,6 +5507,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/82/e8f819b3e7727c636cceaa53fadcbcb22a7d64
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/82/2209b92d2ac9f0024c336e202dfae630b24c1d
 # owner: root
 # group: root
@@ -5564,6 +5655,13 @@ group::r--
 other::r--
 
 # file: .git/objects/82/a363352c94a98b5ea403ed4442389db68ebdd0
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/82/8652d8280dbd77d007d7399f6187ac6de0d9a4
 # owner: root
 # group: root
 user::r--
@@ -6340,6 +6438,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/c3/36ea8c368d0cbb41143adc97ca6422b918078a
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/c3/b46cb634daa28a763dacb6cb74c16237a97b31
 # owner: root
 # group: root
@@ -7096,6 +7201,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/ad/e8c74089845ecd37f5a0c965e88ffca3bc2c85
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/ad/bc537ae0de6886bdd09b83f938142bf60da826
 # owner: root
 # group: root
@@ -7349,6 +7461,13 @@ group::r--
 other::r--
 
 # file: .git/objects/a1/f36baf24506185737cfc162f5afc971bc0e553
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/a1/f6f1658a8dae2d0783910d0f811fd8f22ac4d2
 # owner: root
 # group: root
 user::r--
@@ -7656,6 +7775,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/be/504494b10be55129ba735fa32d87067b0985ea
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/be/202969b7d23088ee9fcf3e07e3d937ed8e1a29
 # owner: root
 # group: root
@@ -7733,7 +7859,21 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/a2/97e319724dc0954cf0d52876ba5fc9d220c28a
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/a2/ca0380dfd26d46f18e85874cfd58a32e95d1b5
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/a2/fb06638484d7168432aaafa215c1b017b84952
 # owner: root
 # group: root
 user::r--
@@ -7803,6 +7943,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/a2/77482aea0a6c6413bc3612d037fcccc9444c29
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/a2/c351dc65d665a3b72a98e248439e29c2742795
 # owner: root
 # group: root
@@ -7811,6 +7958,13 @@ group::r--
 other::r--
 
 # file: .git/objects/a2/7e1b2409d545b450ea2615e38bdc259e0542c3
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/a2/148843cc349be99c1a248c534c4f3ee8281ae3
 # owner: root
 # group: root
 user::r--
@@ -8181,7 +8335,21 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/53/6a55ecfbc47be2528f992ecae13f60238af805
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/53/ce45e0c3bc02a607a58942ca3b40b9b33c7836
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/53/65536577b6fc2b8b7c31c73abac591ab3e37c8
 # owner: root
 # group: root
 user::r--
@@ -8489,6 +8657,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/44/6d53ce6fa863b652bd4bff5140bc81f0c1947b
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/44/fe0536aa742fff6f6c2ed66d4d06de47086c82
 # owner: root
 # group: root
@@ -8532,6 +8707,13 @@ group::r--
 other::r--
 
 # file: .git/objects/44/366db4b737096d6c7f2c5c6937683b6bead298
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/44/fa9c62e3470bd2ff462d9f5c3e19f77ea510bc
 # owner: root
 # group: root
 user::r--
@@ -8672,6 +8854,13 @@ group::r--
 other::r--
 
 # file: .git/objects/3e/e77662d5e200c32618fcb588561a1d597877d6
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/3e/897d89e0497d0df7ce28d2fceac437501289f4
 # owner: root
 # group: root
 user::r--
@@ -9511,6 +9700,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/5f/d12cac639c15c480fa04d588629b1eb6026791
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/5f/65d34011343c8b17759bf6ae8b157bf34024a9
 # owner: root
 # group: root
@@ -9875,6 +10071,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/c9/c341d1509272efc65119162be8b5b7a6692cbe
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/c9/741af0a27eb8e92d2f04c6fb9a9750e367cf11
 # owner: root
 # group: root
@@ -10051,6 +10254,13 @@ group::r--
 other::r--
 
 # file: .git/objects/5b/16e4aadef4c8dcf1d2fca28fbe8cb2770cfaa7
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/5b/f25fed51506df95d45f751876ea67903e8ba43
 # owner: root
 # group: root
 user::r--
@@ -10274,6 +10484,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/47/a87469cf54ea0760aafe24bf117412d609813e
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/47/58a948794a9b483562a58f46e3e38799409030
 # owner: root
 # group: root
@@ -10352,6 +10569,13 @@ group::r--
 other::r--
 
 # file: .git/objects/f7/2899ff71f4c5fee35c7a2432e97ae220fc8956
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/f7/7ab305b7345f67f30a574ceef632c4133654e5
 # owner: root
 # group: root
 user::r--
@@ -10533,6 +10757,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/b4/ea1846ad4f924bc68aaa5847d4296e95a27d6d
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/b4/f1dc5bc9bd02fc464f948cc95572796c43548b
 # owner: root
 # group: root
@@ -10632,6 +10863,13 @@ group::r-x
 other::r-x
 
 # file: .git/objects/5a/fc833117e4e713f5cb7175804c85c18dec2efc
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/5a/fd27c6e5fb179cc5bce93cffe1cc64599cd413
 # owner: root
 # group: root
 user::r--
@@ -11387,6 +11625,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/a8/3354cd5c9d36bb8c55bae2b6ff5a46ad2e4eb6
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/a8/b2a8f97e971f62d6a8ab2c22834ed29f25424e
 # owner: root
 # group: root
@@ -11674,6 +11919,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/bd/26e6cae10cedbfc58df7e835e72a6a1fb060b0
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/bd/4acef11529ab9bd79759c668aded6eaa4c6cbe
 # owner: root
 # group: root
@@ -11688,7 +11940,21 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/bd/9ba20ceabce76be57536f05b1800f86ed5ddbd
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/bd/1260b03bd529ca5e1cbee9639d45c1c9b50dbc
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/bd/fd099a897b7c495b9811df54891ff86173651b
 # owner: root
 # group: root
 user::r--
@@ -11815,6 +12081,13 @@ group::r--
 other::r--
 
 # file: .git/objects/66/5b0b8001be5a586075e686a45014e3265f9936
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/66/9d996b9a87a13d3a10e7270c4c17d6af3c5c87
 # owner: root
 # group: root
 user::r--
@@ -12045,7 +12318,21 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/6b/408b74f8f503dd7d83480f49ed4f55ab9db8bb
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/6b/d8b0d17c8f4718a3761247216e02a0c657f327
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/6b/607052f6b9888fb4e1863d01e213c8d5033d74
 # owner: root
 # group: root
 user::r--
@@ -12284,6 +12571,13 @@ group::r--
 other::r--
 
 # file: .git/objects/46/eb6a72a9a3264b2206589667729506994df679
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/46/503dba3b3eb8d522fd5a3902afc566c65f3a93
 # owner: root
 # group: root
 user::r--
@@ -12556,6 +12850,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/48/27069c52a7bb79048e3f5e19627428a9841427
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/48/51c32950dd2c35e5bba7561ccb17741476b37a
 # owner: root
 # group: root
@@ -12668,6 +12969,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/fb/08fab7adbe79da6e38ebd8e8eafa08d2b6fe63
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/fb/d17d96a3b4ccbde7cc80b5aca6d539ef538251
 # owner: root
 # group: root
@@ -12711,6 +13019,13 @@ group::r--
 other::r--
 
 # file: .git/objects/fb/0cba8d728acc51450c50c813cbdd8644ede22d
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/fb/ae7732ccc04c6b7adce0c13784b836796f8c46
 # owner: root
 # group: root
 user::r--
@@ -12976,6 +13291,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/7f/77043501692d7c04c0dc2bc3608b61db1e5503
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/7f/4af5f3b5798d2f4a42daa850afc4deeabd942a
 # owner: root
 # group: root
@@ -13005,6 +13327,13 @@ group::r--
 other::r--
 
 # file: .git/objects/7f/6574755a24f37f7ecc7c5c5f1fed8458c06982
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/7f/7557df2fbe8c41ec2f0a1d235ec3c81c5cb24e
 # owner: root
 # group: root
 user::r--
@@ -13075,6 +13404,13 @@ group::r--
 other::r--
 
 # file: .git/objects/7f/54590c854ba3af47ad057a17fe405736cfc0fb
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/7f/712a47a206692acd94cc750878ccc0c96ea281
 # owner: root
 # group: root
 user::r--
@@ -13397,6 +13733,13 @@ group::r--
 other::r--
 
 # file: .git/objects/35/04a148706716b7516a6ef6fa6d486a46d29a60
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/35/3812faf352a1fa481dab80371a5eb5065e30b3
 # owner: root
 # group: root
 user::r--
@@ -14348,6 +14691,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/07/a836fae44642861ad091d4ba2f43d22b0352e3
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/07/753442e12558dcb834ea9cff37ce9a068db632
 # owner: root
 # group: root
@@ -14454,6 +14804,13 @@ group::r--
 other::r--
 
 # file: .git/objects/88/8e502f49fe9e582c393d2c6bed5964170688df
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/88/44dcaa91b0f9c0d57240b5d97d70fed84e1005
 # owner: root
 # group: root
 user::r--
@@ -14726,6 +15083,20 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/15/08262da7980fa118cfc08afb8cfd3a7d3e7442
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/15/818846b6e4a412ff3f49d5a7d1b8b2ca49e2aa
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/25
 # owner: root
 # group: root
@@ -14902,6 +15273,13 @@ group::r--
 other::r--
 
 # file: .git/objects/25/89d0cc38056a42b703581c769e912e995cc5fb
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/25/225078533c2a11745c293ec389b998b2bdec46
 # owner: root
 # group: root
 user::r--
@@ -15153,6 +15531,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/1e/88083d5d2fc841f03d3bff5a1b8f3400e11234
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/1e/26fd4fdf636d570725c6e6183e5b8f99728783
 # owner: root
 # group: root
@@ -15336,6 +15721,13 @@ group::r--
 other::r--
 
 # file: .git/objects/b8/445a384b933f5b2294f77b875d9a2d6fbad9a7
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/b8/55773c60e82c2935999bf5237238ccb9058b01
 # owner: root
 # group: root
 user::r--
@@ -16210,6 +16602,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/bb/a83c5ae187afc771c3808d2f2452ac6e23cfb4
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/bb/52ab29eac2e6c2f82d51e5a533c162c7211898
 # owner: root
 # group: root
@@ -16260,6 +16659,13 @@ group::r--
 other::r--
 
 # file: .git/objects/bb/9b11fae3d881592f300746e20e965b1c02d799
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/bb/48294e053e9b939c0660d986deaf42d618a92c
 # owner: root
 # group: root
 user::r--
@@ -16337,6 +16743,13 @@ group::r--
 other::r--
 
 # file: .git/objects/64/09090ebc30a8a6f15b8657a9bdae9f63db1b90
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/64/b417dbdb07f254c0bfd983a3d204da041648eb
 # owner: root
 # group: root
 user::r--
@@ -16973,6 +17386,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/3b/41fbf8bfef3247f4e5a77a8218e1a98f553f11
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/3b/53a63a9b3e61423c9e3f0e3396884d3ce2cc9c
 # owner: root
 # group: root
@@ -16988,6 +17408,13 @@ group::r--
 other::r--
 
 # file: .git/objects/3b/6c62711d879d7be72af51c567da6659c0126f5
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/3b/06791257d8a34c42d7c1671f903002f774d2bd
 # owner: root
 # group: root
 user::r--
@@ -17170,6 +17597,13 @@ group::r--
 other::r--
 
 # file: .git/objects/12/f2baef348794c953d716e180398ad449e18efa
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/12/ecaaa1267e8666921c47102963df3470102780
 # owner: root
 # group: root
 user::r--
@@ -17380,6 +17814,13 @@ group::r--
 other::r--
 
 # file: .git/objects/bc/93576c984c54d59f93f8dfe8a30a0632df10bb
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/bc/4b0e7d6ccfd62da7aad057dab2d6578d98d70e
 # owner: root
 # group: root
 user::r--
@@ -18464,6 +18905,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/ce/a80a86be3d1b835ebc5e99997cea9296f2b599
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/ce/031d0dbbedfac89aee2855feb41be593149099
 # owner: root
 # group: root
@@ -18780,6 +19228,13 @@ group::r--
 other::r--
 
 # file: .git/objects/14/29c3b3794bb3d7add9712f6b05485e7b1a67bf
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/14/7d075f4786df9da29a6f70dcd6f76f193f0758
 # owner: root
 # group: root
 user::r--
@@ -19318,6 +19773,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/89/16ab0513538db315792e6cc88bad0ce0cedb7a
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/89/dcc60b040154ccb7b04ed51aa64bb61571f3b6
 # owner: root
 # group: root
@@ -19444,6 +19906,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/02/e2f80aaac74ed16c76326bd5ae2450ec3fc1ef
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/02/c36d680314c3167aa7eb58fb8c300a213d851d
 # owner: root
 # group: root
@@ -19543,6 +20012,13 @@ group::r--
 other::r--
 
 # file: .git/objects/02/38a2a4e4c0b2bba048d473f45bdd3ea42e51e3
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/02/d97bd6f26e6a99e50fefe4670db4db490b0db0
 # owner: root
 # group: root
 user::r--
@@ -19836,6 +20312,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/37/5c65eebd6b37da6d35c2e688a53267284db324
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/37/dc21d652b9fb7a2cf08907a6191bf59219959f
 # owner: root
 # group: root
@@ -19844,6 +20327,13 @@ group::r--
 other::r--
 
 # file: .git/objects/37/1127b307307ca733862badbafd80ba64a8a970
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/37/1b076aa6feaf88068252e6c68ea6424cc16562
 # owner: root
 # group: root
 user::r--
@@ -20109,6 +20599,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/a9/b82d3ad9e61fcc4fae453e6f27dcacad95f209
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/a9/50f368b43c71d1171885f86fdfc7d8d496f752
 # owner: root
 # group: root
@@ -20326,6 +20823,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/9c/391d45438d114511a2974041f3c8e29a74b22a
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/9c/f0fe4187da392a944b1b41f9c1301f3a52bbdc
 # owner: root
 # group: root
@@ -20390,6 +20894,13 @@ group::r-x
 other::r-x
 
 # file: .git/objects/3c/21dcd0ea95226a8e2ef440ce0b8a32b2d76623
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/3c/ccf1f7ada137074aa2aab01c5a4fc35cfb130f
 # owner: root
 # group: root
 user::r--
@@ -21047,6 +21558,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/9b/bd1e544db5b4d7e2b6bcdefa36850d1fa37d1c
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/9b/192ed3cc9747450dafb430756970eacce2f73a
 # owner: root
 # group: root
@@ -21341,6 +21859,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/61/1a87f63afd616ec4da186075a36e2279e3b1ad
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/61/4d4e5270c37c302b9ea11c494e34fa7879dff6
 # owner: root
 # group: root
@@ -21482,6 +22007,13 @@ group::r--
 other::r--
 
 # file: .git/objects/61/e11daf522cb21eb92d52109f0f239b8f0fa0d2
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/61/e00ea744b3592c2e471edff3f5dae214baa830
 # owner: root
 # group: root
 user::r--
@@ -21747,6 +22279,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/8f/bcbf98cfbfc1700ad8794849751c40b4490aa7
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/8f/f1bb69818ba411766c0d12a81924e0302ba254
 # owner: root
 # group: root
@@ -21902,6 +22441,13 @@ group::r--
 other::r--
 
 # file: .git/objects/ff/9ac3a8af086186dfdcbdbb04c8fbd0f3db1a0e
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/ff/99708237db0a072b743f2bbc96f2590f33d304
 # owner: root
 # group: root
 user::r--
@@ -22118,6 +22664,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/42/75d492793274b2be38719e1d255c60a4337450
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/42/f488c118fab514de7d2aee78bc431f7b8be157
 # owner: root
 # group: root
@@ -22237,7 +22790,21 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/d0/4fa3604c6323e6b258f07a64aac972639afea5
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/d0/fc00889ab917ace7fc650f61150e03012a138f
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/d0/b3df15ff1b5e4b7e6ba06a85232b67a06069f8
 # owner: root
 # group: root
 user::r--
@@ -22447,6 +23014,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/da/c3d2eeb4748f4076b31cfb2cab9aabea4f8b19
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/da/0051270171e3f06e4bf989cc47cf46bc4f979d
 # owner: root
 # group: root
@@ -22518,6 +23092,13 @@ group::r--
 other::r--
 
 # file: .git/objects/33/b134f9ede613cd522ce4674a28fbcdcd2fbed2
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/33/a34beef4ea462fb414e6704cf6ab4cf68b9d48
 # owner: root
 # group: root
 user::r--
@@ -22895,6 +23476,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/0b/51a5de864266575870dec46ca8f76521156134
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/0b/573f5e08f2f837c72ff638367033f78295527f
 # owner: root
 # group: root
@@ -23133,6 +23721,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/58/e727b286e4d538c8977e35b31527ee839ef138
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/58/70fd64902deb84b44207839118b042a548088f
 # owner: root
 # group: root
@@ -23267,6 +23862,13 @@ group::r--
 other::r--
 
 # file: .git/objects/58/232f8fcff8e2c5c77e6acbb13ce44066efdc12
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/58/c3ba1015d4ea137792d08898ed28892a5115ad
 # owner: root
 # group: root
 user::r--
@@ -23756,6 +24358,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/36/ccdcc1e8084966284fc1488ac67c044ce93175
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/36/ca4c813672da06c92fd925e363d7be4abe3bbe
 # owner: root
 # group: root
@@ -23799,6 +24408,13 @@ group::r--
 other::r--
 
 # file: .git/objects/36/fe631d7cec4d21e30658f6ea0dff66776e60e4
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/36/324d1f4e78121c5a304f44e2cfd8b31c8640c1
 # owner: root
 # group: root
 user::r--
@@ -24050,6 +24666,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/77/ba63acae4f63ecf195561e29739e40246578ca
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/77/1bd7207ceec4bb2bc5a0534a15a1fd5929937d
 # owner: root
 # group: root
@@ -24141,6 +24764,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/3d/44fc878110b9d4021212ba99c25d36ba9b752c
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/3d/99bebbfb02c23b70ccb7ca85fe61d6e0d6011a
 # owner: root
 # group: root
@@ -24198,6 +24828,13 @@ group::r--
 other::r--
 
 # file: .git/objects/3d/3d8f06522e7198260a66b04fcdd205ffd2da71
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/3d/af96cedfc76bb188e918067449284420998fab
 # owner: root
 # group: root
 user::r--
@@ -24562,6 +25199,13 @@ group::r--
 other::r--
 
 # file: .git/objects/d5/a4bac071940cf08b4e1e2042f9075a9de76d03
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/d5/5baae589ebf0a98733dd8bee0c5b86691fd59f
 # owner: root
 # group: root
 user::r--
@@ -25100,6 +25744,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/76/12e41218d7c977cd01ff53fd9c75af5085dffd
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/76/a04858da0199c59deb9dc6fef723c63538cb4d
 # owner: root
 # group: root
@@ -25394,6 +26045,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/9e/d8bdef240de25bd04eca44653b54528449d22c
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/9e/0cbec38d8a63848cb6855657e4c2847ea5695d
 # owner: root
 # group: root
@@ -25485,6 +26143,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/a4/b95c2bbc4e32a5f8bb11ad4a7431a66a7de2d4
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/a4/8f8a60e8969288644ba4a4b17a5691f122d603
 # owner: root
 # group: root
@@ -25521,6 +26186,13 @@ group::r--
 other::r--
 
 # file: .git/objects/a4/b1da4a7ec7d39b2163d2737b0b4e46dadb9524
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/a4/1ab42fa829f312dcc5a0c015438210ffc33784
 # owner: root
 # group: root
 user::r--
@@ -25590,6 +26262,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/a4/b994cc3b06cae3107008542d3798985758fb5e
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/a4/3c85d5153873e772245ff180fabe3813ad24f7
 # owner: root
 # group: root
@@ -25610,6 +26289,13 @@ other::r--
 user::rwx
 group::r-x
 other::r-x
+
+# file: .git/objects/05/25cd576ae8652ba2bc8ab33bef22394bb8b82d
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
 
 # file: .git/objects/05/bcf07daddb8f58b0ee5661ce6df79d8f29d3bc
 # owner: root
@@ -26388,6 +27074,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/b5/27587966d59a96e7b50ee3d42390173484bf81
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/b5/636f067f213a8d4c23d77d377bbe660879acb5
 # owner: root
 # group: root
@@ -26606,6 +27299,13 @@ group::r--
 other::r--
 
 # file: .git/objects/4e/137c7a4a6170a5acdb2577062dd7e8f44fbd39
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/4e/3404a5067fe5910b85594b46810c98bf18efe7
 # owner: root
 # group: root
 user::r--
@@ -26836,6 +27536,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/1f/86c061bf9324220b97ef62dd07b109fa8f765a
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/1f/9dbd67cf72dd6d376093594f1a74ef441c5e96
 # owner: root
 # group: root
@@ -27039,6 +27746,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/9f/bb774058073fdf6fa6bb6c36a0c4bba9d85487
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/9f/ae0d4d06224b810e925c3623dfda1f61d16193
 # owner: root
 # group: root
@@ -27061,6 +27775,13 @@ group::r--
 other::r--
 
 # file: .git/objects/9f/ac64137f84f48b711dc94a93bd439a6b29e423
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/9f/21063a786cf0042b4c0bfd51145f6da322b378
 # owner: root
 # group: root
 user::r--
@@ -27110,6 +27831,13 @@ group::r--
 other::r--
 
 # file: .git/objects/9f/5b34c8ce92ca6b03adaa6e3929a759e466db73
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/9f/e9829f55da0f7a7e3403d3ae6235e69b637d29
 # owner: root
 # group: root
 user::r--
@@ -27320,6 +28048,13 @@ group::r--
 other::r--
 
 # file: .git/objects/2d/054f4ac7cbbdc6f427ef2c53172abe9d0fe168
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/2d/c109e0889cb1de01544bec65685c86672bd061
 # owner: root
 # group: root
 user::r--
@@ -27739,6 +28474,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/9a/960ca3e25a22a3486668a998b8b4f74545eee3
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/9a/ebda07342c014746a8985524d9183fd79d3435
 # owner: root
 # group: root
@@ -27831,6 +28573,13 @@ group::r--
 other::r--
 
 # file: .git/objects/9a/67f92cf999778ddb7ad4771641cbf84e599188
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/9a/d24fc98295ee15658993f05206928b35097feb
 # owner: root
 # group: root
 user::r--
@@ -28110,6 +28859,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/87/527c67e94593870e6218ffed25e64a1dbe8057
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/d1
 # owner: root
 # group: root
@@ -28370,6 +29126,13 @@ group::r--
 other::r--
 
 # file: .git/objects/c4/ff3f041faa236722381dc32272e5263b866680
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/c4/98274c5e617b58f48ea1a9a5165555f17544e6
 # owner: root
 # group: root
 user::r--
@@ -28783,6 +29546,13 @@ group::r--
 other::r--
 
 # file: .git/objects/4a/2c2952a9362d8a45164bdec630e35214e8afec
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/4a/c16a4e47d3ed31f573d1757921c1efafa4d0ad
 # owner: root
 # group: root
 user::r--
@@ -29426,6 +30196,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/93/29ec75b1ca288687b13a04320cae6b1c842edf
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/93/f4f78d22bd95a9fed5eea0ce1817564f3eedd5
 # owner: root
 # group: root
@@ -29476,6 +30253,13 @@ group::r--
 other::r--
 
 # file: .git/objects/93/20ab29c620ce26ff27e4b13c1f82ae2bb66831
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/93/b67d9fa0cc9e20711a26e0258da65d0d833150
 # owner: root
 # group: root
 user::r--
@@ -29825,6 +30609,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/91/50e4276d39cceb66fe0684318172d285723240
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/91/78224614e0d3722d501836829410b0a66f91ea
 # owner: root
 # group: root
@@ -30077,6 +30868,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/ae/e5809412e89b89afcedfe66fa89fdc40ab3c24
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/ae/2fac33f2019ffbd6670853c6d077601f378b4a
 # owner: root
 # group: root
@@ -30183,6 +30981,13 @@ group::r--
 other::r--
 
 # file: .git/objects/ae/ba373fd24ce2473ccef2e71aa039ceda4cddf4
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/ae/c78e4b0a8c30e3d031fbc6183eb238f368defb
 # owner: root
 # group: root
 user::r--
@@ -30490,6 +31295,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/af/1a1ca885648217a87d7954f5181caeb19383e3
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/af/2edb4ca1e8439e7e55f9d1f1812ce45245cff4
 # owner: root
 # group: root
@@ -30637,6 +31449,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/01/8c50794df09a64a16b2b7f812edcf4d17fafe5
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/01/d64e881ec1055e530d09fa9baa4b998f73fe80
 # owner: root
 # group: root
@@ -30686,12 +31505,26 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/01/650d1e852fc3a0784c68b9469b5578b2ba12fa
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/70
 # owner: root
 # group: root
 user::rwx
 group::r-x
 other::r-x
+
+# file: .git/objects/70/a875e0293959e13b5d47ebe2796e9a85d064a7
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
 
 # file: .git/objects/70/0f53cddc340c558d850871c2d8e36eb35ddecf
 # owner: root
@@ -30834,6 +31667,13 @@ group::r--
 other::r--
 
 # file: .git/objects/70/65709683fa153e929603629eaa86f470fac5df
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/70/35f4ed210a98c44e2a5be268318c69aea4ccae
 # owner: root
 # group: root
 user::r--
@@ -31232,6 +32072,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/7e/68d8ddb4fcda94eb0cebd9041782ba9124d563
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/7e/4cc0d14e4a4671219e807e4fb66723654409b9
 # owner: root
 # group: root
@@ -31240,6 +32087,13 @@ group::r--
 other::r--
 
 # file: .git/objects/7e/39ce32177b9a468468c90839939af78c7971d6
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/7e/4295f7276c5b17af582d26e5fe0a9fda03aac2
 # owner: root
 # group: root
 user::r--
@@ -31686,6 +32540,13 @@ other::r--
 user::rwx
 group::r-x
 other::r-x
+
+# file: .git/objects/74/9bd78fb9cbd6e09ed56bb2082978b34e5ef7f8
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
 
 # file: .git/objects/74/4043359900cc6e906bce01ee3ef20257425790
 # owner: root
@@ -32471,6 +33332,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/50/701c8a0d4d2b63ea5562bbf22ce7f89d6659ef
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/50/07df9195dba6009d694488d3812860453b1c7c
 # owner: root
 # group: root
@@ -32527,6 +33395,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/0e/e4c679018ee80598d06007eddc7d633fcb6117
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/0e/330fb57bddc13fd02db963060c176cf2934b25
 # owner: root
 # group: root
@@ -32577,6 +33452,13 @@ group::r--
 other::r--
 
 # file: .git/objects/0e/e9487b39dc8bea4bad2dec4cbf3ded680813d5
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/0e/c74ce38e06b30f5cfd1b7d1d707a444b529788
 # owner: root
 # group: root
 user::r--
@@ -33094,6 +33976,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/16/949eb71e98a2ce6e7bbf117534733ea287e786
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/16/fb657f369f6cc491163194f8af611e635311f7
 # owner: root
 # group: root
@@ -33319,6 +34208,13 @@ group::r--
 other::r--
 
 # file: .git/objects/f3/040285eb87d5c568336dddd1a7cc9ba09493fb
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/f3/2d67160cf50a1fbc17d69120dcc5472b8d20be
 # owner: root
 # group: root
 user::r--
@@ -33682,6 +34578,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/b2/61b45f979f379c09be6228001930236f6f5d8b
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/b2/5e221c995178175392c3174d8605a680ca345f
 # owner: root
 # group: root
@@ -33787,6 +34690,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/b2/190f3ef44ac8ab6263af5299c41b795a2d69ad
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/b2/6173981bc197141ba9f10dd72c6e2a60314a2f
 # owner: root
 # group: root
@@ -33851,6 +34761,13 @@ group::r--
 other::r--
 
 # file: .git/objects/b2/cf01f6566dc58d8dc44e276f44c2d54b1320ca
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/b2/441783a477db88584b98842a3e8ce3aa17b83d
 # owner: root
 # group: root
 user::r--
@@ -34012,6 +34929,13 @@ group::r--
 other::r--
 
 # file: .git/objects/cb/0c3865a2823319bf2f90b9f9f64bf342451f09
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/cb/b17206a2b4b4a551e14fb2a9632da659f50301
 # owner: root
 # group: root
 user::r--
@@ -34235,6 +35159,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/85/8f4555785cd19e6aaee4e6149ced11068c1c94
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/85/488dd6caf8800b25da90f88fa2000cce75b5c7
 # owner: root
 # group: root
@@ -34383,6 +35314,13 @@ group::r--
 other::r--
 
 # file: .git/objects/85/68d70c2dcbcb96d8fd97849524f74250c1245f
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/85/3dcb0667f308b2c84f775c6f21697a0cf34411
 # owner: root
 # group: root
 user::r--
@@ -34893,6 +35831,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: .git/objects/60/579ee8c2eefe513c36a3ea2e5cb304583cd681
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/60/d5fb9ff75e39faa571f0d51ea884d447fa7e33
 # owner: root
 # group: root
@@ -35089,6 +36034,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/60/9a3463cd1a057ded8e0b0c5889666e2b83dd25
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/ba
 # owner: root
 # group: root
@@ -35125,6 +36077,13 @@ group::r--
 other::r--
 
 # file: .git/objects/ba/4be8460442bd3fad32d4639590c8f1196fbbc6
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/ba/c9f3de8064d58bee95a8934a4be872c0f92e80
 # owner: root
 # group: root
 user::r--
@@ -35397,6 +36356,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/ec/a87f1bf17832d51b89c882d08b94de43285754
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/ec/c1b04b869d1cf28c1d8d240e53856160b644b7
 # owner: root
 # group: root
@@ -35461,6 +36427,13 @@ group::r--
 other::r--
 
 # file: .git/objects/ec/1f806bd1dbdd5d8306a487c8c3f1141edfb673
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/ec/1c24923dd7d93c22ccfd409882f8b102a704b5
 # owner: root
 # group: root
 user::r--
@@ -36160,6 +37133,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/09/bcd830729daf7af048de3ca693d37ffa831af7
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/09/69d061e93ef1f04c67dfb3e321dd65883bdcfc
 # owner: root
 # group: root
@@ -36377,6 +37357,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/80/e5dc6ab52b0568a360b51f7d85f5f4295defeb
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/80/cd87fcb514dc178474f128632e23b31623c6e5
 # owner: root
 # group: root
@@ -36413,6 +37400,13 @@ group::r--
 other::r--
 
 # file: .git/objects/ac/765a6363b09cbf0bd8b0f529455ff42c77412d
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/ac/19130744f0e805706c1de62cb37738752640b6
 # owner: root
 # group: root
 user::r--
@@ -36573,6 +37567,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/ac/eb888f9a450086ad35ea06399854ca1d3b781c
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/ac/932c3042252c04241e8b1fdde9dcc46977b6f5
 # owner: root
 # group: root
@@ -36595,6 +37596,20 @@ group::r--
 other::r--
 
 # file: .git/objects/ac/ad02739b96023446abdbbccaa1f2d76dbbf4f4
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/ac/2efef96cb72252e428052215dc3247a5966fe8
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/ac/e8047ce2dda0a63e103d01c1c853444121fdf5
 # owner: root
 # group: root
 user::r--
@@ -37091,6 +38106,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/94/92ac765f6da2afd60cede1f2cbe7cfc51c0d7a
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/90
 # owner: root
 # group: root
@@ -37350,6 +38372,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/9d/1291534f5dbe8d47bf9e2daab1227608663bf4
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/9d/d7126cf8ccf857bde92ce4c3e4f85f740bfe45
 # owner: root
 # group: root
@@ -37379,6 +38408,13 @@ group::r--
 other::r--
 
 # file: .git/objects/9d/39e6bcc7d34f2312ec600385cc4486562d1e12
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/9d/a7b3f2afab14d117acc15d48b05d9637abb04c
 # owner: root
 # group: root
 user::r--
@@ -37540,6 +38576,13 @@ group::r--
 other::r--
 
 # file: .git/objects/a7/0d81efc5da8cab29963bcb0c9c4c12c78dc567
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/a7/2ab2f68434e7d49df0f26ff397b5e9608cef22
 # owner: root
 # group: root
 user::r--
@@ -38093,6 +39136,13 @@ group::r--
 other::r--
 
 # file: .git/objects/69/7bd2ca36cb325cdcda4f3e9e27cae7db1cafd5
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/69/4fc578c074beffa08822887e15ed5bd2d89797
 # owner: root
 # group: root
 user::r--
@@ -38750,7 +39800,21 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/4b/4b66ca9c03c888bc06d11921c1d089589fd773
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/4b/f6dbdb40aae940be087806d899ebf99d4eddb3
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/4b/eab22c8d210c82f160ace858e03e8a3a48fc78
 # owner: root
 # group: root
 user::r--
@@ -38953,6 +40017,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/99/38f67d6301abbeeb75cd54bc584576b5193450
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/99/42e8f78b258e8f9ba72313daab3b2a38161044
 # owner: root
 # group: root
@@ -38989,6 +40060,13 @@ group::r--
 other::r--
 
 # file: .git/objects/99/13a81f581125aa82617e3cb32f1873abda632b
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/99/42e5d15f2c04ae9b24e9953bceaff54012d7c9
 # owner: root
 # group: root
 user::r--
@@ -39521,6 +40599,13 @@ group::r-x
 other::r-x
 
 # file: .git/objects/78/aebe8e0a5fb656d9981dbc2525394bc36984c4
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/78/b2ea4773370e7f1c717c88a5b62af9cea6ce27
 # owner: root
 # group: root
 user::r--
@@ -40479,6 +41564,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/23/be17c098286ae997ad7007d94dbd44e8aa6f8f
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/23/d52643a6991364ecdd6d81be3012210740b45f
 # owner: root
 # group: root
@@ -40620,6 +41712,13 @@ group::r--
 other::r--
 
 # file: .git/objects/23/1946606fe4b9327e2c2340b00f5023ed69d641
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/23/ad550e3804d053a03d5b702af68b6af9edd2da
 # owner: root
 # group: root
 user::r--
@@ -40844,6 +41943,13 @@ group::r-x
 other::r-x
 
 # file: .git/objects/f4/e4af397307f6cce19e5fdb131d9ff5c352b398
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/f4/ffd484d4257f2604ef0d1ed50257844f0d9bb1
 # owner: root
 # group: root
 user::r--
@@ -41103,6 +42209,20 @@ group::r--
 other::r--
 
 # file: .git/objects/e8/5b65395f3d5d926c432bf8e4355e052b659dbc
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/e8/59d9c0a5849290b31d749e4823f4f2c896c446
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/e8/465e1765898968d04657f74d187d64dc782c65
 # owner: root
 # group: root
 user::r--
@@ -41459,6 +42579,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/b1/05e1d0e68d702faace00004d05ee79eee12b95
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/b1/b22fc54687f4193472c740448f3c60867963ee
 # owner: root
 # group: root
@@ -41495,6 +42622,13 @@ group::r--
 other::r--
 
 # file: .git/objects/b1/4400139634f4e6a5565b5c5ec98b020d927341
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/b1/1198ea3bd9996b6fa7549f3ac7f0be4fb08628
 # owner: root
 # group: root
 user::r--
@@ -42139,6 +43273,13 @@ group::r--
 other::r--
 
 # file: .git/objects/e0/8418b28b21ffd4f412aa847cf94cfff3023534
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/e0/03cb3d2d0f0f32b1f2c944b8300be5ae8a8714
 # owner: root
 # group: root
 user::r--
@@ -42824,6 +43965,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/1a/4e6a2051027341c090fd88744a08c53bd1ca35
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/1a/26c716dddb20a3bf130a755effa884c9466a41
 # owner: root
 # group: root
@@ -42839,6 +43987,13 @@ group::r--
 other::r--
 
 # file: .git/objects/1a/6451af600f9af1c0b9a84b7b2371ba2d14844d
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/1a/7f79ab8d985066d1e61997ec25129fafa33b24
 # owner: root
 # group: root
 user::r--
@@ -43468,6 +44623,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/c7/3b8952dce9ac130f6fe54a56ca4b44f2bf7e9b
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/c7/fe32aac0245589170e90cc1122d0406a17df68
 # owner: root
 # group: root
@@ -43664,6 +44826,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/19/1e34533885980b2517606442fb63c4a754ea74
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/2b
 # owner: root
 # group: root
@@ -43805,6 +44974,13 @@ group::r--
 other::r--
 
 # file: .git/objects/2b/b318750a2cb7f9789a84b3ad7b3e53341795e9
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/2b/5f4dc37522e0f57a9a0216ebfe51ee49ab2a8f
 # owner: root
 # group: root
 user::r--
@@ -44133,6 +45309,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/e7/e8782c54b37547013b54e87a767d411663c7f8
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/e7/2f1787044f0d057202baeedb28f4ee1d562045
 # owner: root
 # group: root
@@ -44406,6 +45589,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/5e/fdf4fddd0e4732c1e32d3044bb22d4571879b4
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/5e/e23a639f8301b93f748df3d619087a317fe14e
 # owner: root
 # group: root
@@ -44568,6 +45758,13 @@ group::r--
 other::r--
 
 # file: .git/objects/fc/1ca37ff9bb8e85c13ec21025f2ea780a5a683d
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/fc/24eac39adfa26a02345a059108be8d925f2387
 # owner: root
 # group: root
 user::r--
@@ -44749,6 +45946,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/d9/079a174272679f75412c0ec391b8237659c0ee
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/d9/f1c881ff58c66ad0cabefb4a5130cfbca4c246
 # owner: root
 # group: root
@@ -44813,6 +46017,13 @@ group::r--
 other::r--
 
 # file: .git/objects/d9/645a52bf8310c55daced3a99564138e9454f6f
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/d9/2cbe18cce6ec39a9c4ee26f87049941969b2e6
 # owner: root
 # group: root
 user::r--
@@ -44911,6 +46122,13 @@ group::r--
 other::r--
 
 # file: .git/objects/6c/f88f05294d501a4b362356e65597cc5852f4d4
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/6c/94f620c2a9ca96b062e41341974a10f8699553
 # owner: root
 # group: root
 user::r--
@@ -45317,6 +46535,13 @@ group::r--
 other::r--
 
 # file: .git/objects/c0/25fcfabc8b6d576c9fd54ce05c8bf3c5bb5935
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/c0/8fe8f6c07c37260a32140a88672096ac2e20a0
 # owner: root
 # group: root
 user::r--
@@ -45813,6 +47038,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/0d/324e40c2dba162d7ea91bd7c5772323102e664
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/0d/092e88898dc6e779522b5cdd8e0d6b3c1cd0bb
 # owner: root
 # group: root
@@ -46045,6 +47277,13 @@ group::r--
 other::r--
 
 # file: .git/objects/e6/9577f06285c9b35c6ba265e4faa76ea1af32f6
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/e6/6044832016b8eb3e356fe54eb99ddfae8fba60
 # owner: root
 # group: root
 user::r--
@@ -46345,6 +47584,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/97/a072793f7c093e36fb70f37c8ad33cc5eff191
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/97/1963f2d15ea968f17992f7a68213bacbd5a5f9
 # owner: root
 # group: root
@@ -46478,6 +47724,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/10/7605fa0820605620e7da03df0b95a75951cf23
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/10/060e95d4755183399935ba3113f2387d126a55
 # owner: root
 # group: root
@@ -46549,6 +47802,13 @@ group::r--
 other::r--
 
 # file: .git/objects/10/134b369fa9bf0cebc3125ff3c66700f933c8d8
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/10/97e677ca31cd876013e56b85555cd2a7d7fcdd
 # owner: root
 # group: root
 user::r--
@@ -46884,6 +48144,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/f1/55f671f13b6bf77d3788ef8c26e5c116d3e7d8
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/f1/92648cabca1e46a324621bca47df06382fda07
 # owner: root
 # group: root
@@ -46969,6 +48236,13 @@ group::r--
 other::r--
 
 # file: .git/objects/e5/401a55e478d736e19095fbfa60959b1f3fe474
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/e5/520d41869e30f08746b72d3c4c5970822949fe
 # owner: root
 # group: root
 user::r--
@@ -47102,6 +48376,13 @@ group::r--
 other::r--
 
 # file: .git/objects/e5/aaf03660b8ac1f6dda9e5665804b89113e8bf5
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/e5/f8816caa1ccd0cbed8d9afee6fe3761666f6d0
 # owner: root
 # group: root
 user::r--
@@ -47787,6 +49068,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/c8/2461b99d3242b67c703d17dd23351152c51080
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/c8/ce7472b1d9caca17fa4c9da629090c086144a4
 # owner: root
 # group: root
@@ -47795,6 +49083,20 @@ group::r--
 other::r--
 
 # file: .git/objects/c8/5b38b6217df24d740d7f2a07422826e30603ca
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/c8/baafd4e41ed0f0c92ef28470fe8102194d24e4
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/c8/00d51e25db1c3c692db7a17c930207df27610e
 # owner: root
 # group: root
 user::r--
@@ -49180,6 +50482,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/ca/c7b10da010b362c524fe0ffff3e7bba071d7ae
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/ca/6138b28cbe8fed69b3a91fe74e1e0c15d7c092
 # owner: root
 # group: root
@@ -49348,6 +50657,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/c2/c3bff7beb55ae331fc8cb0926ef0da4fe167aa
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/c2/e46903d2366022fa4f15ada400d32f7514c91a
 # owner: root
 # group: root
@@ -49433,6 +50749,13 @@ group::r--
 other::r--
 
 # file: .git/objects/22/ccec74b9e0a05f4c6ebcbddd3eaa0df5c54253
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/22/013d4b189acfc010257afdaaff81fd808405e6
 # owner: root
 # group: root
 user::r--
@@ -49545,6 +50868,13 @@ group::r--
 other::r--
 
 # file: .git/objects/22/f057d91ae8e7dd959b0beab9b47c5e252d9a2f
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/22/5ad3d76f15daa5fcfad53762e2d325fc4496d5
 # owner: root
 # group: root
 user::r--
@@ -49699,6 +51029,13 @@ group::r--
 other::r--
 
 # file: .git/objects/c1/3afd1a0c814f2c54f5a6ce4b1a1976b237def7
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/c1/7f4226f191a7dd948f7e1c8aeb8647dba1996d
 # owner: root
 # group: root
 user::r--
@@ -49971,6 +51308,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/b3/e8d1de43a14f35ed4a17bdb365812226162f50
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/b3/7ce8f00a4a357a82c68cb0d5b4dfbc08ec93d8
 # owner: root
 # group: root
@@ -50076,6 +51420,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/95/5f3a1bf26c9bf913b17ddafa4234d1e570024f
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/95/76b801aac1bd2dfbbaee77d974649cab85a7bd
 # owner: root
 # group: root
@@ -50126,6 +51477,13 @@ group::r--
 other::r--
 
 # file: .git/objects/95/3f367444360a67d86e4d8b61bc9354a5fa63e1
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/95/cdd29d7ce8e24c1a4de51dc39ce8e3798ddeda
 # owner: root
 # group: root
 user::r--
@@ -50447,6 +51805,13 @@ user::r--
 group::r--
 other::r--
 
+# file: .git/objects/62/737b6f8c6fe80d5a5056a0c07c2de7008f0f61
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
 # file: .git/objects/62/96917e262e6ef3d38fabae42238071740af0da
 # owner: root
 # group: root
@@ -50567,6 +51932,13 @@ group::r--
 other::r--
 
 # file: .git/objects/62/21df55e1bfa25d79dcebaf1186f4264840935f
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/62/c8f0b44531e52857462156a9a2961edaf26858
 # owner: root
 # group: root
 user::r--
@@ -50805,6 +52177,13 @@ group::r--
 other::r--
 
 # file: .git/objects/59/6b348cadd1e82ae4ae43ff2e07a27ef51456a2
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/59/be3d64e30be5fdb27b1b8e006762ac5abb1e59
 # owner: root
 # group: root
 user::r--
@@ -51302,6 +52681,13 @@ group::r--
 other::r--
 
 # file: .git/objects/b9/2514fd3ead0f9cfefc9a5e2ec19e62885f8f62
+# owner: root
+# group: root
+user::r--
+group::r--
+other::r--
+
+# file: .git/objects/b9/df8adcc1fca7b183d1cfb6116758a309cde4b8
 # owner: root
 # group: root
 user::r--
@@ -53037,69 +54423,6 @@ user::rw-
 group::rw-
 other::r--
 
-# file: lib/xqwhc
-# owner: root
-# group: root
-user::rwx
-group::rwx
-other::r-x
-
-# file: lib/xqwhc/xqwhc_stat.sh
-# owner: root
-# group: root
-user::rwx
-group::rwx
-other::r-x
-
-# file: lib/xqwhc/xqwhc_public.sh
-# owner: root
-# group: root
-user::rwx
-group::rwx
-other::r-x
-
-# file: lib/xqwhc/xqwhc_metric.sh
-# owner: root
-# group: root
-user::rwx
-group::rwx
-other::r-x
-
-# file: lib/xqwhc/network_lal.sh
-# owner: root
-# group: root
-user::rwx
-group::rwx
-other::r-x
-
-# file: lib/xqwhc/xqwhc_sync.sh
-# owner: root
-# group: root
-user::rwx
-group::rwx
-other::r-x
-
-# file: lib/xqwhc/xqwhc_hyt.sh
-# owner: root
-# group: root
-user::rwx
-group::rwx
-other::r-x
-
-# file: lib/xqwhc/xqwhc.sh
-# owner: root
-# group: root
-user::rwx
-group::rwx
-other::r-x
-
-# file: lib/xqwhc/xqwhc_init.sh
-# owner: root
-# group: root
-user::rwx
-group::rwx
-other::r-x
-
 # file: lib/debug
 # owner: root
 # group: root
@@ -53115,6 +54438,13 @@ group::r-x
 other::r-x
 
 # file: lib/config_post_ota
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: lib/config_post_ota/mesh_cfg_update.sh
 # owner: root
 # group: root
 user::rwx
@@ -53154,6 +54484,13 @@ other::r-x
 # group: root
 user::rwx
 group::r-x
+other::r-x
+
+# file: lib/config_post_ota/ipv6_post_ota.sh
+# owner: root
+# group: root
+user::rwx
+group::rwx
 other::r-x
 
 # file: lib/config_post_ota/ustack_post_ota.sh
@@ -53231,6 +54568,41 @@ other::r-x
 # group: root
 user::rwx
 group::r-x
+other::r-x
+
+# file: lib/mimesh
+# owner: root
+# group: root
+user::rwx
+group::rwx
+other::r-x
+
+# file: lib/mimesh/mimesh_stat.sh
+# owner: root
+# group: root
+user::rwx
+group::rwx
+other::r-x
+
+# file: lib/mimesh/mimesh_public.sh
+# owner: root
+# group: root
+user::rwx
+group::rwx
+other::r-x
+
+# file: lib/mimesh/mimesh_init.sh
+# owner: root
+# group: root
+user::rwx
+group::rwx
+other::r-x
+
+# file: lib/mimesh/mimesh_sync.sh
+# owner: root
+# group: root
+user::rwx
+group::rwx
 other::r-x
 
 # file: lib/upgrade
@@ -54011,6 +55383,13 @@ group::r--
 other::r--
 
 # file: lib/modules/4.4.60/ppp_mppe.ko
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
+# file: lib/modules/4.4.60/enid.ko
 # owner: root
 # group: root
 user::rw-
@@ -55515,6 +56894,13 @@ user::rw-
 group::r--
 other::r--
 
+# file: usr/lib/opkg/info/topology_monitor.control
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: usr/lib/opkg/info/libthrift.prerm
 # owner: root
 # group: root
@@ -56859,6 +58245,13 @@ user::rw-
 group::r--
 other::r--
 
+# file: usr/lib/opkg/info/miwifi-roam.list
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: usr/lib/opkg/info/kmod-ppp.list
 # owner: root
 # group: root
@@ -57034,6 +58427,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: usr/lib/opkg/info/enid.prerm
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: usr/lib/opkg/info/libgmp.list
 # owner: root
 # group: root
@@ -57160,13 +58560,6 @@ user::rw-
 group::r--
 other::r--
 
-# file: usr/lib/opkg/info/xqwhc.prerm
-# owner: root
-# group: root
-user::rwx
-group::r-x
-other::r-x
-
 # file: usr/lib/opkg/info/iptables-mod-conntrack-extra.prerm
 # owner: root
 # group: root
@@ -57238,6 +58631,13 @@ group::r-x
 other::r-x
 
 # file: usr/lib/opkg/info/kmod-qca-ssdk-nohnat.prerm
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: usr/lib/opkg/info/miwifi-roam.prerm
 # owner: root
 # group: root
 user::rwx
@@ -57425,6 +58825,13 @@ other::r--
 user::rw-
 group::r--
 other::r--
+
+# file: usr/lib/opkg/info/kmod-enid.prerm
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
 
 # file: usr/lib/opkg/info/luci-lib-sys.prerm
 # owner: root
@@ -59645,6 +61052,13 @@ user::rw-
 group::r--
 other::r--
 
+# file: usr/lib/opkg/info/enid.control
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: usr/lib/opkg/info/luci-proto-core.control
 # owner: root
 # group: root
@@ -59968,13 +61382,6 @@ group::r-x
 other::r-x
 
 # file: usr/lib/opkg/info/iw.list
-# owner: root
-# group: root
-user::rw-
-group::r--
-other::r--
-
-# file: usr/lib/opkg/info/xqwhc.list
 # owner: root
 # group: root
 user::rw-
@@ -60933,6 +62340,13 @@ user::rw-
 group::r--
 other::r--
 
+# file: usr/lib/opkg/info/kmod-enid.control
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: usr/lib/opkg/info/lua_crypto_lib.control
 # owner: root
 # group: root
@@ -61255,6 +62669,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: usr/lib/opkg/info/kmod-enid.list
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: usr/lib/opkg/info/kmod-sched-connmark.prerm
 # owner: root
 # group: root
@@ -61359,6 +62780,13 @@ other::r--
 user::rw-
 group::r--
 other::r--
+
+# file: usr/lib/opkg/info/topology_monitor.prerm
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
 
 # file: usr/lib/opkg/info/luci-i18n-taiwan.list
 # owner: root
@@ -62578,13 +64006,6 @@ user::rwx
 group::r-x
 other::r-x
 
-# file: usr/lib/opkg/info/xqwhc.control
-# owner: root
-# group: root
-user::rw-
-group::r--
-other::r--
-
 # file: usr/lib/opkg/info/liblzma.control
 # owner: root
 # group: root
@@ -62725,6 +64146,13 @@ user::rw-
 group::r--
 other::r--
 
+# file: usr/lib/opkg/info/enid.list
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: usr/lib/opkg/info/stat_points.list
 # owner: root
 # group: root
@@ -62768,6 +64196,13 @@ group::r-x
 other::r-x
 
 # file: usr/lib/opkg/info/qca-diag.list
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
+# file: usr/lib/opkg/info/topology_monitor.list
 # owner: root
 # group: root
 user::rw-
@@ -63202,6 +64637,13 @@ group::r-x
 other::r-x
 
 # file: usr/lib/opkg/info/iptables-mod-extra.list
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
+# file: usr/lib/opkg/info/miwifi-roam.control
 # owner: root
 # group: root
 user::rw-
@@ -65857,9 +67299,9 @@ other::r--
 # file: usr/lib/lua/luci/controller/api/xqdatacenter.lua
 # owner: root
 # group: root
-user::rw-
-group::r--
-other::r--
+user::rwx
+group::r-x
+other::r-x
 
 # file: usr/lib/lua/luci/sys.lua
 # owner: root
@@ -66284,9 +67726,9 @@ other::r--
 # file: usr/lib/lua/luci/view/web/apsetting/wifi.htm
 # owner: root
 # group: root
-user::rw-
-group::r--
-other::r--
+user::rwx
+group::r-x
+other::r-x
 
 # file: usr/lib/lua/luci/view/web/apsetting/roam.htm
 # owner: root
@@ -66382,9 +67824,9 @@ other::r--
 # file: usr/lib/lua/luci/view/web/setting/wifi.htm
 # owner: root
 # group: root
-user::rw-
-group::r--
-other::r--
+user::rwx
+group::r-x
+other::r-x
 
 # file: usr/lib/lua/luci/view/web/setting/nat.htm
 # owner: root
@@ -66697,9 +68139,9 @@ other::r--
 # file: usr/lib/lua/luci/view/web/inc/speedtest.js.htm
 # owner: root
 # group: root
-user::rw-
-group::r--
-other::r--
+user::rwx
+group::r-x
+other::r-x
 
 # file: usr/lib/lua/luci/view/web/inc/store.js.htm
 # owner: root
@@ -67229,9 +68671,9 @@ other::r--
 # file: usr/lib/lua/xiaoqiang/module/XQAPModule.lua
 # owner: root
 # group: root
-user::rw-
-group::r--
-other::r--
+user::rwx
+group::r-x
+other::r-x
 
 # file: usr/lib/lua/xiaoqiang/module/XQVASModule.lua
 # owner: root
@@ -67488,9 +68930,9 @@ other::r--
 # file: usr/lib/lua/xiaoqiang/util/XQSecureUtil.lua
 # owner: root
 # group: root
-user::rw-
-group::r--
-other::r--
+user::rwx
+group::r-x
+other::r-x
 
 # file: usr/lib/lua/xiaoqiang/util/XQNetUtil.lua
 # owner: root
@@ -67530,9 +68972,9 @@ other::r-x
 # file: usr/lib/lua/xiaoqiang/common/XQConfigs.lua
 # owner: root
 # group: root
-user::rw-
-group::r--
-other::r--
+user::rwx
+group::r-x
+other::r-x
 
 # file: usr/lib/lua/xiaoqiang/XQPushHelper.lua
 # owner: root
@@ -68157,6 +69599,13 @@ user::rwx
 group::rwx
 other::r-x
 
+# file: usr/share/xiaoqiang/plugin_public.pem
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: usr/share/xiaoqiang/xiaoqiang_version
 # owner: root
 # group: root
@@ -68675,6 +70124,13 @@ user::rwx
 group::rwx
 other::r-x
 
+# file: usr/sbin/topomon_action.sh
+# owner: root
+# group: root
+user::rwx
+group::rwx
+other::r-x
+
 # file: usr/sbin/miqosd
 # owner: root
 # group: root
@@ -68711,6 +70167,13 @@ group::r-x
 other::r-x
 
 # file: usr/sbin/pppoe-discovery
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: usr/sbin/miwifi-roam
 # owner: root
 # group: root
 user::rwx
@@ -69102,6 +70565,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: usr/sbin/mesh_cmd
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: usr/sbin/startscene_crontab.lua
 # owner: root
 # group: root
@@ -69114,6 +70584,13 @@ other::r-x
 # group: root
 user::rwx
 group::rwx
+other::r-x
+
+# file: usr/sbin/wan6_link_check.sh
+# owner: root
+# group: root
+user::rwx
+group::r-x
 other::r-x
 
 # file: usr/sbin/stat_points.helper
@@ -69163,13 +70640,6 @@ other::r-x
 # group: root
 user::rwx
 group::r-x
-other::r-x
-
-# file: usr/sbin/xqwhc_superv
-# owner: root
-# group: root
-user::rwx
-group::rwx
 other::r-x
 
 # file: usr/sbin/speedtest_cmd
@@ -69233,13 +70703,6 @@ other::r-x
 # group: root
 user::rwx
 group::r-x
-other::r-x
-
-# file: usr/sbin/xqwhc_push.cron
-# owner: root
-# group: root
-user::rwx
-group::rwx
 other::r-x
 
 # file: usr/sbin/sync_guest_bssid.lua
@@ -69438,6 +70901,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: usr/sbin/topomon
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: usr/sbin/nvram
 # owner: root
 # group: root
@@ -69516,13 +70986,6 @@ group::r-x
 other::r-x
 
 # file: usr/sbin/jason.sh
-# owner: root
-# group: root
-user::rwx
-group::rwx
-other::r-x
-
-# file: usr/sbin/whc_test
 # owner: root
 # group: root
 user::rwx
@@ -69676,6 +71139,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: usr/sbin/enid
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: usr/sbin/guestwifi.sh
 # owner: root
 # group: root
@@ -69684,6 +71154,13 @@ group::rwx
 other::r-x
 
 # file: usr/sbin/macsec_shell
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: usr/sbin/cab_meshd
 # owner: root
 # group: root
 user::rwx
@@ -69928,25 +71405,11 @@ user::rwx
 group::r-x
 other::r-x
 
-# file: usr/sbin/xqwhc_postota
-# owner: root
-# group: root
-user::rwx
-group::rwx
-other::r-x
-
 # file: usr/sbin/prepare_supervisord.sh
 # owner: root
 # group: root
 user::rwx
 group::r-x
-other::r-x
-
-# file: usr/sbin/whcal
-# owner: root
-# group: root
-user::rwx
-group::rwx
 other::r-x
 
 # file: usr/sbin/stat_json.lua
@@ -70171,13 +71634,6 @@ other::r-x
 # group: root
 user::rwx
 group::r-x
-other::r-x
-
-# file: usr/sbin/whc_ual
-# owner: root
-# group: root
-user::rwx
-group::rwx
 other::r-x
 
 # file: usr/sbin/hyt
@@ -70866,6 +72322,13 @@ user::rwx
 group::rwx
 other::r-x
 
+# file: sbin/re_restore.sh
+# owner: root
+# group: root
+user::rwx
+group::rwx
+other::r-x
+
 # file: sbin/whc_to_re_common_api.sh
 # owner: root
 # group: root
@@ -70906,6 +72369,13 @@ other::r-x
 # group: root
 user::rwx
 group::r-x
+other::r-x
+
+# file: sbin/collect_topo_info.sh
+# owner: root
+# group: root
+user::rwx
+group::rwx
 other::r-x
 
 # file: sbin/wifi
@@ -71035,6 +72505,13 @@ group::rwx
 other::r-x
 
 # file: sbin/notice_tbus_device.sh
+# owner: root
+# group: root
+user::rwx
+group::rwx
+other::r-x
+
+# file: sbin/xqwhc_channel.sh
 # owner: root
 # group: root
 user::rwx
@@ -72518,6 +73995,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: www/xiaoqiang/web/img/icons/router_ra69_100_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: www/xiaoqiang/web/img/icons/router_r2350_101_on.png
 # owner: root
 # group: root
@@ -72553,6 +74037,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: www/xiaoqiang/web/img/icons/router_ra67_100_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: www/xiaoqiang/web/img/icons/router_r2350_100_on.png
 # owner: root
 # group: root
@@ -72561,6 +74052,13 @@ group::r-x
 other::r-x
 
 # file: www/xiaoqiang/web/img/icons/router_r3a_101.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra81_100.png
 # owner: root
 # group: root
 user::rwx
@@ -72609,7 +74107,21 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: www/xiaoqiang/web/img/icons/router_ra72_100_on.png
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: www/xiaoqiang/web/img/icons/router_r02_100.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra50_100_on.png
 # owner: root
 # group: root
 user::rwx
@@ -72644,6 +74156,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: www/xiaoqiang/web/img/icons/router_ra80_101_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: www/xiaoqiang/web/img/icons/USB_on.png
 # owner: root
 # group: root
@@ -72651,7 +74170,21 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: www/xiaoqiang/web/img/icons/router_ra72_100.png
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: www/xiaoqiang/web/img/icons/router_r02_100_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra69_101.png
 # owner: root
 # group: root
 user::rwx
@@ -72666,6 +74199,20 @@ group::r-x
 other::r-x
 
 # file: www/xiaoqiang/web/img/icons/router_r01_100.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra70_101.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra67_101.png
 # owner: root
 # group: root
 user::rwx
@@ -72707,7 +74254,28 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: www/xiaoqiang/web/img/icons/router_ra67_100.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra72_101.png
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: www/xiaoqiang/web/img/icons/router_r3_100_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra69_101_on.png
 # owner: root
 # group: root
 user::rwx
@@ -72729,6 +74297,13 @@ group::r-x
 other::r-x
 
 # file: www/xiaoqiang/web/img/icons/router_rm2100_101.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra67_101_on.png
 # owner: root
 # group: root
 user::rwx
@@ -72826,6 +74401,13 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: www/xiaoqiang/web/img/icons/router_ra69_100.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: www/xiaoqiang/web/img/icons/router_r4_101_on.png
 # owner: root
 # group: root
@@ -72833,7 +74415,21 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: www/xiaoqiang/web/img/icons/router_ra70_100_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: www/xiaoqiang/web/img/icons/notharddisc.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra82_101.png
 # owner: root
 # group: root
 user::rwx
@@ -72917,6 +74513,13 @@ user::rw-
 group::r--
 other::r--
 
+# file: www/xiaoqiang/web/img/icons/router_ra82_101_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: www/xiaoqiang/web/img/icons/router_r4ac_101_on.png
 # owner: root
 # group: root
@@ -72925,6 +74528,13 @@ group::r-x
 other::r-x
 
 # file: www/xiaoqiang/web/img/icons/router_r2600_106.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra83_101.png
 # owner: root
 # group: root
 user::rwx
@@ -72953,6 +74563,13 @@ group::r-x
 other::r-x
 
 # file: www/xiaoqiang/web/img/icons/router_r1cm_105_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra50_100.png
 # owner: root
 # group: root
 user::rwx
@@ -73064,6 +74681,20 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: www/xiaoqiang/web/img/icons/router_ra83_101_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra72_101_on.png
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: www/xiaoqiang/web/img/icons/router_rm1800_101_on.png
 # owner: root
 # group: root
@@ -73092,6 +74723,13 @@ user::rw-
 group::r--
 other::r--
 
+# file: www/xiaoqiang/web/img/icons/router_ra50_101.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: www/xiaoqiang/web/img/icons/router_r4cm_101_on.png
 # owner: root
 # group: root
@@ -73100,6 +74738,13 @@ group::r-x
 other::r-x
 
 # file: www/xiaoqiang/web/img/icons/router_r3a_101_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra81_100_on.png
 # owner: root
 # group: root
 user::rwx
@@ -73197,7 +74842,21 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: www/xiaoqiang/web/img/icons/router_ra80_101.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
 # file: www/xiaoqiang/web/img/icons/icon_internet_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra50_101_on.png
 # owner: root
 # group: root
 user::rwx
@@ -73254,6 +74913,20 @@ group::r-x
 other::r-x
 
 # file: www/xiaoqiang/web/img/icons/router_r1cl_101_on.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra70_100.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/icons/router_ra70_101_on.png
 # owner: root
 # group: root
 user::rwx
@@ -73576,6 +75249,13 @@ group::r-x
 other::r-x
 
 # file: www/xiaoqiang/web/img/guide_pppoecatching.png
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: www/xiaoqiang/web/img/miHome.png
 # owner: root
 # group: root
 user::rwx
@@ -74950,9 +76630,9 @@ other::r--
 # file: www/js/miwifi-monitor.js
 # owner: root
 # group: root
-user::rw-
-group::r--
-other::r--
+user::rwx
+group::r-x
+other::r-x
 
 # file: www/js/qwrap.js
 # owner: root
@@ -75031,7 +76711,7 @@ user::rwx
 group::r-x
 other::r-x
 
-# file: www/static/css/init.785ba6ac7de5b5a97f0401b60ed390eb.css
+# file: www/static/css/init.e4de8320eee354cce437f5d27c59dd29.css
 # owner: root
 # group: root
 user::rw-
@@ -75059,6 +76739,13 @@ user::rw-
 group::r--
 other::r--
 
+# file: www/static/js/manifest.aeea2dfc58fc82d72a1c.js
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
 # file: www/static/js/9.f4f42b01f9bff453ca20.js
 # owner: root
 # group: root
@@ -75073,7 +76760,7 @@ user::rw-
 group::r--
 other::r--
 
-# file: www/static/js/6.1a2cf325a556ddd65c7a.js
+# file: www/static/js/0.874eb2b64ee56767e0b5.js
 # owner: root
 # group: root
 user::rw-
@@ -75108,14 +76795,7 @@ user::rw-
 group::r--
 other::r--
 
-# file: www/static/js/28.72e7a877308905c2e860.js
-# owner: root
-# group: root
-user::rw-
-group::r--
-other::r--
-
-# file: www/static/js/7.09d8d3449d3600b7a94d.js
+# file: www/static/js/4.89ae764b54106326f596.js
 # owner: root
 # group: root
 user::rw-
@@ -75137,13 +76817,6 @@ group::r--
 other::r--
 
 # file: www/static/js/24.1ad3710adaf3fd0faec0.js
-# owner: root
-# group: root
-user::rw-
-group::r--
-other::r--
-
-# file: www/static/js/0.a8605c3be70e8aab9cd5.js
 # owner: root
 # group: root
 user::rw-
@@ -75185,14 +76858,14 @@ user::rw-
 group::r--
 other::r--
 
-# file: www/static/js/19.2a3861dfe2b78e2ad197.js
+# file: www/static/js/28.639e5b008a3d2a8d29e3.js
 # owner: root
 # group: root
 user::rw-
 group::r--
 other::r--
 
-# file: www/static/js/4.837fd43e1fc9d9502656.js
+# file: www/static/js/19.2a3861dfe2b78e2ad197.js
 # owner: root
 # group: root
 user::rw-
@@ -75206,7 +76879,7 @@ user::rw-
 group::r--
 other::r--
 
-# file: www/static/js/manifest.682868fe5b10610a7ebf.js
+# file: www/static/js/2.c76fdbeee898d051a62f.js
 # owner: root
 # group: root
 user::rw-
@@ -75214,6 +76887,13 @@ group::r--
 other::r--
 
 # file: www/static/js/14.a9b10db4c00741d06ddd.js
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
+# file: www/static/js/6.bb4c5c1d587b11cbf92f.js
 # owner: root
 # group: root
 user::rw-
@@ -75262,13 +76942,6 @@ user::rw-
 group::r--
 other::r--
 
-# file: www/static/js/2.29c51bbe71b9fa489415.js
-# owner: root
-# group: root
-user::rw-
-group::r--
-other::r--
-
 # file: www/static/js/8.378b3f125e3c4ffa252c.js
 # owner: root
 # group: root
@@ -75277,6 +76950,13 @@ group::r--
 other::r--
 
 # file: www/static/js/20.eebb3d8cb429be13b251.js
+# owner: root
+# group: root
+user::rw-
+group::r--
+other::r--
+
+# file: www/static/js/7.aae4b4037e701759b89e.js
 # owner: root
 # group: root
 user::rw-
@@ -75322,8 +77002,8 @@ other::r--
 # owner: root
 # group: root
 user::rw-
-group::rw-
-other::rw-
+group::r--
+other::r--
 
 # file: www/static/img/error_tip_redmi.ae2f57f.png
 # owner: root
@@ -75634,6 +77314,13 @@ group::rwx
 other::r-x
 
 # file: bin/mk_ecos_image
+# owner: root
+# group: root
+user::rwx
+group::r-x
+other::r-x
+
+# file: bin/mkxqplugin
 # owner: root
 # group: root
 user::rwx
