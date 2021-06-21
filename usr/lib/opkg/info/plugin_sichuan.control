@@ -1,8 +1,0 @@
-Package: plugin_sichuan
-Version: 0.1
-Depends: libc, libubus, libblobmsg-json, ubusd, libpthread, libpolarssl, libopenssl, liblua
-Source: package/miwifi/plugin_sichuan
-Section: net
-Architecture: aarch64_cortex-a53
-Installed-Size: 79107
-Description:  plugin sichuan telel package

@@ -1363,17 +1363,15 @@ guest_network_judge()
 {
     _encryption=$(uci get wireless.guest_2G.encryption 2>/dev/null)
     _ssid=$(uci get wireless.guest_2G.ssid 2>/dev/null)
-    _disabled1=$(uci get wireless.guest_2G.disabled 2>/dev/null)
-    _disabled2=$(uci get wireless.guest_5G.disabled 2>/dev/null)
+    _disabled=$(uci get wireless.guest_2G.disabled 2>/dev/null)
     _passwd=$(uci get wireless.guest_2G.key 2>/dev/null)
-    [ "$_disabled1" == 1 ] && [ "$_disabled2" == 1 ] && exit 1
+    [ "$_disabled" == 1 ] && exit 1
     [ "$_ssid" == "" ] && exit 1
     # check guest ip conflict
     guest_ip_check
 
     # for different guest mode    
     [ "$_encryption" != "none" ] && exit 1
-    [ "$_encryption" == "none" ] && exit 1
     # wifishare_log "passwd  ===== $_passwd"
     # for guest wifi not share
     [ "$_passwd" == "12345678" ] && [ "$_encryption" == "none" ] && exit 1

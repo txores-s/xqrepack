@@ -126,6 +126,10 @@ __init_son()
 
     uci commit repacd
 
+    uci set network.lan.multicast_querier='1'
+    uci set network.lan.igmp_snooping='1'
+
+	uci commit network
 }
 
 __start_son()
@@ -188,12 +192,6 @@ __delete_wifi()
         opts="`uci show wireless | grep wireless.${sguest}`"
     fi
 
-    local sguest5g="$(uci -q get misc.wireless.iface_guest_5g_name)"
-    [ -z "$sguest5g" ] && sguest5g=guest_5G
-    if uci -q get wireless.${sguest5g} >/dev/null 2>&1; then
-        opts5g="`uci show wireless | grep wireless.${sguest5g}`"
-    fi
-
     # wifi cfg restore
     ### wifi down;  # how about we do NOT wifi down first
     (rm /etc/config/wireless; wifi detect >/etc/config/wireless 2>/dev/null; sync; /sbin/wifi reload_legacy)
@@ -204,13 +202,8 @@ __delete_wifi()
             uci -q set "$opt"
         done
         uci commit wireless
-    }
-    [ "$role"  = "CAP" -a -n "$opts5g" ] && {
-        for opt in $opts5g; do
-            uci -q set "$opt"
-        done
-        uci commit wireless
-    }
+    } 
+
 }
 
 # check bh white mac_list, return mac_list if valid
@@ -239,21 +232,19 @@ __init_wifi_cap()
     WHC_LOGI " setup wifi cfg on CAP "
 
     local guest_cfg="/tmp/log/sguest"
-    local iface_list="" ii=0 iface_idx_start=4
+    local iface_list="" ii=0 iface_idx_start=2
     local main_ssid main_mgmt main_pswd
     ifconfig wifi2 >/dev/null 2>&1 && export WIFI2_EXIST=1 || export WIFI2_EXIST=0
-    [ "$WIFI2_EXIST" = "1" ] && iface_idx_start=5 || iface_idx_start=4
+    [ "$WIFI2_EXIST" = "1" ] && iface_idx_start=3 || iface_idx_start=2
 
     # backup guest vap cfg and restore later
     local sguest="$(uci -q get misc.wireless.iface_guest_2g_name)"
-    local sguest5g="$(uci -q get misc.wireless.iface_guest_5g_name)"
     [ -z "$sguest" ] && sguest=guest_2G
-    [ -z "$sguest5g" ] && sguest5g=guest_5G
-    #if uci -q get wireless.${sguest} >/dev/null 2>&1; then
-    #    opts="`uci show wireless | grep wireless.${sguest}`"
-    #fi
-    #echo "$opts" > ${guest_cfg}
-    #uci -q delete wireless.${sguest}
+    if uci -q get wireless.${sguest} >/dev/null 2>&1; then
+        opts="`uci show wireless | grep wireless.${sguest}`"
+    fi
+    echo "$opts" > ${guest_cfg}
+    uci -q delete wireless.${sguest}
 
     case "$BH_METHOD" in
         $USE_DUAL_BAND_BH)
@@ -588,28 +579,23 @@ EOF
     fi
 
     # restore guest vap cfg
-    #[ -n "$opts" ] && {
-    #    while read line
-    #    do
-    #        echo "$line" | grep -q "wifi-iface"
-    #        [ $? -eq 0 ] && {
-    #            uci -q set "$line"
-    #            continue
-    #        }
-    #        opt="`echo $line | awk -F "[.=]" '{print $3}'`"
-    #        value="`echo $line | awk -F "'" '{print $2}'`"
-    #        uci -q set wireless.${sguest}.${opt}="${value}"
-    #    done < ${guest_cfg}
-    #}
+    [ -n "$opts" ] && {
+        while read line
+        do
+            echo "$line" | grep -q "wifi-iface"
+            [ $? -eq 0 ] && {
+                uci -q set "$line"
+                continue
+            }
+            opt="`echo $line | awk -F "[.=]" '{print $3}'`"
+            value="`echo $line | awk -F "'" '{print $2}'`"
+            uci -q set wireless.${sguest}.${opt}="${value}"
+        done < ${guest_cfg}
+    }
     # check guest vap iface
     if uci -q get wireless.${sguest} >/dev/null 2>&1; then
         uci -q set wireless.${sguest}.wsplcd_unmanaged='1'
         uci -q set wireless.${sguest}.repacd_security_unmanaged='1'
-    fi
-
-    if uci -q get wireless.${sguest5g} >/dev/null 2>&1; then
-        uci -q set wireless.${sguest5g}.wsplcd_unmanaged='1'
-        uci -q set wireless.${sguest5g}.repacd_security_unmanaged='1'
     fi
 
     uci commit wireless
@@ -857,9 +843,9 @@ __init_wifi_re()
         #uci -q set wireless.wifi1.txpwr=min
     fi
 
-    local iface_list="" ii=0 idx=0 iface_idx_start=4
+    local iface_list="" ii=0 idx=0 iface_idx_start=2
     local main_ssid main_mgmt main_pswd
-    [ "$WIFI2_EXIST" = "1" ] && iface_idx_start=5 || iface_idx_start=4
+    [ "$WIFI2_EXIST" = "1" ] && iface_idx_start=3 || iface_idx_start=2
     case "$BH_METHOD" in
         $USE_DUAL_BAND_BH)
             # config wifi ap ifaces
@@ -1354,12 +1340,12 @@ EOF
     }
     uci -q set wireless.@wifi-iface[0].miwifi_mesh='0'
 
-    #local sguest="$(uci -q get misc.wireless.iface_guest_2g_name)"
-    #[ -z "$sguest" ] && sguest=guest_2G
-    #if uci -q get wireless.${sguest} >/dev/null 2>&1; then
-    #    WHC_LOGI " has guest network, destroy before create whc-RE!"
-    #   guestwifi.sh unset
-    #fi
+    local sguest="$(uci -q get misc.wireless.iface_guest_2g_name)"
+    [ -z "$sguest" ] && sguest=guest_2G
+    if uci -q get wireless.${sguest} >/dev/null 2>&1; then
+        WHC_LOGI " has guest network, destroy before create whc-RE!"
+        guestwifi.sh unset
+    fi
 
     uci commit wireless
 }

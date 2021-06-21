@@ -98,7 +98,7 @@
 /etc/iwevent.d/01-feedpush.sh
 /etc/hotplug.d/iface/10-phy_check.sh
 /etc/os-release
-/etc/opkg/keys/136a6ba437d4beb7
+/etc/opkg/keys/efb26340e23d4431
 /sbin/ethstatus
 /usr/sbin/sysapi.firewall
 /usr/sbin/jason.sh

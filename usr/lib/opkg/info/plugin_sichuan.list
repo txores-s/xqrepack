@@ -1,7 +1,0 @@
-/usr/share/datacenter/appdata/notuninstallable/plugin/server_check.sh
-/usr/share/datacenter/appdata/notuninstallable/plugin/port_count.sh
-/usr/share/datacenter/appdata/notuninstallable/plugin/plugin_cmd.lua
-/usr/share/datacenter/appdata/notuninstallable/plugin/Plugin
-/etc/init.d/plugin
-/usr/lib/libRouterSdk.so
-/etc/plug.conf

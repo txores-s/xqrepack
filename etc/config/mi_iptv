@@ -1,4 +1,0 @@
-config iptv settings
-    option enabled "0"
-	option port "1"
-	option vlanid "0"
