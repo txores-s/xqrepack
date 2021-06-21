@@ -1,8 +1,0 @@
-Package: china_unicom
-Version: 1.0-a
-Depends: libc, liblua, libubox, libcurl, libjson-c, libpthread, libblobmsg-json, libopenssl, libcrypto, libmbedtls
-Source: package/isp/china_unicom
-Section: net
-Architecture: all
-Installed-Size: 57699
-Description:  A script to do coap test.

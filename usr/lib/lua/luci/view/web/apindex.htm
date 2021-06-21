@@ -17,7 +17,7 @@
     local encode4HtmlValue = XQFunction.encode4HtmlValue
     local router_name = XQSysUtil.getRouterName()
     local router_local = XQSysUtil.getRouterLocale()
-    router_name = encode4HtmlValue(router_name) .."(".. encode4HtmlValue(router_local) ..")"
+    router_name = encode4HtmlValue(router_name)
 
     local netmod = XQFunction.getnetmode()
     local hardware = string.lower( XQSysUtil.getHardware() )
@@ -91,7 +91,7 @@
             <div id="netline" class="line line-aplink"></div>
             <%end%>
             <div class="linetext-aplink">
-            <%if netmod == 1 then%><%:无线中继%><%elseif netmod ==3 then%><%:Mesh组网%><%else%><%:有线中继%><%end%></div>
+            <%if netmod == 1 then%><%:无线中继%><%elseif netmod ==3 then%> <%else%><%:有线中继%><%end%></div>
             <div class="internet">
             <%if vendorInfo_ip ~= 0 then%>
                 <a href="http://<%=vendorInfo_ip%>" target="_blank">
@@ -122,32 +122,32 @@
                     <div class="wifi_2g">
                         <ul>
                              <li> <b>2.4G</b><span>Hz</span></li>
-                            <li class="wifi_2g_name">Wi-Fi名称</li>
-                            <li class="passwd_2g">Wi-Fi密码：
-                                <input type="text" class="wifi_2g_pssswd wifi_2g_pssswd_txt" style="padding: 5px;" value="">
-                                <input type="password" class="wifi_2g_pssswd" value="">
+                            <li class="wifi_2g_name"><%:Wi-Fi名称%></li>
+                            <li class="passwd_2g"><%:Wi-Fi密码%>： 
+                                <input type="text" class="wifi_2g_pssswd wifi_2g_pssswd_txt" style="padding: 5px;" value="" readonly>
+                                <input type="password" class="wifi_2g_pssswd" value="" readonly>
                                  <span class="eye2"></span>
                             </li>
-                            <li class="wifi_2g_online">连接设备数量 --</li>
+                            <li class="wifi_2g_online"><%:连接设备数量%> --</li>
                         </ul>
                         <%if netmod ~= 3 then%>
-                        <a class="btn_wifi" href="<%=luci.dispatcher.build_url("web", "apsetting", "wifi")%>" >设置</a>
+                        <a class="btn_wifi" href="<%=luci.dispatcher.build_url("web", "apsetting", "wifi")%>" ><%:设置%></a>
                         <%end%>
                     </div>
 
                     <div class="wifi_5g">
                         <ul>
                             <li> <b>5G</b><span>Hz</span></li>
-                             <li class="wifi_5g_name">Wi-Fi名称</li>
-                            <li class="passwd_5g">Wi-Fi密码：
-                                <input type="text" class="wifi_5g_pssswd wifi_5g_pssswd_txt" style="padding: 5px;" value="">
-                                <input type="password" class="wifi_5g_pssswd" value="">
+                             <li class="wifi_5g_name"><%:Wi-Fi名称%></li>
+                            <li class="passwd_5g"><%:Wi-Fi密码%>：
+                                <input type="text" class="wifi_5g_pssswd wifi_5g_pssswd_txt" style="padding: 5px;" value="" readonly>
+                                <input type="password" class="wifi_5g_pssswd" value="" readonly>
                                 <span class="eye2"></span>
                             </li>
-                            <li class="wifi_5g_online">连接设备数量 --</li>
+                            <li class="wifi_5g_online"><%:连接设备数量%> --</li>
                         </ul>
                         <%if netmod ~= 3 then%>
-                        <a class="btn_wifi" href="<%=luci.dispatcher.build_url("web", "apsetting", "wifi")%>" >设置</a>
+                        <a class="btn_wifi" href="<%=luci.dispatcher.build_url("web", "apsetting", "wifi")%>" ><%:设置%></a>
                         <%end%>
                     </div>
                 </div>
@@ -248,7 +248,8 @@ $.sub('status:get', function(){
             'R2600': '<%:小米路由器2600%>',
             'R2100': '<%:小米路由器2100%>',
             'R1500': '<%:小米路由器1500%>',
-            'R3600': '<%:小米AIoT路由器 AX3600%>'
+            'R3600': '<%:小米AIoT路由器AX3600%>',
+            'R2350': '<%:小米AIoT路由器AC2350%>'
         };
 
         $('#routermodel').text(mapModel[data.platform]);
@@ -310,7 +311,8 @@ $.sub('status:newget', function(){
         'R2600': '<%:小米路由器2600%>',
         'R2100': '<%:小米路由器AC2100%>',
         'R1500': '<%:小米路由器1500%>',
-        'R3600': '<%:小米AIoT路由器 AX3600%>'
+        'R3600': '<%:小米AIoT路由器AX3600%>',
+        'R2350': '<%:小米AIoT路由器AC2350%>'
     };
     var apiNewStatus = '<%=luci.dispatcher.build_url("api","misystem","newstatus")%>';
     $.ajax({
@@ -321,27 +323,27 @@ $.sub('status:newget', function(){
                     res =  $.parseJSON(res);
                     if(res.code == 0){
                         //2.4g
-                        $('.wifi_2g_name').html('Wi-Fi名称：'+res['2g'].ssid);
+                        $('.wifi_2g_name').html('<%:Wi-Fi名称%>：'+res['2g'].ssid);
                         if(res['2g'].pssswd != ''){
                             $('.wifi_2g_pssswd').val(res['2g'].pssswd);
                         }else{
-                            $('.passwd_2g').html('Wi-Fi密码: 未设置');
+                            $('.passwd_2g').html('<%:Wi-Fi密码%>: <%:未设置%>');
                         }
-                        $('.wifi_2g_online').html('连接设备数量：'+res['2g'].online_sta_count);
+                        $('.wifi_2g_online').html('<%:连接设备数量%>：'+res['2g'].online_sta_count);
                         //5g
-                        $('.wifi_5g_name').html('Wi-Fi名称：'+res['5g'].ssid);
+                        $('.wifi_5g_name').html('<%:Wi-Fi名称%>：'+res['5g'].ssid);
                         if(res['5g'].passwd != ''){
                             $('.wifi_5g_pssswd').val(res['5g'].passwd);
                         }else{
-                            $('.passwd_5g').html('Wi-Fi密码: 未设置');
+                            $('.passwd_5g').html('<%:Wi-Fi密码%>: <%:未设置%>');
                         }
-                        $('.wifi_5g_online').html('连接设备数量：'+res['5g'].online_sta_count);
+                        $('.wifi_5g_online').html('<%:连接设备数量%>：'+res['5g'].online_sta_count);
                         //信息
-
-
+                     
+                       
                         $('#routermodel').text(mapModel[res.hardware.platform]);
-
-
+                        
+                       
                         $('#routerversion').text('MiWiFi ' + mapChannel[res.hardware.channel] + ' ' + res.hardware.version);
                         $('#routermac').text(res.hardware.mac);
                         $('#routersn').text(res.hardware.sn);

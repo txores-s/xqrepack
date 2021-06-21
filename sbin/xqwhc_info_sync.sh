@@ -465,7 +465,7 @@ wifi_parse()
             WHC_LOGI " xq_whc_sync, wifi0 dev change channel $ch_5_act -> $ch_5 "
         }
     }
-    [ "$txp_5" != "$txp_5_cur"] && {
+    [ "$txp_5" != "$txp_5_cur" ] && {
         son_changed=1
         WHC_LOGI " xq_whc_sync, wifi0 dev change $txp_5_cur -> $txp_5"
         uci set wireless.wifi0.txpwr="$txp_5"
@@ -592,6 +592,7 @@ system_parse()
         WHC_LOGI " xq_whc_sync, system timezone change $timezone_cur -> $timezone"
         uci set system.@system[0].timezone="$timezone"
         uci commit system
+        echo "$timezone" > /tmp/TZ
     }
 
     local ota_auto="`cat $cfgf | grep -w "ota_auto" | awk -F ":=" '{print $2}'`"
@@ -630,6 +631,17 @@ system_parse()
                gpio 3 0;gpio 5 0;[ -f /usr/sbin/wan_check.sh ] && /usr/sbin/wan_check.sh reset
            fi
         }
+    }
+
+    local lang="`cat $cfgf | grep -w "main_lang" | awk -F ":=" '{print $2}'`"
+    [ -z "$lang" ] && lang=en
+    local lang_cur="`uci -q get luci.main.lang`"
+    [ -z "$lang_cur" ] && lang_cur=en
+    [ "$lang" != "$lang_cur" ] && {
+        sys_changed=1
+        WHC_LOGI " xq_whc_sync, system lang change $lang_cur -> $lang"
+        uci set luci.main.lang="$lang"
+        uci commit luci
     }
 
     return 0

@@ -1,7 +1,9 @@
 #!/bin/sh
 # Copyright (C) 2015 Xiaomi
 
-REQUEST_URL="http://api.miwifi.com/report_recovery?"
+API_MIWIFI=$(uci -q get miwifi.server.API)
+[ -z "$API_MIWIFI" ] && API_MIWIFI="api.miwifi.com"
+REQUEST_URL="http://${API_MIWIFI}/report_recovery?"
 
 sync_work_mode()
 {

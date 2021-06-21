@@ -9,7 +9,6 @@
 /etc/hotplug.d/iface/85-wanip_check
 /usr/sbin/wanlinkprobe
 /etc/resolv.conf
-/etc/crontabs/root-R2200
 /usr/sbin/ban_admin
 /usr/sbin/recovery_info_sync.sh
 /usr/sbin/update_vas_conf.lua
@@ -27,6 +26,7 @@
 /etc/hotplug.d/button/51-reset
 /bin/reboot_safe.sh
 /usr/sbin/diskeh
+/etc/hotplug.d/button/01-mi-reset-key
 /usr/sbin/guestwifi.sh
 /etc/localtime
 /usr/sbin/parentalctl.sh
@@ -40,6 +40,7 @@
 /etc/device_info
 /usr/sbin/set_wps_state
 /usr/lib64
+/etc/opkg/keys/8820a030d8f6217
 /etc/protocols
 /etc/uci-defaults/12_network-generate-ula
 /usr/sbin/mivpn.sh
@@ -53,12 +54,12 @@
 /usr/sbin/supervisord
 /usr/sbin/startscene.lua
 /usr/sbin/ddnsd
+/etc/config/server_mapping
 /usr/sbin/gensmartdns.sh
 /lib/config_post_ota/vasinfo_post_ota.sh
 /usr/sbin/logupload.lua
 /etc/config/macfilter
 /etc/config/skb_recycler
-/etc/opkg/keys/5e5002977e8bb8a3
 /lib/preinit/32_check_for_boottype
 /usr/sbin/cr_ip_conflict.lua
 /etc/config/system
@@ -137,6 +138,7 @@
 /lib/upgrade/nand.sh
 /etc/rc.button/failsafe
 /lib/upgrade/fwtool.sh
+/etc/config/country_mapping
 /etc/services
 /usr/sbin/get_router_kv.lua
 /etc/config/vas_user

@@ -44,7 +44,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 
         </div>
         <%if hardware == "r3a" or hardware == "r3g" or hardware == "r4ac" then%>
-        <div class="mod-set mod-wifi mod-wifi-roam">
+        <!-- <div class="mod-set mod-wifi mod-wifi-roam">
             <div class="hd">
                 <h3>漫游</h3>               
             </div>
@@ -67,7 +67,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                 <p>警告：开启此功能后，可能会导致某些设备无法接入路由器，影响用户的正常上网体验，建议非专业人士请勿开启。</p>
             </div>
             
-        </div>
+        </div> -->
         <%end%>
         <%include("web/inc/devcenter")%>
     </div>
@@ -75,7 +75,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
     <%include("web/inc/footer")%>
 </div>
 <%include("web/inc/g.js")%>
-<script type="text/tmpl" id="tplRoam24">
+<!-- <script type="text/tmpl" id="tplRoam24">
     <input type="hidden" value="1" name="wifiIndex">
         <div class="item">
             <span class="bsd-ground"><%:2.4G 漫游%></span>
@@ -97,8 +97,8 @@ local hardware = string.lower( XQSysUtil.getHardware() )
          <div class="form-contral">
             <button type="submit" class="btn btn-primary btn-l hidden"><span><%:保存%></span></button>
         </div>
-    </script>
-    <script type="text/tmpl" id="tplRoam50">
+    </script> -->
+   <!--  <script type="text/tmpl" id="tplRoam50">
     <input type="hidden" value="2" name="wifiIndex">
         <div class="item">
             <span class="bsd-ground"><%:5G 漫游%></span>
@@ -120,7 +120,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
          <div class="form-contral">
             <button type="submit" class="btn btn-primary btn-l hidden"><span><%:保存%></span></button>
         </div>
-    </script>
+    </script> -->
 <script>
 var modelUpnp = (function(){
     function upnpStatus(){
@@ -180,8 +180,8 @@ $(function(){
         
         // get wifi and rander html
          var containers = ['wifiset24', 'wifiset50', 'wifisetguest'],
-                roamContainer = ['roamset24', 'roamset50'],
-                tplRoamContainer = ['tplRoam24', 'tplRoam50'],
+                // roamContainer = ['roamset24', 'roamset50'],
+                // tplRoamContainer = ['tplRoam24', 'tplRoam50'],
                 tpl = $('#tplWifi').html();
         $.getJSON('<%=luci.dispatcher.build_url("api","xqnetwork","wifi_detail_all")%>')
         .done(function( rsp ){
@@ -245,12 +245,12 @@ $(function(){
                     //     $('#wifisetbsdtop').html( $('#tplWifiBsdTop').html().tmpl(tplData) );
                     // }
                      if (i < 2) {
-                        var roamTempContainer = $(document.getElementById(roamContainer[i]));
-                        roamTempContainer.html( $('#' + tplRoamContainer[i]).html().tmpl(tplData) )
+                        // var roamTempContainer = $(document.getElementById(roamContainer[i]));
+                        // roamTempContainer.html( $('#' + tplRoamContainer[i]).html().tmpl(tplData) )
                     }
 
-                     $('#roamset24,#roamset50').delegate('input[type=text], input[type=checkbox], input[type=radio]', 'click', onControlFocus)
-                .delegate('.ipt-text', 'click', onControlFocus);
+                //      $('#roamset24,#roamset50').delegate('input[type=text], input[type=checkbox], input[type=radio]', 'click', onControlFocus)
+                // .delegate('.ipt-text', 'click', onControlFocus);
                    
                 }
             }

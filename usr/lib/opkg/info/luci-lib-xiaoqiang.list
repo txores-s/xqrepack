@@ -68,6 +68,7 @@
 /usr/lib/lua/xiaoqiang/module/XQGuestWifi.lua
 /usr/lib/lua/xiaoqiang/util/XQUPnPUtil.lua
 /usr/lib/lua/xiaoqiang/module/XQEcos.lua
+/usr/lib/lua/xiaoqiang/util/XQIPTVUtil.lua
 /usr/lib/lua/xiaoqiang/common/XQFunction.lua
 /usr/lib/lua/xiaoqiang/module/XQMessageBox.lua
 /usr/share/xiaoqiang/oui.tar.gz

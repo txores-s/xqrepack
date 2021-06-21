@@ -23,43 +23,43 @@ json_out() {
 
 # find out why wan is down?
 diagnose_wan_down() {
-	local proto=$1
-	case "$proto" in
+    local proto=$1
+    case "$proto" in
 	pppoe)
-		local pppoe_ret=$(lua /usr/sbin/pppoe.lua status)
-		local ret
-		local code
-		json_load "${pppoe_ret}"
-		json_get_var ret "msg"
-		json_get_var code "code"
-		json_get_var proc "process"
-		case "$ret" in
+	    local pppoe_ret=$(lua /usr/sbin/pppoe.lua status)
+	    local ret
+	    local code
+	    json_load "${pppoe_ret}"
+	    json_get_var ret "msg"
+	    json_get_var code "code"
+	    json_get_var proc "process"
+	    case "$ret" in
 		678)
-			[ $code = "531" ] && json_out 3 "pppoe no response"
-			[ $code = "532" ] && json_out 34 "pppoe need reset mac"
+		    [ $code = "531" ] && json_out 3 "pppoe no response"
+		    [ $code = "532" ] && json_out 34 "pppoe need reset mac"
 		;;
 		633)
-			json_out 31 "pppoe no more sesson"
+		    json_out 31 "pppoe no more sesson"
 		;;
 		691)
-			[ $code = "507" ] && json_out 32 "pppoe password error"
-			[ $code = "508" ] && json_out 33 "pppoe account not valid"
+		    [ $code = "507" ] && json_out 32 "pppoe password error"
+		    [ $code = "508" ] && json_out 33 "pppoe account not valid"
 		;;
-		esac
-		[ $proc = "down" ] && json_out 35 "pppoe stop by user"
-		if [ ! -n "$ret" ]; then
+	    esac
+	    [ $proc = "down" ] && json_out 35 "pppoe stop by user"
+	    if [ ! -n "$ret" ]; then
 			[ $proc = "connecting" ] && json_out 35 "pppoe stop by user"
-		fi
-		return
-		#TODO check if the result is not there
+	    fi
+	    return
+	    #TODO check if the result is not there
 	;;
 	dhcp)
-		json_out 2 "dhcp no server"
-		return
+	    json_out 2 "dhcp no server"
+	    return
 	;;
-	esac
-	# TODO for vnp ?
-	json_out 10 "link broken"
+    esac
+    # TODO for vnp ?
+    json_out 10 "link broken"
 }
 
 is_subnet_conflict() {
@@ -81,7 +81,7 @@ dns_check() {
     local dns_list="$1"
     local host_list="$2"
     if [ -z "$host_list" ]; then
-	cc=$(/usr/sbin/bdata get CountryCode)
+	cc=$(nvram get CountryCode)
 	cc=${cc:-CN}
 	if [ "$cc" == "CN" ]; then
 	    host_list=$(uci -q get system.netdt.cn_domain)

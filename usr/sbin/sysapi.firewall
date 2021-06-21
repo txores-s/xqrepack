@@ -454,50 +454,28 @@ turbo_doit() {
 }
 
 ipv6_masq_doit() {
-    ip6_mode=$(uci -q get ipv6.settings.mode)
-    ip6_on=$(uci -q get ipv6.settings.enabled)
+    local netmode=$(uci -q get xiaoqiang.common.NETMODE)
+    [ "$netmode" = "lanapmode" -o "$netmode" = "wifiapmode" -o "$netmode" = "whc_re" ] && return
+
+    local fw6_dis=$(uci -q get firewall.@defaults[0].disable_ipv6)
+    [ "$fw6_dis" = "1" ] && return
+
+    local ip6_mode=$(uci -q get ipv6.settings.mode)
+    local ip6_on=$(uci -q get ipv6.settings.enabled)
     ip6tables -t nat -D POSTROUTING -j MASQUERADE >/dev/null 2>&1
     if [ "$ip6_on" = "1" -a "$ip6_mode" = "nat" ]; then
         ip6tables -t nat -A POSTROUTING -j MASQUERADE >/dev/null 2>&1
     fi
 
-    wan=$(uci -q get network.wan.ifname)
+    local wan=$(uci -q get network.wan.ifname)
+    local proto=$(uci -q get network.wan.proto)
+    [ "$proto" = "pppoe" ] && wan="pppoe-wan"
     ip6tables -t filter -D zone_wan_dest_REJECT -i $wan -j ACCEPT
     if [ "$ip6_on" = "1" -a "$ip6_mode" != "nat" ]; then
         ip6tables -t filter -I zone_wan_dest_REJECT -i $wan -j ACCEPT
     fi
 
     return 0
-}
-
-set_tcpmss_doit() {
-	local vpn_type=$(uci -q get network.vpn.proto)
-	[ "$vpn_type" != "pptp" ] && return
-
-	local vpn_exist=$(ubus call network.interface.vpn status 2>/dev/null | grep -Eq '"up": true' && echo 1 || echo 0)
-	[ "$vpn_exist" != "1" ] && return
-
-	local mtu=$(ifconfig pptp-vpn 2>/dev/null | grep MTU | cut -d : -f 2 | cut -d " " -f 1)
-	[ -z $mtu ] && return
-	local tcpmss=`expr $mtu - 44`
-
-	iptables -t mangle -D FORWARD -o "pptp-vpn" -p tcp -m tcp --tcp-flags SYN,RST SYN -m comment --comment "!fw3: Zone wan MTU fixing" -j TCPMSS --clamp-mss-to-pmtu
-	iptables -t mangle -D FORWARD -i "pptp-vpn" -p tcp -m tcp --tcp-flags SYN,RST SYN -m comment --comment "!fw3: Zone wan MTU fixing" -j TCPMSS --clamp-mss-to-pmtu
-	iptables -L set_tcpmss -t mangle 2>&- >&-
-	if [ $? -ne 0 ]; then
-		iptables -t mangle -N set_tcpmss 2>/dev/null
-		iptables -t mangle -I FORWARD -j set_tcpmss 2>/dev/null
-	fi
-	iptables -t mangle -F set_tcpmss 2>/dev/null
-	iptables -t mangle -I set_tcpmss -i "pptp-vpn" -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss "$tcpmss" 2>/dev/null
-	iptables -t mangle -I set_tcpmss -o "pptp-vpn" -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss "$tcpmss" 2>/dev/null
-
-	#to do
-	#local ipv6_enable=$(uci -q get ipv6.settings.enabled)
-	#local ipv6_mode=$(uci -q get ipv6.settings.mode)
-	#[ "$ipv6_enable" == "1" -a "$ipv6_mode" != "off" ] && {
-		#to do
-	#}
 }
 
 modules_doit(){
@@ -553,9 +531,6 @@ modules_doit(){
 	#	;;
 	ipv6_masq)
         ipv6_masq_doit
-		;;
-	set_tcpmss)
-		set_tcpmss_doit
 		;;
 	*)
 		echo "not support $ctlop"

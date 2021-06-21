@@ -111,14 +111,13 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 
          <div class="mod-set mod-wifi">
             <div class="hd">
-                <h3><%:Wi-Fi 5 兼容模式%></h3>
+                <h3><%:Wi-Fi 5(802.11ac)兼容模式%></h3>
                 <div class="switch">
                     <a href="#WIFI6switch" id="WIFI6switch" class="btn-switch btn-switch-on" data-on="1"></a>
                 </div>
             </div>
             <div class="bd">
-                <p><%:某些老设备对Wi-Fi6支持不好，可能扫描不到信号或者连接不上等。开启此开关后，将会切换到Wi-Fi5模式，解决兼容问题。但同时会关闭Wi-Fi6的相关功能，如OFDMA，BSS Coloring等。
-                %></p>
+                <p><%:某些老设备对Wi-Fi 6支持不好，可能出现扫描不到或者连接不上 Wi-Fi 等兼容性问题。开启此开关后，路由器将会运行到Wi-Fi 5的兼容模式下，解决兼容问题。但同时会关闭Wi-Fi 6的相关功能，如OFDMA，BSS Coloring等。%></p>
             </div>
         </div>
 
@@ -130,8 +129,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                 </div>
             </div>
             <div class="bd">
-                <p><%:MU-MIMO“多用户多入多出”技术，可以让路由器与多台终端同时通信，极大改善无线资源利用效率，提升Wi-Fi体验。该功能生效需要路由器和终端同时支持。
-                %></p>
+                <p><%:MU-MIMO“多用户多入多出”技术，可以让路由器与多台终端同时通信，极大改善无线资源利用效率，提升Wi-Fi体验。该功能生效需要路由器和终端同时支持。%></p>
             </div>
         </div>
 
@@ -143,22 +141,11 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                 </div>
             </div>
             <div class="bd">
-                <p><%:AIoT智能天线自动扫描功能可以自动发现未初始化的小米智能设备，通过米家APP快速入网。%><br/><%:此功能可能在网络拥塞的环境下导致网络出现一定的丢包变多及延时提高的问题。%></p>
+                <p><%:AIoT智能天线自动扫描功能可以自动发现未初始化的小米智能设备，通过米家APP快速入网。此功能可能在网络拥塞的环境下导致网络出现一定的丢包变多及延时提高的问题。%></p>
             </div>
         </div>
 
-        <!-- 多终端接入优先 -->
-<!--        <div class="mod-set mod-wifi">-->
-<!--            <div class="hd">-->
-<!--                <h3><%:多终端接入优先%></h3>-->
-<!--                <div class="switch">-->
-<!--                    <a href="#deviceSwitch" id="deviceSwitch" class="btn-switch btn-switch-off" data-on="0"></a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="bd">-->
-<!--                <p><%:开启此功能，2.4GHz频段将被优先用于保障终端的接入稳定性。当网络中接入终端较多时，建议保持此功能开启。%></p>-->
-<!--            </div>-->
-<!--        </div>-->
+
 
     </div>
     <%include("web/inc/footer")%>
@@ -208,8 +195,8 @@ local hardware = string.lower( XQSysUtil.getHardware() )
         <span class="v">
             <select name="encryption" class="beautify encryption" >
 
-                <option value="ccmp"{if ($encryption == "ccmp")} selected{/if}><%:超强加密(WPA3个人版)%></option>
-                <option value="psk2+ccmp"{if ($encryption == "psk2+ccmp")} selected{/if}><%:强混合加密(WPA3/WPA2个人版)%></option>
+                <option value="ccmp"{if ($encryption == "ccmp")} selected{/if}><%:超强加密(WPA3)%></option>
+                <option value="psk2+ccmp"{if ($encryption == "psk2+ccmp")} selected{/if}><%:强混合加密(WPA3/WPA2)%></option>
 
 
                 <option value="psk2"{if ($encryption == "psk2")} selected{/if}><%:强加密(WPA2个人版)%></option>
@@ -271,8 +258,8 @@ local hardware = string.lower( XQSysUtil.getHardware() )
         <span class="v">
             <select name="encryption" class="beautify encryption">
 
-                <option value="ccmp"{if ($encryption == "ccmp")} selected{/if}><%:超强加密(WPA3个人版)%></option>
-                <option value="psk2+ccmp"{if ($encryption == "psk2+ccmp")} selected{/if}><%:强混合加密(WPA3/WPA2个人版)%></option>
+                <option value="ccmp"{if ($encryption == "ccmp")} selected{/if}><%:超强加密(WPA3)%></option>
+                <option value="psk2+ccmp"{if ($encryption == "psk2+ccmp")} selected{/if}><%:强混合加密(WPA3/WPA2)%></option>
 
                 <option value="psk2"{if ($encryption == "psk2")} selected{/if}><%:强加密(WPA2个人版)%></option>
                 <option value="mixed-psk"{if ($encryption == "mixed-psk")} selected{/if}><%:混合加密(WPA/WPA2个人版)%></option>
@@ -310,7 +297,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
              {/for}
             <%else%>
             {for(var i=0, len=$channels.length; i<len; i++)}
-                {if ($channels[i]['c'] < 52 || $channels[i]['c'] > 64)}
+                {if ($channels[i]['c'] < 52 || $channels[i]['c'] > 144)}
                     <option value="{$channels[i]['c']}" {if ($channel==$channels[i]['c'])}selected{/if}>
                     {if ($channels[i]['c']==0)}<%:自动%>
                         {if ($channelInfo["channel"] != "0")}
@@ -329,7 +316,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
              <em class="t"></em>
         <%else%>
         {if ($wifilei == 1)}
-             <em class="t">Mesh模式下不支持DFS信道选择（52-64）</em>
+             <em class="t"><%:Mesh模式下不支持DFS信道选择（52-140）%></em>
         {/if}
         <%end%>
     </div>
@@ -338,7 +325,8 @@ local hardware = string.lower( XQSysUtil.getHardware() )
         <label class="k"><%:频段带宽%></label>
         <span class="v">
             <select name="bandwidth" class="beautify bandwidth" >
-                {if ($channelInfo["bandList"].length >= 3)}
+                {if ($channelInfo["bandList"].length >= 3 && $channels.length > 8
+                && $channels[8]['c'] == 64)}
                     <option value="0" {if ($bandwidth  == "0" )}selected="selected"{/if}><%:160/80/40/20MHz%></option>
                 {/if}
                 {if ($channelInfo["bandList"].length == 2)}
@@ -407,8 +395,8 @@ local hardware = string.lower( XQSysUtil.getHardware() )
         <span class="v">
             <select name="encryption" class="beautify encryption" >
 
-                <option value="ccmp"{if ($encryption == "ccmp")} selected{/if}><%:超强加密(WPA3个人版)%></option>
-                <option value="psk2+ccmp"{if ($encryption == "psk2+ccmp")} selected{/if}><%:强混合加密(WPA3/WPA2个人版)%></option>
+                <option value="ccmp"{if ($encryption == "ccmp")} selected{/if}><%:超强加密(WPA3)%></option>
+                <option value="psk2+ccmp"{if ($encryption == "psk2+ccmp")} selected{/if}><%:强混合加密(WPA3/WPA2)%></option>
 
                 <option value="psk2"{if ($encryption == "psk2")} selected{/if}><%:强加密(WPA2个人版)%></option>
                 <option value="mixed-psk"{if ($encryption == "mixed-psk")} selected{/if}><%:混合加密(WPA/WPA2个人版)%></option>
@@ -444,7 +432,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
             {/for}
             <%else%>
             {for(var i=0, len=$channels.length; i<len; i++)}
-                {if ($channels[i]['c'] < 52 || $channels[i]['c'] > 64)}
+                {if ($channels[i]['c'] < 52 || $channels[i]['c'] > 144)}
                 <option value="{$channels[i]['c']}" {if ($channel==$channels[i]['c'])}selected{/if}>
                 {if ($channels[i]['c']==0)}<%:自动%>
                     {if ($channelInfo["channel"] != "0")}
@@ -463,7 +451,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
              <em class="t"></em>
         <%else%>
         {if ($wifilei == 1)}
-             <em class="t">Mesh模式下不支持DFS信道选择（52-64）</em>
+             <em class="t"><%:Mesh模式下不支持DFS信道选择（52-140）%></em>
         {/if}
         <%end%>
 
@@ -472,7 +460,8 @@ local hardware = string.lower( XQSysUtil.getHardware() )
         <label class="k"><%:频段带宽%></label>
         <span class="v">
             <select name="bandwidth" class="beautify bandwidth">
-               {if ($channelInfo["bandList"].length >= 3)}
+               {if ($channelInfo["bandList"].length >= 3 && $channels.length > 8
+               && $channels[8]['c'] == 64)}
                     <option value="0" {if ($bandwidth  == "0" )}selected="selected"{/if}><%:160/80/40/20MHz%></option>
                 {/if}
                {if ($channelInfo["bandList"].length == 2)}
@@ -485,7 +474,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
         </span>
         <em class="t"></em>
     </div>
-    <%if hardware ~= "d01" then%>
+
     <div class="form-item-select">
         <label class="k"><%:信号强度%></label>
         <span class="v">
@@ -497,7 +486,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
         </span>
         <em class="t"></em>
     </div>
-    <%end%>
+
     {/if}
     <div class="form-contral">
         <button type="submit" class="btn btn-primary btn-l hidden"><span><%:保存%></span></button>
@@ -645,11 +634,10 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                         wifilei:i
                     };
 
-                    // if(i==0 && (encryption == 'ccmp'||encryption == 'psk2+ccmp')){//2.4G zhangpan
-                    //     $('#wifiset24 .t0').html('<%:仅支持WPA加密方式的设备将无法连接%>').show();
-                    // }else if(i==1 && (encryption == 'ccmp'||encryption == 'psk2+ccmp')){
-                    //     $('#wifiset50 .t0').html('<%:仅支持WPA加密方式的设备将无法连接%>').show();
-                    // }
+
+
+
+
 
                     if( i == 0 && rsp.bsd == 1 ){
                         $('#wifisetbsdtop').html( $('#tplWifiBsdTop').html().tmpl(tplData) );
@@ -657,7 +645,11 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 
                         container.html( tpl.tmpl(tplData) );
 
-
+                    if(i==0 && (encryption == 'ccmp'||encryption == 'psk2+ccmp')){//2.4G zhangpan
+                        $('#wifiset24 .t0').html('<%:WPA3为新一代加密技术，可使安全性大大加强，但选择该选项后部分旧设备会存在兼容性问题而无法接入%>').show();
+                    }else if(i==1 && (encryption == 'ccmp'||encryption == 'psk2+ccmp')){
+                        $('#wifiset50 .t0').html('<%:WPA3为新一代加密技术，可使安全性大大加强，但选择该选项后部分旧设备会存在兼容性问题而无法接入%>').show();
+                    }
                     //debugger;
                     global.wifi.configs[i+1] = tplData;
                 }
@@ -668,6 +660,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                 $.pub('wifi:bindEventEncryption');
                 $.pub('wifi:bindEventChannel');
                 $.pub('wifi:bindEventBandwidth');
+                $.pub( 'countrycode' );//取国家
             }, 100 );
         });
     });
@@ -729,12 +722,12 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                     break;
                 }
             }
-            if (bdlist.length >= 3)
+            if (bdlist.length >= 3 && pddk.length > 8 && pddk[8]['c'] == 64) /*pddk[8]=64 means the country support 36-64*/
             {
                 bandtext = '160/80/40/20MHz';
                 item = '<option value="0"><%:160/80/40/20MHz%></option>';
             }
-     /*       
+     /*
             else if (bdlist.length == 3)
             {
                 bandtext = '80MHz';
@@ -751,7 +744,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                 bandtext = '20MHz';
                 item = '';
             }
-            
+
 
             for ( var i = 0; (i <  bdlist.length) && (i < 3); i++ ) {
                 item += '<option value="'+bdlist[i]+'">'+ bdlist[i] +'MHz</option>';
@@ -759,9 +752,9 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 
             //$.alert(bdlist.length+''+bandtext);
 
-            if ($bandwidth.val() == '0' && (channelVal <= 161 && channelVal >= 149))
+            if ($bandwidth.val() == '0' && (channelVal <= 161 && channelVal >= 100))
             {
-                    $.alert('<%:160MHz频宽只适用于36至64信道，系统会给你切换频宽至80MHz%>');
+                    $.alert('<%:160MHz频宽只适用于36至64信道，系统会将频宽自动切换至80MHz%>');
                     $bandwidth.html( item ).val("80")
                     $itemBandwidth
                         .find( '.dummy' )
@@ -823,9 +816,9 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 
             if (val === '0') {
                 //tips.html('<%:推荐使用自动(80M)频宽，以获得更好的覆盖及抗干扰性能%>').show();
-                if ($channel.val()  >= 149)
+                if ($channel.val()  >= 100)
                 {
-                    $.alert('<%:160MHz频宽只适用于36至64信道，系统会自动给你进行信道切换%>');
+                    $.alert('<%:160MHz频宽只适用于36至64信道，系统会自动进行信道切换%>');
                     $channel.val('36');
                     $itemChannel
                         .find( '.dummy' )
@@ -862,7 +855,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 
                     if (wifiIndex == 1)
                     {
-                        if ((global.wifi.configs[2].channel >= 52 && global.wifi.configs[2].channel <= 64)
+                        if ((global.wifi.configs[2].channel >= 52 && global.wifi.configs[2].channel <= 144)
                             || ( global.wifi.configs[2].bandwidth == 0))
                         {
                             isDFS = 1;
@@ -870,18 +863,18 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                         else
                         {
                             isDFS = 0;
-                        }   
+                        }
                     }
                     else
                     {
-                        if ((channel >= 52 && channel <= 64) || (bandwidth == 0))
-                        {
-                            isDFS = 1;
-                        }
-                        else
-                        {
-                            isDFS = 0;
-                        }
+                        if ((channel >= 52 && channel <= 144) || (bandwidth == 0))
+                    {
+                        isDFS = 1;
+                    }
+                    else
+                    {
+                        isDFS = 0;
+                    }
                     }
 
                 var requestData = {
@@ -897,8 +890,6 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                     isDFS: isDFS,
                 };
 
-                //$.alert(isDFS);
-              //console.info(requestData)
                 $.pub( 'wifi:confirm', {
                     ok : function(){
                         $.pub( 'wifi:modify', {
@@ -1029,7 +1020,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 
                 var isDFS;
 
-                if ((channel2 >= 52 && channel2 <= 64) || (bandwidth2 == 0))
+                if ((channel2 >= 52 && channel2 <= 144) || (bandwidth2 == 0))
                 {
                     isDFS = 1;
                 }
@@ -1171,7 +1162,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 
             var isDFS;
 
-            if ((global.wifi.configs[2].channel >= 52 && global.wifi.configs[2].channel <= 64)
+            if ((global.wifi.configs[2].channel >= 52 && global.wifi.configs[2].channel <= 144)
                 || ( global.wifi.configs[2].bandwidth == 0))
             {
                 isDFS = 1;
@@ -1185,7 +1176,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                 ax: ax,
                 isDFS: isDFS,
             };
-            
+
             $.ajax({
                 url: '<%=luci.dispatcher.build_url("api", "xqnetwork", "set_wifi_ax")%>',
                 dataType: 'json',
@@ -1229,7 +1220,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
             var txbf = $(this).attr('data-on') == 1 ? 0 : 3;
             var self = this;
 
-            if ((global.wifi.configs[2].channel >= 52 && global.wifi.configs[2].channel <= 64)
+            if ((global.wifi.configs[2].channel >= 52 && global.wifi.configs[2].channel <= 144)
                 || ( global.wifi.configs[2].bandwidth == 0))
             {
                 isDFS = 1;
@@ -1287,20 +1278,8 @@ local hardware = string.lower( XQSysUtil.getHardware() )
             e.preventDefault();
             var on = $(this).attr('data-on') == 1 ? 0:1;
             var self = this;
-
-            if ((global.wifi.configs[2].channel >= 52 && global.wifi.configs[2].channel <= 64)
-                || ( global.wifi.configs[2].bandwidth == 0))
-            {
-                isDFS = 1;
-            }
-            else
-            {
-                isDFS = 0;
-            }
-
             var requestData = {
-                on: on,
-                isDFS: isDFS,
+                on: on
             };
             $.ajax({
                 url: '<%=luci.dispatcher.build_url("api", "xqnetwork", "miscan_switch")%>',
@@ -1340,130 +1319,12 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 
         });
 
-        $('#deviceSwitch').on('click', function(e){
-        e.preventDefault();
-        var mode = $(this).attr('data-on') == 1 ? 0 : 1;
-        var self = this;
 
-        var requestData = {
-          mode: mode
-        };
-
-
-        if(mode == 1){//开启
-
-          var dialog = $.dialog({
-            id : "confirm",
-            width: 390,
-            title : "<%:多终端接入优先%>",
-            content : '<p>1.开启此功能，可能会影响Mesh路由器之间回程链路的稳定性，建议在子Mesh路由指示灯为蓝色时开启；</p><p>2.开启此功能，可能会造成接入终端短暂断开连接，一般可自动重连，或重启终端设备。</p> ',
-            ok: function(){
-              $.ajax({
-                url: '<%=luci.dispatcher.build_url("api", "xqnetwork", "set_son_backhaul_mode")%>',
-                dataType: 'json',
-                timeout: 5000,
-                type: 'POST',
-                data: requestData,
-                success: function( rsp ){
-                  dialog.close();
-                  if( rsp.code === 0 ){
-                    if(mode == 0) {
-                      $(self)
-                        .removeClass('btn-switch-on')
-                        .addClass('btn-switch-off')
-                        .attr('data-on', '0');
-                    }else {
-                      $(self)
-                        .removeClass('btn-switch-off')
-                        .addClass('btn-switch-on')
-                        .attr('data-on', '1');
-                    }
-
-                    $.alert( '成功开启多终端接入优先' ).lock();
-
-
-                  } else {
-
-                    $.alert( '开启多终端接入优先失败' ).lock();
-
-                  }
-                },
-                error: function() {
-                  dialog.close();
-                  $.alert( '<%:网络异常，请检查是否联网%>' );
-                }
-              });
-            },
-            cancel: function () {
-              dialog.close();
-            }
-          }).lock();
-
-        }else{// 关闭
-
-          var dialog1 = $.dialog({
-            id : "confirm",
-            width: 390,
-            title : "<%:多终端接入优先%>",
-            content : '<%:关闭此功能，可能会造成接入终端短暂断开连接，一般可自动重连，或重启终端设备。%>',
-            ok: function(){
-
-              $.ajax({
-                url: '<%=luci.dispatcher.build_url("api", "xqnetwork", "set_son_backhaul_mode")%>',
-                dataType: 'json',
-                timeout: 5000,
-                type: 'POST',
-                data: requestData,
-                success: function( rsp ){
-                  dialog1.close();
-                  if( rsp.code === 0 ){
-                    if(mode == 0) {
-                      $(self)
-                        .removeClass('btn-switch-on')
-                        .addClass('btn-switch-off')
-                        .attr('data-on', '0');
-                    }else {
-                      $(self)
-                        .removeClass('btn-switch-off')
-                        .addClass('btn-switch-on')
-                        .attr('data-on', '1');
-                    }
-
-                    $.alert( '成功关闭多终端接入优先' ).lock();
-
-
-                  } else {
-
-                    $.alert( '关闭多终端接入优先失败' ).lock();
-
-                  }
-                },
-                error: function() {
-                  dialog1.close();
-                  $.alert( '<%:网络异常，请检查是否联网%>' );
-                }
-              });
-            },
-            cancel: function(){
-              dialog1.close();
-
-            }
-          }).lock();
-
-
-
-
-        }
-
-
-
-      });
         $('#bsdswitch').on('click', function(e){
             e.preventDefault();
             var on = $(this).attr('data-on');
             var self = this;
-            console.log(global.wifi.configs[2]);
-            if ((global.wifi.configs[2].channel >= 52 && global.wifi.configs[2].channel <= 64)
+            if ((global.wifi.configs[2].channel >= 52 && global.wifi.configs[2].channel <= 144)
                 || ( global.wifi.configs[2].bandwidth == 0))
             {
                 isDFS = 1;
@@ -1543,12 +1404,12 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 
     $.sub( 'wifi:success', function( evt, data ){
         var requestData =  data.requestData;
-        if (requestData && requestData.isDFS)
+        if (requestData && requestData.isDFS && global_countryCode !== 'JO' && global_countryCode !== 'ID')//约旦,印尼不支持ＤＦＳ
         {
             $.radarDialog({
               width:500,
             title : '<%:修改 Wi-Fi 设置%>',
-            content : '<div class="dialog_con_radar"></div><div class="radar_tips"><%:设置成功正在重启，遵照国家法律法规，路由器正在做退避雷达信号探测，Wi-Fi信号要%><span>69</span><%:s后才能开启，请稍候...%></div>',
+            content : '<div class="dialog_con_radar"></div><div class="radar_tips">'+'<%:遵照国家法律法规，路由器正在做退避雷达信号探测，Wi-Fi信号要{$time}秒后才能开启，请稍候%>'.tmpl({time: '<span>'+69+'</span>'})+'</div>',
             cancel: false
             }).lock().time( 69*1000 );
             setTimeout( function(){
@@ -1571,12 +1432,13 @@ local hardware = string.lower( XQSysUtil.getHardware() )
             }, 30*1000 );
         }
     } );
+
     $.sub( 'wifi:confirm', function( evt, data ){
         var ok = data.ok || function(){},
             cancel = data.cancel || function(){};
         var content = '<%:该操作将重启 Wi-Fi 并导致 Wi-Fi 下的所有设备失去连接，是否确认修改？%>';
         if (data.requestData  && data.requestData.wifiIndex == 2 && data.requestData.on == 0) {
-          content = '<div style="text-align: left">1.该操作将重启Wi-Fi并导致Wi-Fi下的所有设备失去连接；<br/>2.关闭5GHz Wi-Fi，将无法添加子Mesh节点；<br/>是否确认修改？</div>';
+          content = '<div style="text-align: left"><%:1.该操作将重启Wi-Fi并导致Wi-Fi下的所有设备失去连接；%><br/><%:2.关闭5GHz Wi-Fi，将无法添加子Mesh节点；%><br/><%:是否确认修改？%></div>';
         }
         $.dialog({
             id : "confirm",
@@ -1595,6 +1457,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
     $.sub( 'wifi:modify', function( evt, data ){
         var requestData =  data.requestData;
         var url = data.url;
+
         $.ajax({
             url: url,
             dataType: 'json',
@@ -1607,7 +1470,9 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                             requestData : requestData,
                         });
                 } else {
-                    if ( rsp.code !== 401) {
+                  if(rsp.code === 1523){
+                    $.alert( '<%:请输入数字、英文字母或英文符号%>' ).lock();
+                  }else if ( rsp.code !== 401) {
                         var msg = StringH.encode4Html( rsp.msg );
                         $.alert( msg ).lock();
                     }
@@ -1683,6 +1548,13 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                     selectContent.push(option);
                 };
                 $select.html( selectContent.join('') );
+                global_countryCode =rsp.current;
+                if(rsp.current === 'JO' || rsp.current === 'ID') {
+
+                        $('#wifiset50').find('.itemChannel').find('.t').html('');
+
+                }
+
             }
             $.selectBeautify({container: '#countrycode'});
         });
@@ -1710,7 +1582,7 @@ local hardware = string.lower( XQSysUtil.getHardware() )
         $.pub( 'wifi:init' );
         $.pub( 'wifi:bindEvent' );
         $.pub( 'wifi:txpwr' );
-        $.pub( 'countrycode' );
+
     });
 }());
 </script>

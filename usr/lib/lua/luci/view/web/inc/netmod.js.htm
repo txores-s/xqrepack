@@ -16,17 +16,16 @@ local isMesh = (netmod == 3 or netmod == 4) and "true" or "false"
 %>
 
 <script>
-    var netmod = <%=netmod%>;
+    var netmod = '<%=netmod%>';
 // r1c netmod.js
 $(function(){
     var netModeDialog;
     var currentmode = $('#currentnetmode').val();
 
     $( '#btnNetmodSwitch' ).on( 'click', function( e ){
-        // alert(netmod);
         e.preventDefault();
         if(netmod == 4){
-            $.alert('<%:Mesh模式下不支持切换为中继模式。%>');
+            $.alert('<%:为确保使用体验，Mesh模式下不支持切换为中继模式%>');
         }else{
             netModeDialog = $.dialog({
                 title:'<%:工作模式切换%>',
@@ -114,7 +113,11 @@ $(function(){
                             var option = $('<option />');
                             option.attr('data-bandwidth', item.bandwidth);
                             option.attr('data-ssid', StringH.encode4Html( item.ssid ) );
-                            option.text( item.ssid );
+                            //option.text( item.ssid );
+                            var p = $('<p/>');
+                            p.css({'max-width':'200px','display':'inline-block','overflow':'hidden','text-overflow':'ellipsis','text-indent':0,'white-space':'nowrap'})
+                            p.append(item.ssid)
+                            option.append( p );
                             option.attr('data-band', item.band);
                             option.attr('data-channel', item.channel);
                             option.attr('data-enctype', item.enctype);
@@ -141,7 +144,7 @@ $(function(){
                                     option.addClass( 'is-encryption-1' );
                                 }
                             }
-                             if(item.band == '5g'){
+                            if(item.band == '5g'){
                                 var text = document.createElement("i");
                                 text.textContent = "5G";
                                 option.append(text);
@@ -171,7 +174,7 @@ $(function(){
             $(this).addClass('on');
             var index = $('#modeSelect .mode-option').index(this);
             var currentmode = $('#currentnetmode').val();
-            console.log(currentmode, index);
+            // console.log(currentmode, index);
             if( currentmode == index ){
                 $('#modeSelectBtn').addClass('btn-primary-disabled');
             }else{
@@ -212,9 +215,9 @@ $(function(){
                 //             }
                 //         }
                 //     });
-
-                $.confirm('<div style="text-align: left"><div><%:1.如果您已开启访客wifi，切换为无线中继模式后，访客wifi将会关闭%></div><div><%:2.切换为无线中继模式后，Mesh功能将不可用%></div></div>', function() {
-                                    stepwdsinit();
+                
+                $.confirm('<div style="text-align: left"><div><%:1.如果您已开启访客wifi，切换为无线中继模式后，访客wifi将会关闭%></div><div><%:2.切换为中继模式后，Mesh功能将不可用%></div></div>', function() {
+                                    stepwdsinit();  
                                 });
             }else{
                 $.formInit();
@@ -230,7 +233,7 @@ $(function(){
                 //             }
                 //         }
                 //     });
-                $.confirm('<div style="text-align: left"><div><%:1.如果您已开启访客wifi，切换为有线中继模式后，访客wifi将会关闭%></div><div><%:2.切换为无线中继模式后，Mesh功能将不可用%></div></div>', function() {
+                $.confirm('<div style="text-align: left"><div><%:1.如果您已开启访客wifi，切换为无线中继模式后，访客wifi将会关闭%></div><div><%:2.切换为中继模式后，Mesh功能将不可用%></div></div>', function() {
                                     goToStep('step-lanap');
                                 });
             }
@@ -285,20 +288,15 @@ $(function(){
                         if( res.code == 0 ){
                             var haswifi50 = $('#currentssid2').length > 0 ? true : false;
                             $('#lanapssid24').html( StringH.encode4Html( $('#currentssid1').val() ) );
-                            $('#lanapssid50').html( StringH.encode4Html( $('#currentssid2').val() ) );
+                            // $('#lanapssid50').html( StringH.encode4Html( $('#currentssid2').val() ) );
                             if( $('#currentssid1').attr('data-status') == '0' ){
                                 $('#lanapssid24').closest('p').hide();
                             }
-                            if( !haswifi50 || $('#currentssid2').attr('data-status') == '0' ){
+                            // if( !haswifi50 || $('#currentssid2').attr('data-status') == '0' ){
                                 $('#lanapssid50').closest('p').hide();
-                            }
-                            if( $('#currentssid1').attr('data-status') == '0' && ( !haswifi50 || $('#currentssid2').attr('data-status') == '0' ) ){
+                            // }
+                            if( $('#currentssid1').attr('data-status') == '0' ){
                                 $('.wifi-on-text').hide();
-                            }
-                            if( $('#currentssid1').val() == $('#currentssid2').val() &&
-                                $('#currentssid1').attr('data-status') == '1' &&
-                                $('#currentssid2').attr('data-status') == '1' ){
-                                $('#lanapssid50').closest('p').hide();
                             }
                             $('#lanapip').html(res.ip);
                             goToStep('step-succ-lanap');

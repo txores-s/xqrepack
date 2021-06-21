@@ -9,7 +9,7 @@
 
 OPT=$1
 
-case $OPT in 
+case $OPT in
     reset)
         ubus call check_wan reset
     ;;
@@ -18,8 +18,7 @@ case $OPT in
        ubus call check_wan update
     ;;
 
-     * ) 
+     * )
         echo "usage: wan_check.sh reset/update" >&2
   ;;
 esac
-

@@ -62,6 +62,9 @@ index_cdn_addr="http://bigota.miwifi.com/xiaoqiang/webpage/wifishare/index.html"
 html_path="/etc/nginx/htdocs"
 html_name="wifishare.html"
 
+api_miwifi_url=$(uci -q get miwifi.server.API)
+[ -z "$api_miwifi_url" ] && api_miwifi_url="api.miwifi.com"
+
 # generate random number between min & max
 rand(){
     min=$1
@@ -608,7 +611,7 @@ check_local_config()
         uci commit wifishare
     }
     [ -z "${_domain_white_list}" ] && {
-        uci set wifishare.global.domain_white_list="s.miwifi.com api.miwifi.com"
+        uci set wifishare.global.domain_white_list="s.miwifi.com ${api_miwifi_url}"
         uci commit wifishare
         should_update_flag="true"
     }
@@ -634,7 +637,8 @@ get_server_config(){
     check_local_config
     config_md5_file="/tmp/wifishare_conf_md5.json"
     # if server is not reachable, use local config
-    if ! (curl --connect-timeout 2 http://api.miwifi.com/data/wifishare/config/md5 > ${config_md5_file}) ; then
+    local request_url1="http://${api_miwifi_url}/data/wifishare/config/md5"
+    if ! (curl --connect-timeout 2 "${request_url1}" > ${config_md5_file}) ; then
         echo "cannot get server config md5, use local config, do not update"
     fi
     config_json_md5=`cat ${config_md5_file}`
@@ -651,7 +655,8 @@ get_server_config(){
     fi
     config_json_file="/tmp/wifishare_conf.json"
     logger -p info -t wifishare "stat_points_none wifishare_get_config_from_server=$date_tag"
-    if ! (curl --connect-timeout 2 http://api.miwifi.com/data/wifishare/config > ${config_json_file}) ; then
+    local request_url2="http://${api_miwifi_url}/data/wifishare/config"
+    if ! (curl --connect-timeout 2 "${request_url2}" > ${config_json_file}) ; then
         echo "cannot get server config content, use local config, do not update"
     fi
     # use jshn lib in openwrt to phase json
@@ -885,7 +890,7 @@ share_timeout_gettime()
 
 share_access_timeout_iptables()
 {
-    rm /tmp/wifishare_timeout_mac
+   rm /tmp/wifishare_timeout_mac
     current_utc_time=$(date -u "+%Y-%m-%dT%H:%M:%S" @${current_time})
     current_utc_time=$(echo $current_utc_time | awk '{gsub(/-|:|T/," ",$0);print $0}')
     current_utc_time_sec=$(echo $current_utc_time | awk '{sec=mktime($0);print sec}')
@@ -1467,10 +1472,10 @@ time_stamp_html_init()
     _random_interval=`rand 7200 14400`
     _next_time=`expr ${_init_time_stamp} + ${_random_interval}`
     uci set wifishare.global.update_wifishare_html_time=${_next_time}
-    uci commit wifishare
+    uci commit wifishare  
 }
 
-get_wifishare_html_cdn()
+get_wifishare_html_cdn() 
 {
     #set -x
     last_etag=`uci get wifishare.global.last_etag`

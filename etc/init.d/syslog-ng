@@ -17,12 +17,15 @@ start() {
 		echo "Couldn't parse $(basename $config_file)" >&2
 		exit 1
 	fi
+	
+	/usr/sbin/syslog-ng.helper &
 
 	service_start $PROG --process-mode background \
 		-p $SERVICE_PID_FILE
 }
 
 stop() {
+	killall syslog-ng.helper
 	service_stop $PROG
 }
 

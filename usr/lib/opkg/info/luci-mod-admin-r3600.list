@@ -5,9 +5,9 @@
 /usr/lib/lua/luci/view/web/inc/guestwifi.htm
 /usr/lib/lua/luci/view/web/inc/wifi.html
 /usr/lib/lua/luci/view/web/inc/qosapp.htm
-/usr/lib/lua/luci/view/web/setting/wan.htm
 /usr/lib/lua/xiaoqiang/XQFeatures.lua
 /usr/lib/lua/luci/view/web/inc/qosapp.js.htm
+/usr/lib/lua/luci/view/web/setting/vpn.htm
 /www/xiaoqiang/web/img/icon_font/iconfont.eot
 /www/xiaoqiang/web/img/guide_bd_nowanselect.png
 /www/xiaoqiang/web/img/icon_font/iconfont.woff
@@ -22,6 +22,7 @@
 /www/xiaoqiang/web/img/icon_font/iconfont.svg
 /www/xiaoqiang/web/img/icons/eye1.png
 /usr/lib/lua/luci/view/web/inc/store.htm
+/usr/lib/lua/luci/view/web/inc/netmod.js.htm
 /usr/lib/lua/luci/view/web/inc/wanspeed.htm
 /usr/lib/lua/luci/view/web/inc/devcenter.htm
 /www/xiaoqiang/web/img/icons/eye2.png
@@ -30,7 +31,6 @@
 /www/xiaoqiang/web/img/guide_pppoesending.png
 /usr/lib/lua/luci/view/web/apindex.htm
 /www/xiaoqiang/web/img/guide_bd_nowanselect_rp.png
-/usr/lib/lua/luci/view/web/setting/qos.htm
 /usr/lib/lua/luci/view/web/inc/devcenter.js.htm
 /www/xiaoqiang/web/img/dialog_icon_radar.png
 /usr/lib/lua/luci/view/web/inc/hwnat.js.htm

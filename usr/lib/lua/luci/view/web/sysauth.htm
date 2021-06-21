@@ -4,12 +4,13 @@
     local xqCountryCode = require "xiaoqiang.XQCountryCode"
     local ccode = xqCountryCode.getBDataCountryCode()
     local hardware = string.lower( XQSysUtil.getHardware() )
-    
+
     if not XQSysUtil.getInitInfo() then
 
         luci.http.redirect("/init.html")
         
     end
+
     local XQFunction = require("xiaoqiang.common.XQFunction")
     local XQTopology = require("xiaoqiang.module.XQTopology")
     local httpHost = luci.http.getenv("HTTP_HOST")
@@ -41,53 +42,7 @@
     <link href="<%=resource%>/web/css/bc.css?v=<%=ver%>" rel="stylesheet">
     <link href="<%=resource%>/web/css/login.css?v=<%=ver%>" rel="stylesheet">
     <link href="<%=resource%>/web/css/guide.css?v=<%=ver%>" rel="stylesheet">
-    <script>
-        var isMobile = {
-            Android: function() {
-                return navigator.userAgent.match(/Android/i);
-            },
-            BlackBerry: function() {
-                return navigator.userAgent.match(/BlackBerry/i);
-            },
-            iOS: function() {
-                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-            },
-            Opera: function() {
-                return navigator.userAgent.match(/Opera Mini/i);
-            },
-            Windows: function() {
-                return navigator.userAgent.match(/IEMobile/i);
-            },
-            any: function() {
-                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-            }
-        },
-     ccode = '<%=ccode%>',
-     hardware = '<%=hardware%>';
-     function getUrlParam (name) {
-              var reg = new RegExp( "(^|&)" + name + "=([^&]*)(&|$)" ) ; //构造一个含有目标参数的正则表达式对象
-              var r = window.location.search.substr(1).match(reg) ; //匹配目标参数
-              if (r != null ) return unescape(r[2]) ; return null; //返回参数值
-         }
-            var flag = getUrlParam ('goto') ;
 
-        if( ( isMobile.Android() || isMobile.iOS() )  && flag != "pc")  {
-            window.onload=function(){
-                document.getElementsByTagName('html')[0].style.backgroundColor = '#fff';
-             }
-            var domain = window.location.host;
-            var protocol = window.location.protocol;
-            window.location.href=protocol + "//" + domain +"/main.html";
-        }else {
-             document.getElementsByTagName('html')[0].style.backgroundColor = '#1782dd';
-            //$('#admin-PC').show()
-            //document.getElementById('html').style.backgroundColor = '#000';
-             window.onload=function(){
-                document.getElementById('admin-PC').style.display = 'block';
-             }
-            
-        }
-    </script>
 </head>
 <body>
 <div id="doc">
@@ -166,19 +121,40 @@
 </div>
 <%include("web/inc/g.js")%>
 <script>
- 
+ var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+},
+     ccode = '<%=ccode%>',
+     hardware = '<%=hardware%>';
 
-    // if( ccode == 'CN' && hardware != 'r3a' && hardware != 'd01' && hardware != 'r3l' && hardware != 'r4c' && hardware != 'r4cm' && hardware != 'r4ac' && (isMobile.Android() || isMobile.iOS()) )  {
-    //     $('#admin-mob').show();
+    if( ccode == 'CN' && hardware != 'r3a' && hardware != 'r3l' && hardware != 'r4c' && hardware != 'r4cm' && hardware != 'r4ac' && (isMobile.Android() || isMobile.iOS()) )  {
+         $('#admin-mob').show();
 
-    //     if (isMobile.Android()) {
-    //         $('#install').attr('href','http://bigota.miwifi.com/xiaoqiang/client/xqapp_rom.apk');
-    //      }else {
-    //         $('#install').attr('href','https://itunes.apple.com/cn/app/id859962702?mt=8&ls=1');
-    //      }
-    // }else {
-        //$('#admin-PC').show()
-    // }
+        if (isMobile.Android()) {
+            $('#install').attr('href','http://bigota.miwifi.com/xiaoqiang/client/xqapp_rom.apk');
+         }else {
+            $('#install').attr('href','https://itunes.apple.com/cn/app/id859962702?mt=8&ls=1');
+         }
+    }else {
+        $('#admin-PC').show()
+    }
 
 $(function(){
     var pwdErrorCount = 0;
