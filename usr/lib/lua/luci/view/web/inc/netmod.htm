@@ -37,19 +37,21 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 		<%end%>
     </div>
 </div>
-<%if features["netmode"]["elink"] == "1" and hardware ~= "r4ac" and hardware ~= "r2100" and hardware ~= "r3600" then%>
- <div class="mod-set mod-wifi" >
-            <div class="hd">
-                <h3><%:启用与智能网关的无线配置同步%></h3>
-                <div class="switch">
-                    <a href="#elinkswitch" id="elinkswitch" class="btn-switch btn-switch-on" data-on="1"></a>
-                </div>
-            </div>
-            <div class="bd">
-                <p><%:启用此功能后，小米路由器将自动从运营商家庭网关同步Wi-Fi设置%></p>
-            </div>
-    </div>
-<%end%>
+<div class="mod-set mod-iptv">
+	<form class="form form-horizontal" id="iptvForm" name="iptvForm" action="<%=luci.dispatcher.build_url("api", "misystem", "set_iptv")%>" autocomplete="off">
+	</form>
+</div>
+<!--<div class="mod-set mod-wifi" >-->
+<!--            <div class="hd">-->
+<!--                <h3><%:启用与智能网关的无线配置同步%></h3>-->
+<!--                <div class="switch">-->
+<!--                    <a href="#elinkswitch" id="elinkswitch" class="btn-switch btn-switch-on" data-on="1"></a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="bd">-->
+<!--                <p><%:启用此功能后，小米路由器将自动从运营商家庭网关同步Wi-Fi设置%></p>-->
+<!--            </div>-->
+<!--</div>-->
 <script type="tmpl/html" id="tmplNetMode">
 <div class="netmode-switch-dialog-cont">
 	<div class="switch-step step-select" style="display:block;">
@@ -131,9 +133,9 @@ local hardware = string.lower( XQSysUtil.getHardware() )
             <div class="form-new-ssid">
             <div class="contral" style="display:none;">
             	<label for="newssidtextInnetmod">
-            		<input type="checkbox" id="newssidtextInnetmod" checked="checked" /> 
+            		<input type="checkbox" id="newssidtextInnetmod" checked="checked" />
             		<span><%:无线网络的名称密码与目标路由器一致%></span>
-            	</label>	
+            	</label>
 			</div>
 				<div class="contral-div hide" id="newssiddivInnetmod">
 	            	<p class="title"><%:设置WiFi名称和密码%></p>
@@ -250,4 +252,36 @@ local hardware = string.lower( XQSysUtil.getHardware() )
 		<a id="abandonlanap" class="btn btn-dft" href="#"><span><%:放弃%></span></a>
 	</div>
 </div>
+</script>
+<script type="text/tmpl" id="tplIptv">
+<div class="hd">
+   <h3><%:IPTV网络开关%></h3>
+		<div class="switch">
+			<a href="#" id="IPTVswitch" class="btn-switch {$className}" data-on="{$enable}"></a>
+		</div>
+</div>
+<div class="bd">
+		<p><%:启用此功能，您在上网的同时，还可以通过IPTV电视畅享多媒体服务。目前仅支持四川电信。%></p>
+
+<div class="iptv-input-wrap" style="display:{$display}">
+	<div class="form-item-select">
+		<label class="k"><%:IPTV接口%></label>
+		<span class="v">
+			<select name="port" class="beautify port" >
+				<option value="1"{if ($port == "1")} selected{/if}><%:LAN1（靠近WAN口）%></option>
+				<option value="2"{if ($port == "2")} selected{/if}><%:LAN2（中间）%></option>
+				<option value="3"{if ($port == "3")} selected{/if}><%:LAN3（远离WAN口）%></option>
+			</select>
+		</span>
+	</div>
+	<!--<div class="form-item form-item-input">
+		<label class="k"><%:VLAN ID (2-4094)%></label>
+		<span class="v"><input type="number" min="2" max="4094" name="vlanid" value="{$vlanid}" class="ipt-text" autocomplete="off" /></span>
+	</div>-->
+	<div class="form-contral">
+        <button type="submit" class="btn btn-primary btn-l"><span><%:保存%></span></button>
+    </div>
+</div>
+</div>
+
 </script>
