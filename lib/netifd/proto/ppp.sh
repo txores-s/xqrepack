@@ -89,9 +89,10 @@ ppp_generic_setup() {
 	local localip
 
 	json_get_vars ipv6 ip6table demand keepalive keepalive_adaptive username password pppd_options pppname unnumbered persist maxfail holdoff peerdns
-	if [ "$ipv6" = 0 ]; then
+	if [ -z "$ipv6" -o "$ipv6" = 0 ]; then
 		ipv6=""
-	elif [ -z "$ipv6" -o "$ipv6" = auto ]; then
+		autoipv6=0
+	elif [ -n "$ipv6" -o "$ipv6" = auto ]; then
 		ipv6=1
 		autoipv6=1
 	fi
@@ -137,7 +138,7 @@ ppp_generic_setup() {
 		${localip:+$localip:} \
 		${lcp_failure:+lcp-echo-interval $lcp_interval lcp-echo-failure $lcp_failure $lcp_adaptive} \
 		${ipv6:++ipv6} \
-		${autoipv6:+set AUTOIPV6=1} \
+		${autoipv6:+set AUTOIPV6=$autoipv6} \
 		${ip6table:+set IP6TABLE=$ip6table} \
 		${peerdns:+set PEERDNS=$peerdns} \
 		nodefaultroute \
@@ -313,9 +314,20 @@ proto_pptp_init_config() {
 proto_pptp_setup() {
 	local config="$1"
 	local iface="$2"
+	local wan_type=$(uci -q get network.wan.proto)
+	local wan_mtu=1500
 	
-    json_get_var mru mru
-    mru="${mru:-1410}"	
+	case "$wan_type" in
+		"pppoe") 
+			wan_mtu=$(uci -q get network.wan.mru)
+			[ -z "$wan_mtu" ] && wan_mtu=1480
+			;;
+		*) 
+			wan_mtu=$(uci -q get network.wan.mtu)
+			[ -z "$wan_mtu" ] && wan_mtu=1500
+			;;
+	esac
+	mru=`expr $wan_mtu - 40`
 
 	local ip serv_addr server interface
 	json_get_vars interface server

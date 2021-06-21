@@ -42,6 +42,7 @@ get_front_end_mode() {
 		;;
 	*)
 		echo 'uci_option_acceleration_engine is invalid'
+		;;
 	esac
 }
 
@@ -101,16 +102,18 @@ unload_ecm() {
 }
 
 start() {
-	local vpn_intf=$(uci -q get network.vpn)
-	if [ -n "$vpn_intf" ]; then
-		return
-	fi
+	local ecm_mode=$(get_front_end_mode)
+	local vpn_up=$(ubus call network.interface.vpn status 2>/dev/null | grep -Eq '"up": true' && echo 1 || echo 0)
 	
-	if [ $(get_front_end_mode) == '3' ]; then
+	[ "$vpn_up" == "1" ] && {
+#		[ "$ecm_mode" == "0" -o "$ecm_mode" == "1" ] &&	ecm_mode=3
+		return
+	}
+	if [ "$ecm_mode" == "3" ]; then
 		/etc/init.d/shortcut-fe start &>/dev/null
-	elif [ $(get_front_end_mode) != '4' ]; then
+	elif [ "$ecm_mode" == "0" -o "$ecm_mode" == "1" ]; then
 		load_ecm
-		
+
 		/etc/firewall.d/qca-nss-ecm
 
 		# If the acceleration engine is NSS, enable wifi redirect.
