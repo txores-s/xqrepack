@@ -596,9 +596,118 @@ $.sub('getElinkStatus', function(){
         }, 30*1000 );
     } );
 
+    $.sub('iptv',function(){
+      var initEnable;
+      var tpl = $('#tplIptv').html();
+        $.getJSON('<%=luci.dispatcher.build_url("api","misystem","get_iptv")%>')
+          .done(function( rsp ) {
+            if (rsp.code == 0) {
+              initEnable = rsp.enable;
+              var tplData = {
+                port: rsp.port,
+                vlanid: rsp.vlanid,
+                enable:rsp.enable,
+                className:rsp.enable == 1? 'btn-switch-on':'btn-switch-off',
+                display:rsp.enable == 1? 'block':'none',
+              };
+
+              $('#iptvForm').html( tpl.tmpl(tplData) );
+              $.selectBeautify();
+            }
+          });
+      function iptvSubmitHandler(e){
+        e.preventDefault();
+
+        var formOjb = this, formAction = this.action, validator = Valid.checkAll(formOjb);
+        if ( validator) {
+          var vlanid = 0, //$( 'input[name=vlanid]', formOjb ).val(),
+            port = $( 'select[name=port]', formOjb ).val()
+          var requestData = {
+            enable:1,
+            vlanid: vlanid,
+            port: port,
+          };
+		  $.pub('loading:start');
+          $.ajax({
+            url: '<%=luci.dispatcher.build_url("api", "misystem", "set_iptv")%>',
+            type: "POST",
+            data: requestData,
+            dataType: "json",
+            success : function( rsp ){
+				$.pub('loading:stop');
+				if ( rsp.code === 0 ) {
+					location.reload( true );
+				} else {
+					if ( rsp.code !== 401) {
+			  			var msg = StringH.encode4Html( rsp.msg );
+			  			$.alert( msg ).lock();
+					}
+				}
+            },
+            error: function() {
+				$.pub('loading:stop');
+				$.alert( '<%:网络异常，请检查是否联网%>' );
+           	}
+	  });
+        }
+      }
+      $('#iptvForm').on('submit', iptvSubmitHandler);
+
+      $('#IPTVswitch').live('click', function(e){
+        e.preventDefault();
+        var self = this;
+        var btnStatus = $(this).attr('data-on');
+        if(btnStatus == 0) {
+          $(this)
+            .removeClass('btn-switch-off')
+            .addClass('btn-switch-on')
+            .attr('data-on', '1');
+          $('.iptv-input-wrap').show();
+        } else if (btnStatus == 1 && initEnable == 1) {
+          $.pub('loading:start');
+          $.ajax({
+            url: '<%=luci.dispatcher.build_url("api", "misystem", "set_iptv")%>',
+            dataType: 'json',
+            type: 'POST',
+            data: {enable: 0},
+            success: function( rsp ){
+              $.pub('loading:stop');
+              if( rsp.code === 0 ){
+                if(btnStatus == 1) {
+                  $(self)
+                    .removeClass('btn-switch-on')
+                    .addClass('btn-switch-off')
+                    .attr('data-on', '0');
+                  $('.iptv-input-wrap').hide();
+				  location.reload( true );
+                }
+              } else {
+                if ( rsp.code !== 401) {
+                  var msg = StringH.encode4Html( rsp.msg );
+                  $.alert( msg ).lock();
+                }
+              }
+            },
+            error: function() {
+              $.pub('loading:stop');
+              $.alert( '<%:网络异常，请检查是否联网%>' );
+            }
+          });
+        } else {
+          $(this)
+            .removeClass('btn-switch-on')
+            .addClass('btn-switch-off')
+            .attr('data-on', '0');
+          $('.iptv-input-wrap').hide();
+        }
+      });
+    });
 
     $.pub('getElinkStatus');
     $.pub('addEvent');
     $.pub('netmode:addEvent');
+	if (netmod != 1 && netmod != 2 && netmod != 3) {
+    	$.pub('iptv');
+	}
 });
 </script>

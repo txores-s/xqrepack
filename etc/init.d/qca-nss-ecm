@@ -76,7 +76,7 @@ load_ecm() {
 			/etc/init.d/hyd stop
 		fi
 		insmod ecm front_end_selection=$(get_front_end_mode)
-		sleep 1
+		sleep 3
 	}
 
 	support_bridge && {
@@ -111,7 +111,7 @@ unload_ecm() {
 		sleep 5;
 
 		rmmod ecm
-		sleep 1
+		sleep 3
 		if [ "$netmode" = "whc_cap" -o "$netmode" = "whc_re" ]; then
 			/etc/init.d/hyd start
 		fi

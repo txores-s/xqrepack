@@ -24,6 +24,7 @@
 /usr/lib/lua/luci/view/web/inc/store.htm
 /usr/lib/lua/luci/view/web/inc/wanspeed.htm
 /usr/lib/lua/luci/view/web/inc/devcenter.htm
+/usr/lib/lua/luci/view/web/inc/netmod.htm
 /www/xiaoqiang/web/img/icons/eye2.png
 /usr/lib/lua/luci/view/web/apsetting/wifi.htm
 /www/xiaoqiang/web/img/login_d_pic.png

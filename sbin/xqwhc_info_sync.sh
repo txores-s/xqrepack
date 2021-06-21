@@ -465,7 +465,7 @@ wifi_parse()
             WHC_LOGI " xq_whc_sync, wifi0 dev change channel $ch_5_act -> $ch_5 "
         }
     }
-    [ "$txp_5" != "$txp_5_cur"] && {
+    [ "$txp_5" != "$txp_5_cur" ] && {
         son_changed=1
         WHC_LOGI " xq_whc_sync, wifi0 dev change $txp_5_cur -> $txp_5"
         uci set wireless.wifi0.txpwr="$txp_5"

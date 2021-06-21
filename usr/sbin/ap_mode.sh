@@ -445,6 +445,7 @@ case $OPT in
         ifdown vpn
 	echo $wan_device $lan_device
 
+		[ -f /usr/sbin/mi_iptv.sh ] && /usr/sbin/mi_iptv.sh net_del_iptv
         bridgeap_open;
         /etc/init.d/ipv6 ip6_fw close
         /etc/init.d/firewall restart
@@ -476,6 +477,7 @@ case $OPT in
         /etc/init.d/odhcpd start
         /etc/init.d/dnsmasq stop
         /usr/sbin/dhcp_apclient.sh restart
+		[ -f /usr/sbin/mi_iptv.sh ] && /usr/sbin/mi_iptv.sh net_add_iptv
         /etc/init.d/network restart
         /etc/init.d/dnsmasq start
         /usr/sbin/vasinfo_fw.sh post_ota

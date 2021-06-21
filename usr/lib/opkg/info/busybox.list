@@ -32,6 +32,7 @@
 /usr/bin/xzcat
 /usr/bin/ipcs
 /bin/sync
+/usr/sbin/adduser
 /usr/bin/dirname
 /usr/bin/hostid
 /sbin/hwclock
@@ -139,6 +140,7 @@
 /usr/bin/bunzip2
 /usr/bin/uptime
 /bin/fsync
+/usr/sbin/deluser
 /bin/pidof
 /bin/egrep
 /usr/bin/readlink
