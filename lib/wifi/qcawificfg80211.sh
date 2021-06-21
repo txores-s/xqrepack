@@ -2731,7 +2731,7 @@ enable_qcawificfg80211() {
 		[ -n "$caprssi" ] && "$device_if" "$ifname" caprssi "${caprssi}"
 
 		config_get_bool ap_isolation_enabled $device ap_isolation_enabled 0
-		config_get_bool ap_isolate "$vif" isolate 0
+		config_get ap_isolate "$vif" ap_isolate 0
 
 		if [ $ap_isolation_enabled -ne 0 ]; then
 			[ "$mode" = "wrap" ] && isolate=1
@@ -2796,8 +2796,7 @@ enable_qcawificfg80211() {
 		case "$mode" in
 			ap|wrap|ap_monitor|ap_smart_monitor|mesh|ap_lp_iot)
 
-
-				"$device_if" "$ifname" ap_bridge "$((isolate^1))"
+				"$device_if" "$ifname" ap_bridge "$((ap_isolate^1))"
 
 				config_get_bool l2tif "$vif" l2tif
 				[ -n "$l2tif" ] && "$device_if" "$ifname" l2tif "$l2tif"

@@ -174,7 +174,6 @@
 /lib/upgrade/stage2
 /etc/uci-defaults/13_fix_group_user
 /sbin/firstboot
-/etc/opkg/keys/2e6b633efa98e87f
 /usr/sbin/showmacs
 /bin/login.sh
 /usr/sbin/config_post_ota.sh
@@ -198,6 +197,7 @@
 /etc/config/parentalctl
 /etc/init.d/timezone
 /usr/sbin/ntpsetclock
+/etc/opkg/keys/3fcbc1f4336c2b6e
 /usr/sbin/iptv.sh
 /rom/note
 /etc/inittab
