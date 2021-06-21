@@ -4,8 +4,6 @@
     ]]--
     local XQVersion = require "xiaoqiang.XQVersion"
     local ver = XQVersion.webVersion
-        local XQSysUtil = require "xiaoqiang.util.XQSysUtil"
-    local hardware = string.lower( XQSysUtil.getHardware() )
 %>
 <%include("web/inc/head")%>
 <title><%:小米路由器%></title>
@@ -66,7 +64,7 @@
     <div class="router-root">
         <a target="_blank" href="{$link}"><img data-hover-src="{$hoverpic}" src="{$pic}" /></a>
         <div class="clearfix root-name">
-            <span class="name"><em>{$name}{$locale}</em></span>
+            <span class="name"><em>{$name}</em></span>
             <span class="info"><em><%:网关%></em></span>
         </div>
         <span class="wifi"><em>{$ip}</em></span>
@@ -76,9 +74,8 @@
     <div class="router-item">
         <a class="link-{$hardware}" target="_blank" href="{$link}"><img data-hover-src="{$hoverpic}" src="{$pic}" /></a>
         {if($locale)}
-        <div class="clearfix">
+        <div class="clearfix no-locale">
             <span class="name">{$name}</span>
-            <span class="locale">{$locale}</span>
         </div>
         {else}
             {if($name)}
@@ -100,7 +97,6 @@
 <![endif]-->
 <script type="text/javascript">
 $(function(){
-
     //存储路由器节点字符
     var html = [];
     var routerColor = {
@@ -155,14 +151,10 @@ $(function(){
             hoverpic: getRouterPic( obj.hardware, obj.color, false  ).hoverSrc
         });
         $('#root').append( html );
-        //修改d01名称
-        hardware = '<%=hardware%>';
-        if(hardware == 'd01'){
-            $('.info em').html('网关')
-        }
     };
     //创建路由器单节点
     var createRouterItem = function( obj ){
+      if(!obj.ip) return false;
         var tpl = $('#routertpl').html();
         var item = '';
         html.push( '<li>' );
@@ -194,7 +186,7 @@ $(function(){
     };
     /*调整位置*/
     var adjustPosition = function(){
-        var treeWidth = $('#root > ul').width();
+        var treeWidth = $('#root > ul').width() || 0;
         var outerWidth = $('#bd').width();
 
         if( treeWidth < outerWidth ){
@@ -225,13 +217,25 @@ $(function(){
         });
     };
 
+    var formatLeafs  = function(arr){
+      var tmp = [];
+      $(arr).each(function(index,item){
+        if(item.ip) {
+          tmp.push(item)
+        }
+      });
+      return tmp;
+    }
     getTopoGraph( function( res ){
         if( res.show == 0 ){
             return;
         }else{
             /*由接口数据创建路由器节点*/
             createRouterRoot( res.graph );
-            createRouter( res.graph.leafs );
+            var leafs = formatLeafs(res.graph.leafs);
+            if(leafs.length > 0) {
+              createRouter(leafs);
+            }
             $('#root').append( html.join('') ).show();
             //ie8不支持 :first-child :last-child css
             if( $.browser.version == '8.0' ){

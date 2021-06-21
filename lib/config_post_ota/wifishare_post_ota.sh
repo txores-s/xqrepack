@@ -35,6 +35,12 @@ country_code=$(nvram get CountryCode)
 #guest default format Xiaomi_xxxx_VIP
 #guest_ssid_matched=$(echo $guest_ssid | grep "^Xiaomi_[[:xdigit:]]\{4\}_VIP$")
 [ "$guest_ssid" != "" -a "$guest_ssid_change" != "2" ] && {
+    if [ "$country_code" == "CN" ]
+    then
+        uci set wireless.guest_2G.ssid="  小米共享WiFi_${guest_suffix}";
+    else
+        uci set wireless.guest_2G.ssid="  MiShareWiFi_${guest_suffix}";
+    fi
     uci set wireless.guest_2G.ssid_changed=2
     uci commit wireless
 }
@@ -45,8 +51,11 @@ ios_domain=$(uci get wifishare.global.ios_domain 2>/dev/null)
 update_cfg_time=$(uci get wifishare.global.update_cfg_time 2>/dev/null)
 config_md5=$(uci get wifishare.global.config_md5 2>/dev/null)
 last_etag=$(uci get wifishare.global.last_etag 2>/dev/null)
+api_miwifi_url=$(uci -q get miwifi.server.API 2>/dev/null)
+[ -z "$api_miwifi_url" ] && api_miwifi_url="api.miwifi.com"
+
 [ -z "${domain_white_list}" ] && {
-    uci set wifishare.global.domain_white_list="s.miwifi.com api.miwifi.com"
+    uci set wifishare.global.domain_white_list="s.miwifi.com ${api_miwifi_url}"
     uci commit wifishare
 }
 [ -z "${ios_domain}" ] && {

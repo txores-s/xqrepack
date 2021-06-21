@@ -5,7 +5,6 @@ config dnsmasq
 	option localise_queries	1
 	option rebind_protection 0  # disable if upstream must serve RFC1918 addresses
 	option rebind_localhost 1  # enable for RBL checking and similar services
-	#list rebind_domain example.lan  # whitelist RFC1918 responses for domains
 	option local	'/lan/'
 	option expandhosts	1
 	option nonegcache	0
@@ -22,11 +21,11 @@ config dhcp lan
 	option start 	5
 	option limit	250
 	option leasetime	12h
-	#force mean start dhcp even if already have a dhcp server running
 	option force	1
         option dhcpv6   'server'
         option ra   'server'
         option ra_default '1'
+	option ra_preference 'high'
 
 config dhcp wan
 	option interface	wan

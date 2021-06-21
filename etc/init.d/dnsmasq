@@ -991,6 +991,15 @@ dnsmasq_start() {
 		config_list_foreach "$cfg" rebind_domain append_rebind_domain
 	}
 
+	[ -f "/www/xiaoqiang/diagnosis/index.html" ] && {
+		# network troubleshoot intercept
+		local intercept="$(uci -q get network.lan.ipaddr)"
+		[ -n "$intercept" ] && {
+			xappend "--intercept-ip-address=$intercept"
+			[ -f "/etc/intercept_wlist" ] && xappend "--intercept-white-list=/etc/intercept_wlist"
+		}
+	}
+
 	config_get_bool dnssec "$cfg" dnssec 0
 	[ "$dnssec" -gt 0 ] && {
 		xappend "--conf-file=$TRUSTANCHORSFILE"
@@ -1102,7 +1111,9 @@ dnsmasq_start() {
 	mkdir -p /tmp/hosts/ && {
 		echo "${lanipaddr} miwifi.com" >/tmp/hosts/miwifi.com
 		echo "${lanipaddr} www.miwifi.com" >/tmp/hosts/www.miwifi.com
-		echo "${lanipaddr} wowifi.smartont.net" >/tmp/hosts/wowifi.smartont.net
+
+		echo "${lanipaddr} router.miwifi.com" >/tmp/hosts/router.miwifi.com
+		echo "${lanipaddr} www.router.miwifi.com" >/tmp/hosts/www.router.miwifi.com
 	}
 
 	#custom hosts

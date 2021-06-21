@@ -2,5 +2,4 @@
 * * * * * /usr/sbin/startscene_crontab.lua `/bin/date "+%u %H:%M"`
 48 3,4,5 * * * /usr/sbin/otapredownload >/dev/null 2>&1
 0 3 * * * /usr/sbin/rmportscanresult.sh >/dev/null 2>&1
-*/1 * * * * /usr/sbin/wifi_timing_process.lua > /dev/null 2>&1
 

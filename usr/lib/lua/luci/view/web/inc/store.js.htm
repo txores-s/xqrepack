@@ -1,5 +1,5 @@
 <script>
-//js for r3g store
+//js for r1c store
 (function(){
     var url = {
         //磁盘基本信息,分类信息
@@ -37,40 +37,4 @@
         getDiskData();
     });
 })();
-(function(){
-    var switchbtn = $('#usb3switch');
-    var apiOpt = '<%=luci.dispatcher.build_url("api", "misystem", "usb_u3")%>';
-    var apiGet = '<%=luci.dispatcher.build_url("api", "misystem", "get_usb_u3")%>';
-
-    function getInfo(){
-        $.get(apiGet, function(rsp){
-            rsp = $.parseJSON(rsp);
-            if (rsp.code === 0 ) {
-                if (rsp.enable == 1) {
-                    switchbtn[0].className = 'btn-switch btn-switch-on';
-                } else {
-                    switchbtn[0].className = 'btn-switch btn-switch-off';
-                }
-            }
-        });
-    }
-
-    switchbtn.on('click', function(e){
-        e.preventDefault();
-        var open = 1;
-        if($(this).hasClass('btn-switch-on')){
-            open = 0;
-        }
-        // $.pub('loading:start');
-        $.post(apiOpt, {enable:open}, function(rsp){
-            rsp = $.parseJSON(rsp)
-            if (rsp.code === 0) {
-                getInfo();
-                // $.pub('loading:stop');
-            }
-        });
-    });
-
-    getInfo();
-}());
 </script>

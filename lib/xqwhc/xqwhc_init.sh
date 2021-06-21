@@ -690,7 +690,6 @@ xqwhc_preinit()
     # delete former metric buff
     xqwhc_metric_flush
 
-    ps -w | grep -w wifi | grep -v grep | grep -v hostapd | awk '{print $1}' | xargs  kill -9
     __if_wifi_cfg
     ret=$?
     if [ $ret -eq $WIFI_INIT_NOCHANGE ]; then

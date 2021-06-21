@@ -884,6 +884,8 @@ enable_qcawificfg80211() {
 	local recover="$2"
 	local hk_ol_num=0
 	local hwcaps
+	local bd_country_code=`bdata get CountryCode`
+	local nv_country_code=`nvram get CountryCode`
 	local board_name
 	[ -f /tmp/sysinfo/board_name ] && {
 		board_name=$(cat /tmp/sysinfo/board_name)
@@ -1065,16 +1067,25 @@ enable_qcawificfg80211() {
 			160) 
 				htmode=HT160
 			;;
-			*) 
-			    if [ "$channel" = 149 \
-                -o "$channel" = 153 \
-                -o "$channel" = 157 \
-                -o "$channel" = 161 ]; then
+			*)
+				if [ "$channel" = 149 \
+					-o "$channel" = 153 \
+					-o "$channel" = 157 \
+					-o "$channel" = 161 \
+					-o "$channel" = 100 \
+					-o "$channel" = 104 \
+					-o "$channel" = 108 \
+					-o "$channel" = 112 ]; then
 					htmode=HT80
 				else
 					htmode=HT160
 				fi
-			    if [ "$channel" = 165 ]; then
+				if [ "$nv_country_code" = "JO" \
+					-o "$nv_country_code" = "KE" \
+					-o "$nv_country_code" = "NG" ]; then
+					htmode=HT80
+				fi
+				if [ "$channel" = 165 ]; then
 					htmode=HT20
 				fi
 			;;
@@ -1978,19 +1989,19 @@ enable_qcawificfg80211() {
 		esac
 		"$device_if" "$ifname" wds "$wds" >/dev/null 2>&1
 
-        config_get ext_nss "$device" ext_nss
-        if [ "$bw" = "0" -a "$bdmode" = "5G" ]; then
+		config_get ext_nss "$device" ext_nss
+		if [ "$bw" = "0" -a "$bdmode" = "5G" ]; then
 			ext_nss=0
 		else
 			ext_nss=1
 		fi
-        case "$ext_nss" in
-            1|on|enabled) "$device_if" "$phy" ext_nss 1 >/dev/null 2>&1
-                ;;
-            0|on|enabled) "$device_if" "$phy" ext_nss 0 >/dev/null 2>&1
-                ;;
-            *) ;;
-        esac
+		case "$ext_nss" in
+			1|on|enabled) "$device_if" "$phy" ext_nss 1 >/dev/null 2>&1
+				;;
+			0|on|enabled) "$device_if" "$phy" ext_nss 0 >/dev/null 2>&1
+				;;
+			*) ;;
+		esac
 
 		config_get ext_nss_sup "$vif" ext_nss_sup
 		case "$ext_nss_sup" in
@@ -2010,8 +2021,11 @@ enable_qcawificfg80211() {
 		config_get bintval "$vif" bintval
 		[ -n "$bintval" ] && "$device_if" "$ifname" bintval "$bintval"
 
-		config_get_bool countryie "$vif" countryie 1
+		config_get_bool countryie "$vif" countryie 0
 		[ -n "$countryie" ] && "$device_if" "$ifname" countryie "$countryie"
+
+		config_get_bool vap_contryie "$vif" vap_contryie 0
+		[ -n "$vap_contryie" ] && "$device_if" "$ifname" vap_contryie "$vap_contryie"
 
 		config_get ppdu_duration "$device" ppdu_duration
 		[ -n "$ppdu_duration" ] && "$device_if" "$phy" ppdu_duration "${ppdu_duration}"
@@ -2695,7 +2709,12 @@ enable_qcawificfg80211() {
 		config_get neighbourfilter "$vif" neighbourfilter
 		[ -n "$neighbourfilter" ] && "$device_if" "$ifname" neighbourfilter "${neighbourfilter}"
 
-		config_get athnewind "$vif" athnewind
+		netmode=`uci -q get xiaoqiang.common.NETMODE`
+		if [ -n "$netmode" -a "$netmode" = "wifiapmode" ]; then
+			config_get athnewind "$vif" athnewind 1
+		else
+			config_get athnewind "$vif" athnewind
+		fi
 		[ -n "$athnewind" ] && "$device_if" "$ifname" athnewind "$athnewind"
 
 		config_get osen "$vif" osen
@@ -2958,7 +2977,34 @@ enable_qcawificfg80211() {
 		else
 			max_power=30
 		fi
-
+		if [ "$bd_country_code" = "EU" ]; then
+			if [ "$bdmode" = "24G" ]; then
+				max_power=14
+			else
+				if [ "$channel" -ge 100 ]; then
+					max_power=23
+				else
+					max_power=16
+				fi
+			fi
+			if [ $ifname = "wl2" ]; then
+				max_power=13
+			fi
+		fi
+		#miwifi: reduce 3db for Brazil band1
+		if [ "$nv_country_code" = "BR" ]; then
+			if [ "$bdmode" = "5G" -a "$channel" -le 48 ]; then
+				max_power=13
+			fi
+		fi
+		#miwifi: we use band1 txpower for wifi ap mode
+		netmode=`uci get xiaoqiang.common.NETMODE`
+		if [ -n "$netmode" -a "$netmode" = "wifiapmode" -a "$bdmode" = "5G" ]; then
+			max_power=16
+			if [ "$nv_country_code" = "BR" ]; then
+				max_power=13
+			fi
+		fi
 		config_get txpwr "$device" txpwr
 		if [ "$txpwr" = "mid" ]; then
 			txpower=`expr $max_power - 1`
@@ -2976,8 +3022,7 @@ enable_qcawificfg80211() {
 			enable_rps $ifname
 		fi
 
-		# miwifi enable multicast to unicast
-		[ "$mode" = "ap" ] && echo "1" > /sys/devices/virtual/net/$ifname/brport/multicast_to_unicast
+
 	done
 
 	config_get wifi_debug_sh $device wifi_debug_sh
@@ -2986,7 +3031,7 @@ enable_qcawificfg80211() {
 	config_get primaryradio "$device" primaryradio
 	[ -n "$primaryradio" ] && "$device_if" "$phy" primaryradio "${primaryradio}"
 
-	config_get CSwOpts "$device" CSwOpts
+	config_get CSwOpts "$device" CSwOpts 5
 	[ -n "$CSwOpts" ] && "$device_if" "$phy" CSwOpts "${CSwOpts}"
 
 	if [ $disable_qrfs_wifi == 1 ] && [ -f "/lib/update_system_params.sh" ]; then
@@ -3598,7 +3643,8 @@ detect_qcawificfg80211() {
 
 	local enable_cfg80211=`uci show qcacfg80211.config.enable |grep "qcacfg80211.config.enable='0'"`
 	[ -n "$enable_cfg80211" ] && echo "qcawificfg80211 configuration is disable" > /dev/console && return 1;
-
+	local bd_country_code=`bdata get CountryCode`
+	local nv_country_code=`nvram get CountryCode`
 	is_ftm=`cat /proc/xiaoqiang/ft_mode`
 	[ $is_ftm = 1 ] && ftm_qcawificfg80211 &&  return
 
@@ -3626,6 +3672,7 @@ detect_qcawificfg80211() {
 	reload=0
 	hw_mode_detect=0
 	avoid_load=0
+	country_code="SG"
 	prefer_hw_mode_id="$(grep hw_mode_id \
 			/ini/internal/global_i.ini | awk -F '=' '{print $2}')"
 
@@ -3645,7 +3692,14 @@ detect_qcawificfg80211() {
 			esac
 		done
 	fi
-
+	if [ "$bd_country_code" == "EU" ]; then
+		if [ -n "$nv_country_code" ]; then
+			country_code="$nv_country_code"
+		fi
+		if [ "$nv_country_code" == "EU" ]; then
+			country_code="SG"
+		fi
+	fi
 	load_qcawificfg80211
 	config_load wireless
 	local board_name
@@ -3793,12 +3847,11 @@ EOF
 	option bw 20
 EOF
 	fi
-    if [ $devidx = 0 ]; then
-        cat <<EOF
-    option bw 80
-    option support160 '1'
+	if [ $devidx = 0 ]; then
+		cat <<EOF
+	option bw 80
 EOF
-    fi
+	fi
 	cat <<EOF
 
 config wifi-iface
@@ -3813,7 +3866,7 @@ config wifi-iface
 EOF
 	if [ $devidx = 0 ]; then
 		cat <<EOF
-	option channel_block_list '52,56,60,64'
+	option channel_block_list '52,56,60,64,100,104,108,112,116,120,124,128,132,136,140,144,165'
 	option miwifi_mesh '1'
 EOF
 	fi

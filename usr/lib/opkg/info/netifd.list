@@ -10,7 +10,6 @@
 /sbin/netifd
 /sbin/devstatus
 /etc/hotplug.d/net/20-smp-tune
-/etc/hotplug.d/iface/01-multicast
 /lib/netifd/utils.sh
 /lib/netifd/netifd-wireless.sh
 /etc/udhcpc.user
