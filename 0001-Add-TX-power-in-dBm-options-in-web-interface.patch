@@ -1,14 +1,17 @@
-From 0d43f015fa6bdd52b9375a21d2f6ddcc658908e5 Mon Sep 17 00:00:00 2001
+From b1e3360f90b7e2832b83c3b1f9b7640f79ac30cd Mon Sep 17 00:00:00 2001
 From: Alexander Georgievskiy <galeksandrp@gmail.com>
 Date: Sun, 20 Jun 2021 10:47:30 +0300
 Subject: [PATCH] Add TX power in dBm options in web interface
 
+remove comment from html templates
+
+In some cases, this broke the markup. For example when you enable Smart Connect option.
 ---
  lib/wifi/qcawificfg80211.sh                  | 12 ++-
- usr/lib/lua/luci/view/web/apsetting/wifi.htm | 62 +++++++++++++
- usr/lib/lua/luci/view/web/inc/wifi.html      | 62 +++++++++++++
- usr/lib/lua/luci/view/web/setting/wifi.htm   | 93 ++++++++++++++++++++
- 4 files changed, 228 insertions(+), 1 deletion(-)
+ usr/lib/lua/luci/view/web/apsetting/wifi.htm | 60 +++++++++++++
+ usr/lib/lua/luci/view/web/inc/wifi.html      | 60 +++++++++++++
+ usr/lib/lua/luci/view/web/setting/wifi.htm   | 90 ++++++++++++++++++++
+ 4 files changed, 221 insertions(+), 1 deletion(-)
 
 diff --git a/lib/wifi/qcawificfg80211.sh b/lib/wifi/qcawificfg80211.sh
 index 9a4ecf4..b65ee92 100644
@@ -34,14 +37,13 @@ index 9a4ecf4..b65ee92 100644
  		elif [ "$txpwr" = "min" ]; then
  			txpower=`expr $max_power - 3`
 diff --git a/usr/lib/lua/luci/view/web/apsetting/wifi.htm b/usr/lib/lua/luci/view/web/apsetting/wifi.htm
-index 0a395ba..84712f3 100644
+index 0a395ba..67b7e66 100644
 --- a/usr/lib/lua/luci/view/web/apsetting/wifi.htm
 +++ b/usr/lib/lua/luci/view/web/apsetting/wifi.htm
-@@ -210,6 +210,37 @@ local hardware = string.lower( XQSysUtil.getHardware() )
+@@ -210,6 +210,36 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                  <option value="max"{if ($txpwr == "max")} selected{/if}><%:穿墙%></option>
                  <option value="mid"{if ($txpwr == "mid")} selected{/if}><%:标准%></option>
                  <option value="min"{if ($txpwr == "min")} selected{/if}><%:节能%></option>
-+                <!-- If you return to stock FW from this patched FW, "max" setting will be used by default -->
 +                <option value="dbm30"{if ($txpwr == "dbm30")} selected{/if}>30 dBm (1000 mW)</option>
 +                <option value="dbm29"{if ($txpwr == "dbm29")} selected{/if}>29 dBm (794 mW)</option>
 +                <option value="dbm28"{if ($txpwr == "dbm28")} selected{/if}>28 dBm (630 mW)</option>
@@ -75,11 +77,10 @@ index 0a395ba..84712f3 100644
              </select>
          </span>
          <em class="t"></em>
-@@ -312,6 +343,37 @@ local hardware = string.lower( XQSysUtil.getHardware() )
+@@ -312,6 +342,36 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                  <option value="max"{if ($txpwr == "max")} selected{/if}><%:穿墙%></option>
                  <option value="mid"{if ($txpwr == "mid")} selected{/if}><%:标准%></option>
                  <option value="min"{if ($txpwr == "min")} selected{/if}><%:节能%></option>
-+                <!-- If you return to stock FW from this patched FW, "max" setting will be used by default -->
 +                <option value="dbm30"{if ($txpwr == "dbm30")} selected{/if}>30 dBm (1000 mW)</option>
 +                <option value="dbm29"{if ($txpwr == "dbm29")} selected{/if}>29 dBm (794 mW)</option>
 +                <option value="dbm28"{if ($txpwr == "dbm28")} selected{/if}>28 dBm (630 mW)</option>
@@ -114,14 +115,13 @@ index 0a395ba..84712f3 100644
          </span>
          <em class="t"></em>
 diff --git a/usr/lib/lua/luci/view/web/inc/wifi.html b/usr/lib/lua/luci/view/web/inc/wifi.html
-index 9ced932..f61e909 100644
+index 9ced932..02bcdb0 100644
 --- a/usr/lib/lua/luci/view/web/inc/wifi.html
 +++ b/usr/lib/lua/luci/view/web/inc/wifi.html
-@@ -297,6 +297,37 @@ local hardware = string.lower( XQSysUtil.getHardware() )
+@@ -297,6 +297,36 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                  <option value="max"{if ($txpwr == "max")} selected{/if}><%:穿墙%></option>
                  <option value="mid"{if ($txpwr == "mid")} selected{/if}><%:标准%></option>
                  <option value="min"{if ($txpwr == "min")} selected{/if}><%:节能%></option>
-+                <!-- If you return to stock FW from this patched FW, "max" setting will be used by default -->
 +                <option value="dbm30"{if ($txpwr == "dbm30")} selected{/if}>30 dBm (1000 mW)</option>
 +                <option value="dbm29"{if ($txpwr == "dbm29")} selected{/if}>29 dBm (794 mW)</option>
 +                <option value="dbm28"{if ($txpwr == "dbm28")} selected{/if}>28 dBm (630 mW)</option>
@@ -155,11 +155,10 @@ index 9ced932..f61e909 100644
              </select>
          </span>
          <em class="t"></em>
-@@ -421,6 +452,37 @@ local hardware = string.lower( XQSysUtil.getHardware() )
+@@ -421,6 +451,36 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                  <option value="max"{if ($txpwr == "max")} selected{/if}><%:穿墙%></option>
                  <option value="mid"{if ($txpwr == "mid")} selected{/if}><%:标准%></option>
                  <option value="min"{if ($txpwr == "min")} selected{/if}><%:节能%></option>
-+                <!-- If you return to stock FW from this patched FW, "max" setting will be used by default -->
 +                <option value="dbm30"{if ($txpwr == "dbm30")} selected{/if}>30 dBm (1000 mW)</option>
 +                <option value="dbm29"{if ($txpwr == "dbm29")} selected{/if}>29 dBm (794 mW)</option>
 +                <option value="dbm28"{if ($txpwr == "dbm28")} selected{/if}>28 dBm (630 mW)</option>
@@ -194,14 +193,13 @@ index 9ced932..f61e909 100644
          </span>
          <em class="t"></em>
 diff --git a/usr/lib/lua/luci/view/web/setting/wifi.htm b/usr/lib/lua/luci/view/web/setting/wifi.htm
-index 213d4b7..d249597 100644
+index 213d4b7..e104139 100644
 --- a/usr/lib/lua/luci/view/web/setting/wifi.htm
 +++ b/usr/lib/lua/luci/view/web/setting/wifi.htm
-@@ -235,6 +235,37 @@ local hardware = string.lower( XQSysUtil.getHardware() )
+@@ -235,6 +235,36 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                  <option value="max"{if ($txpwr == "max")} selected{/if}><%:穿墙%></option>
                  <option value="mid"{if ($txpwr == "mid")} selected{/if}><%:标准%></option>
                  <option value="min"{if ($txpwr == "min")} selected{/if}><%:节能%></option>
-+                <!-- If you return to stock FW from this patched FW, "max" setting will be used by default -->
 +                <option value="dbm30"{if ($txpwr == "dbm30")} selected{/if}>30 dBm (1000 mW)</option>
 +                <option value="dbm29"{if ($txpwr == "dbm29")} selected{/if}>29 dBm (794 mW)</option>
 +                <option value="dbm28"{if ($txpwr == "dbm28")} selected{/if}>28 dBm (630 mW)</option>
@@ -235,11 +233,10 @@ index 213d4b7..d249597 100644
              </select>
          </span>
          <em class="t"></em>
-@@ -359,6 +390,37 @@ local hardware = string.lower( XQSysUtil.getHardware() )
+@@ -359,6 +389,36 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                  <option value="max"{if ($txpwr == "max")} selected{/if}><%:穿墙%></option>
                  <option value="mid"{if ($txpwr == "mid")} selected{/if}><%:标准%></option>
                  <option value="min"{if ($txpwr == "min")} selected{/if}><%:节能%></option>
-+                <!-- If you return to stock FW from this patched FW, "max" setting will be used by default -->
 +                <option value="dbm30"{if ($txpwr == "dbm30")} selected{/if}>30 dBm (1000 mW)</option>
 +                <option value="dbm29"{if ($txpwr == "dbm29")} selected{/if}>29 dBm (794 mW)</option>
 +                <option value="dbm28"{if ($txpwr == "dbm28")} selected{/if}>28 dBm (630 mW)</option>
@@ -273,11 +270,10 @@ index 213d4b7..d249597 100644
              </select>
          </span>
          <em class="t"></em>
-@@ -493,6 +555,37 @@ local hardware = string.lower( XQSysUtil.getHardware() )
+@@ -493,6 +553,36 @@ local hardware = string.lower( XQSysUtil.getHardware() )
                  <option value="max"{if ($txpwr == "max")} selected{/if}><%:穿墙%></option>
                  <option value="mid"{if ($txpwr == "mid")} selected{/if}><%:标准%></option>
                  <option value="min"{if ($txpwr == "min")} selected{/if}><%:节能%></option>
-+                <!-- If you return to stock FW from this patched FW, "max" setting will be used by default -->
 +                <option value="dbm30"{if ($txpwr == "dbm30")} selected{/if}>30 dBm (1000 mW)</option>
 +                <option value="dbm29"{if ($txpwr == "dbm29")} selected{/if}>29 dBm (794 mW)</option>
 +                <option value="dbm28"{if ($txpwr == "dbm28")} selected{/if}>28 dBm (630 mW)</option>
@@ -312,5 +308,5 @@ index 213d4b7..d249597 100644
          </span>
          <em class="t"></em>
 -- 
-2.32.0.windows.1
+2.32.0
 
