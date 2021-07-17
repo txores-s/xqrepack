@@ -3014,6 +3014,7 @@ enable_qcawificfg80211() {
 			txpower="$max_power"
 		fi
 
+		[ ! -z "${txpwr##*[!0-9]*}" ] && [ "$txpwr" -ge 0 -a "$txpwr" -le 30 ] && txpower="$txpwr"
 		txpower="${txpower:-$vif_txpower}"
 		[ -z "$txpower" ] || iwconfig "$ifname" txpower "${txpower%%.*}"
 
