@@ -195,6 +195,23 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
+        name: miwifi_r3600_firmware_aba17_1.1.19+SSH+${{ env.FIRMWARE_SLUG }}
+        path: miwifi_r3600_firmware_aba17_1.1.19+SSH+${{ env.FIRMWARE_SLUG }}.bin
+    - uses: actions/upload-artifact@v2
+      with:
+        name: miwifi_r3600_firmware_aba17_1.1.19+SSH+MI+${{ env.FIRMWARE_SLUG }}
+        path: miwifi_r3600_firmware_aba17_1.1.19+SSH+MI+${{ env.FIRMWARE_SLUG }}.bin
+    - uses: actions/upload-artifact@v2
+      with:
+        name: miwifi_r3600_firmware_aba17_1.1.19+SSH+opt+${{ env.FIRMWARE_SLUG }}
+        path: miwifi_r3600_firmware_aba17_1.1.19+SSH+opt+${{ env.FIRMWARE_SLUG }}.bin
+    - uses: actions/upload-artifact@v2
+      with:
+        name: miwifi_r3600_firmware_aba17_1.1.19+SSH+MI+opt+${{ env.FIRMWARE_SLUG }}
+        path: miwifi_r3600_firmware_aba17_1.1.19+SSH+MI+opt+${{ env.FIRMWARE_SLUG }}.bin
+
+    - uses: actions/upload-artifact@v2
+      with:
         name: miwifi_r3600_all_6510e_3.0.22_INT+SSH+${{ env.FIRMWARE_SLUG }}
         path: miwifi_r3600_all_6510e_3.0.22_INT+SSH+${{ env.FIRMWARE_SLUG }}.bin
     - uses: actions/upload-artifact@v2
