@@ -10,32 +10,36 @@ all: $(TARGETS)
 
 %+SSH+$(FIRMWARE_SLUG).bin: orig-firmwares/%.bin repack-squashfs.sh
 	rm -f $@
-	-rm -rf ubifs-root/$*.bin
-	ubireader_extract_images -w orig-firmwares/$*.bin
-	fakeroot -- ./repack-squashfs.sh ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs
-	./ubinize.sh ubifs-root/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
-	mv r3600-raw-img.bin $@
+	-rm -rf ubifs-root/$@ squashfs-root/$@
+	ubireader_extract_images -w -o ubifs-root/$@ orig-firmwares/$*.bin
+	mkdir -p squashfs-root/$@
+	FSDIR=squashfs-root/$@ fakeroot -- ./repack-squashfs.sh ubifs-root/$@/$*.bin/img-*_vol-ubi_rootfs.ubifs
+	OUTPUT=$@ ./ubinize.sh ubifs-root/$@/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$@/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
+	rm -rf ubifs-root/$@ squashfs-root/$@
 
 %+SSH+MI+$(FIRMWARE_SLUG).bin: orig-firmwares/%.bin repack-squashfs-mi.sh
 	rm -f $@
-	-rm -rf ubifs-root/$*.bin
-	ubireader_extract_images -w orig-firmwares/$*.bin
-	fakeroot -- ./repack-squashfs-mi.sh ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs
-	./ubinize.sh ubifs-root/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
-	mv r3600-raw-img.bin $@
+	-rm -rf ubifs-root/$@ squashfs-root/$@
+	ubireader_extract_images -w -o ubifs-root/$@ orig-firmwares/$*.bin
+	mkdir -p squashfs-root/$@
+	FSDIR=squashfs-root/$@ fakeroot -- ./repack-squashfs-mi.sh ubifs-root/$@/$*.bin/img-*_vol-ubi_rootfs.ubifs
+	OUTPUT=$@ ./ubinize.sh ubifs-root/$@/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$@/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
+	rm -rf ubifs-root/$@ squashfs-root/$@
 
 %+SSH+MI+opt+$(FIRMWARE_SLUG).bin: orig-firmwares/%.bin repack-squashfs-mi-opt.sh
 	rm -f $@
-	-rm -rf ubifs-root/$*.bin
-	ubireader_extract_images -w orig-firmwares/$*.bin
-	fakeroot -- ./repack-squashfs-mi-opt.sh ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs
-	./ubinize.sh ubifs-root/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
-	mv r3600-raw-img.bin $@
+	-rm -rf ubifs-root/$@ squashfs-root/$@
+	ubireader_extract_images -w -o ubifs-root/$@ orig-firmwares/$*.bin
+	mkdir -p squashfs-root/$@
+	FSDIR=squashfs-root/$@ fakeroot -- ./repack-squashfs-mi-opt.sh ubifs-root/$@/$*.bin/img-*_vol-ubi_rootfs.ubifs
+	OUTPUT=$@ ./ubinize.sh ubifs-root/$@/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$@/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
+	rm -rf ubifs-root/$@ squashfs-root/$@
 
 %+SSH+opt+$(FIRMWARE_SLUG).bin: orig-firmwares/%.bin repack-squashfs-opt.sh
 	rm -f $@
-	-rm -rf ubifs-root/$*.bin
-	ubireader_extract_images -w orig-firmwares/$*.bin
-	fakeroot -- ./repack-squashfs-opt.sh ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs
-	./ubinize.sh ubifs-root/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
-	mv r3600-raw-img.bin $@
+	-rm -rf ubifs-root/$@ squashfs-root/$@
+	ubireader_extract_images -w -o ubifs-root/$@ orig-firmwares/$*.bin
+	mkdir -p squashfs-root/$@
+	FSDIR=squashfs-root/$@ fakeroot -- ./repack-squashfs-opt.sh ubifs-root/$@/$*.bin/img-*_vol-ubi_rootfs.ubifs
+	OUTPUT=$@ ./ubinize.sh ubifs-root/$@/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$@/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
+	rm -rf ubifs-root/$@ squashfs-root/$@

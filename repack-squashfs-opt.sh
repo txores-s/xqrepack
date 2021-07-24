@@ -17,8 +17,8 @@ ROOTPW='$1$qtLLI4cm$c0v3yxzYPI46s28rbAYG//'  # "password"
 command -v unsquashfs &>/dev/null || { echo "install unsquashfs"; exit 1; }
 mksquashfs -version >/dev/null || { echo "install mksquashfs"; exit 1; }
 
-FSDIR=`mktemp -d /tmp/resquash-rootfs.XXXXX`
-trap "rm -rf $FSDIR" EXIT
+[ -z "$FSDIR" ] && FSDIR=`mktemp -d /tmp/resquash-rootfs.XXXXX`
+[ -z "$FSDIR" ] && trap "rm -rf $FSDIR" EXIT
 
 # test mknod privileges
 mknod "$FSDIR/foo" c 0 0 2>/dev/null || { echo "need to be run with fakeroot"; exit 1; }
@@ -101,6 +101,9 @@ done
 
 # as a last-ditch effort, change the *.miwifi.com hostnames to localhost
 sed -i 's@\w\+.miwifi.com@localhost@g' $FSDIR/etc/config/miwifi
+
+# apply patch from xqrepack repository
+find patches -type f -exec bash -c "(cd "$FSDIR" && git apply -p1) < {}" \;
 
 >&2 echo "repacking squashfs..."
 rm -f "$IMG.new"
