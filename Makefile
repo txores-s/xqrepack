@@ -8,34 +8,103 @@ TARGETS:=$(shell echo $(TARGETS_SSH) $(TARGETS_SSH_MI) $(TARGETS_SSH_MI_OPT) $(T
 
 all: $(TARGETS)
 
-%+SSH+$(FIRMWARE_SLUG).bin: orig-firmwares/%.bin repack-squashfs.sh
-	rm -f $@
-	-rm -rf ubifs-root/$*.bin
-	ubireader_extract_images -w orig-firmwares/$*.bin
-	fakeroot -- ./repack-squashfs.sh ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs
-	./ubinize.sh ubifs-root/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
-	mv r3600-raw-img.bin $@
+# ubifs
 
-%+SSH+MI+$(FIRMWARE_SLUG).bin: orig-firmwares/%.bin repack-squashfs-mi.sh
-	rm -f $@
-	-rm -rf ubifs-root/$*.bin
-	ubireader_extract_images -w orig-firmwares/$*.bin
-	fakeroot -- ./repack-squashfs-mi.sh ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs
-	./ubinize.sh ubifs-root/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
-	mv r3600-raw-img.bin $@
+ubifs-root/%: orig-firmwares/%
+	-rm -rf $@
+	ubireader_extract_images -w orig-firmwares/$*
 
-%+SSH+MI+opt+$(FIRMWARE_SLUG).bin: orig-firmwares/%.bin repack-squashfs-mi-opt.sh
-	rm -f $@
-	-rm -rf ubifs-root/$*.bin
-	ubireader_extract_images -w orig-firmwares/$*.bin
-	fakeroot -- ./repack-squashfs-mi-opt.sh ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs
-	./ubinize.sh ubifs-root/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
-	mv r3600-raw-img.bin $@
+ubifs-kernel/%: ubifs-root/%
+	-rm -rf $@
+	mkdir -p $@
+	mv ubifs-root/$*/img-*_vol-kernel.ubifs $@
 
-%+SSH+opt+$(FIRMWARE_SLUG).bin: orig-firmwares/%.bin repack-squashfs-opt.sh
+# unsquashfs
+
+unsquashfs-root/%: ubifs-kernel/% ubifs-root/%
+	-rm -rf $@
+	mkdir -p $@
+	unsquashfs -f -d $@ ubifs-root/$*/img-*_vol-ubi_rootfs.ubifs
+	rm -rf ubifs-root/$*
+
+# tar
+
+tar-root:
+	mkdir -p $@
+
+tar-root/%: unsquashfs-root/% tar-root
+	-rm -rf $@
+	tar cf $@ -C unsquashfs-root/$* .
+	rm -rf unsquashfs-root/$*
+
+# squashfs
+
+squashfs-root:
+	mkdir -p $@
+
+squashfs-root/%+SSH+$(FIRMWARE_SLUG).bin: tar-root/%.bin squashfs-root
+	-rm -rf $@
+	mkdir -p $@
+	tar xf tar-root/$*.bin -C squashfs-root/$*+SSH+$(FIRMWARE_SLUG).bin --strip-components=1
+
+squashfs-root/%+SSH+MI+$(FIRMWARE_SLUG).bin: tar-root/%.bin squashfs-root
+	-rm -rf $@
+	mkdir -p $@
+	tar xf tar-root/$*.bin -C squashfs-root/$*+SSH+MI+$(FIRMWARE_SLUG).bin --strip-components=1
+
+squashfs-root/%+SSH+MI+opt+$(FIRMWARE_SLUG).bin: tar-root/%.bin squashfs-root
+	-rm -rf $@
+	mkdir -p $@
+	tar xf tar-root/$*.bin -C squashfs-root/$*+SSH+MI+opt+$(FIRMWARE_SLUG).bin --strip-components=1
+
+squashfs-root/%+SSH+opt+$(FIRMWARE_SLUG).bin: tar-root/%.bin squashfs-root
+	-rm -rf $@
+	mkdir -p $@
+	tar xf tar-root/$*.bin -C squashfs-root/$*+SSH+opt+$(FIRMWARE_SLUG).bin --strip-components=1
+
+# mksquashfs
+
+mksquashfs-root:
+	mkdir -p $@
+
+mksquashfs-root/%+SSH+$(FIRMWARE_SLUG).bin.new: squashfs-root/%+SSH+$(FIRMWARE_SLUG).bin mksquashfs-root
+	-rm -rf $@
+	FSDIR=squashfs-root/$*+SSH+$(FIRMWARE_SLUG).bin ./repack-squashfs.sh mksquashfs-root/$*+SSH+$(FIRMWARE_SLUG).bin
+	rm -rf squashfs-root/$*+SSH+$(FIRMWARE_SLUG).bin
+
+mksquashfs-root/%+SSH+MI+$(FIRMWARE_SLUG).bin.new: squashfs-root/%+SSH+MI+$(FIRMWARE_SLUG).bin mksquashfs-root
+	-rm -rf $@
+	FSDIR=squashfs-root/$*+SSH+MI+$(FIRMWARE_SLUG).bin ./repack-squashfs-mi.sh mksquashfs-root/$*+SSH+MI+$(FIRMWARE_SLUG).bin
+	rm -rf squashfs-root/$*+SSH+MI+$(FIRMWARE_SLUG).bin
+
+mksquashfs-root/%+SSH+MI+opt+$(FIRMWARE_SLUG).bin.new: squashfs-root/%+SSH+MI+opt+$(FIRMWARE_SLUG).bin mksquashfs-root
+	-rm -rf $@
+	FSDIR=squashfs-root/$*+SSH+MI+opt+$(FIRMWARE_SLUG).bin ./repack-squashfs-mi-opt.sh mksquashfs-root/$*+SSH+MI+opt+$(FIRMWARE_SLUG).bin
+	rm -rf squashfs-root/$*+SSH+MI+opt+$(FIRMWARE_SLUG).bin
+
+mksquashfs-root/%+SSH+opt+$(FIRMWARE_SLUG).bin.new: squashfs-root/%+SSH+opt+$(FIRMWARE_SLUG).bin mksquashfs-root
+	-rm -rf $@
+	FSDIR=squashfs-root/$*+SSH+opt+$(FIRMWARE_SLUG).bin ./repack-squashfs-opt.sh mksquashfs-root/$*+SSH+opt+$(FIRMWARE_SLUG).bin
+	rm -rf squashfs-root/$*+SSH+opt+$(FIRMWARE_SLUG).bin
+
+# ubi
+
+%+SSH+$(FIRMWARE_SLUG).bin: mksquashfs-root/%+SSH+$(FIRMWARE_SLUG).bin.new repack-squashfs.sh ubifs-kernel/%.bin
 	rm -f $@
-	-rm -rf ubifs-root/$*.bin
-	ubireader_extract_images -w orig-firmwares/$*.bin
-	fakeroot -- ./repack-squashfs-opt.sh ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs
-	./ubinize.sh ubifs-root/$*.bin/img-*_vol-kernel.ubifs ubifs-root/$*.bin/img-*_vol-ubi_rootfs.ubifs.new
-	mv r3600-raw-img.bin $@
+	OUTPUT=$@ ./ubinize.sh ubifs-kernel/$*.bin/img-*_vol-kernel.ubifs mksquashfs-root/$@.new
+	rm -rf mksquashfs-root/$@.new
+
+%+SSH+MI+$(FIRMWARE_SLUG).bin: mksquashfs-root/%+SSH+MI+$(FIRMWARE_SLUG).bin.new repack-squashfs-mi.sh ubifs-kernel/%.bin
+	rm -f $@
+	OUTPUT=$@ ./ubinize.sh ubifs-kernel/$*.bin/img-*_vol-kernel.ubifs mksquashfs-root/$@.new
+	rm -rf mksquashfs-root/$@.new
+
+%+SSH+MI+opt+$(FIRMWARE_SLUG).bin: mksquashfs-root/%+SSH+MI+opt+$(FIRMWARE_SLUG).bin.new repack-squashfs-mi-opt.sh ubifs-kernel/%.bin
+	rm -f $@
+	OUTPUT=$@ ./ubinize.sh ubifs-kernel/$*.bin/img-*_vol-kernel.ubifs mksquashfs-root/$@.new
+	rm -rf mksquashfs-root/$@.new
+
+%+SSH+opt+$(FIRMWARE_SLUG).bin: mksquashfs-root/%+SSH+opt+$(FIRMWARE_SLUG).bin.new repack-squashfs-opt.sh ubifs-kernel/%.bin
+	rm -f $@
+	OUTPUT=$@ ./ubinize.sh ubifs-kernel/$*.bin/img-*_vol-kernel.ubifs mksquashfs-root/$@.new
+	rm -rf mksquashfs-root/$@.new
