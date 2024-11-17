@@ -1,7 +1,7 @@
 xqrepack fork
 =========
 
-These scripts allow you to modify the *Xiaomi R3600* firmware image to make sure SSH and UART access is always enabled.
+These scripts allow you to modify the *Xiaomi BE3600 2.5G* firmware image to make sure SSH and UART access is always enabled.
 
 The default root password is `password`. Please remember to login to the router and change that after the upgrade. Your router settings like IP address and SSIDs are stored in the nvram and should stay the same.
 
